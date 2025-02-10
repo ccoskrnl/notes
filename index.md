@@ -1,4 +1,5 @@
 ---
-title: Welcome to my blog
+title: Notes 
+date: 2025-02-10
 ---
 
