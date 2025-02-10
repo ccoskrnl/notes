@@ -16,6 +16,7 @@ Performing compile time optimization requires solving a class of problems, calle
 3. $n_0$ in $N$ is the initial node. There is a path from $n_0$ to every node.
 
 **Definition**:  A semilattice is a set $L$ with a binary meet operation $\wedge$ such that for all $ a, b, c \in L $:
+
 $$
 \begin{align*}
 & a \wedge a = a & \text{idempotent} \\ 
@@ -23,13 +24,16 @@ $$
 & a \wedge ( b \wedge c ) = (a \wedge b ) \wedge c & \text{accociative} 
 \end{align*}
 $$
+
 **Definition**: Given a semilattice $L$ and elements, $a, b \in L$, we say that
+
 $$
 \begin{flalign}
 & a \geq b \qquad \iff \; a \wedge b = b \\
 & a \ge b \qquad \iff \; a \wedge b = b \; and \; a \neq b
 \end{flalign}
 $$
+
 also $ a \leq b $ means $ b \geq a$ and $ a < b $ means $ b > a $. We extend the notation of the meet operation to arbitrary finite sets by saying
 $$
 \bigwedge\limits_{1 \leq i \leq n} x_i = x_1 \wedge x_2 \wedge ... \wedge x_n
