@@ -18,7 +18,7 @@ export default defineUserConfig({
   // Gitlab Backup（gitlab的仓库名强制全小写的，所以这里也要全小写， github的话仓库名是什么这里就填什么）
   // base: "/dailynotes/",
 
-  base: "/VuePressTemplate/",
+  base: "/notes/",
 
   plugins: [
     slimsearchPlugin({
