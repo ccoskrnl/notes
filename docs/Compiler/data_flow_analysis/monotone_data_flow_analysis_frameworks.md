@@ -6,13 +6,13 @@ Monotone data flow analysis frameworks are used to analyze the flow of informati
 
 ## Lattice Theoretic
 
-**Definition**: A flow graph is a triple $ G = (N, E, n_0) $, where: 
+**Definition**: A flow graph is a triple $G = (N, E, n_0)$, where: 
 
 1. $N$ is a finite set of nodes.
-2. $E$ is a subset of $ N \times N $ called the edges. The edge $(x, y)$ enters node y and leaves node $x$. We say that $x$ is a predecessor of $y$, and $y$ a successor of $x$.
+2. $E$ is a subset of $N \times N$ called the edges. The edge $(x, y)$ enters node y and leaves node $x$. We say that $x$ is a predecessor of $y$, and $y$ a successor of $x$.
 3. $n_0$ in $N$ is the initial node. There is a path from $n_0$ to every node.
 
-**Definition**:  A semilattice is a set $L$ with a binary meet operation $\wedge$ such that for all $ a, b, c \in L $:
+**Definition**:  A semilattice is a set $L$ with a binary meet operation $\wedge$ such that for all $a, b, c \in L$:
 $$
 \begin{align*}
 & a \wedge a = a & \text{idempotent} \\ 
@@ -22,30 +22,36 @@ $$
 $$
 **Definition**: Given a semilattice $L$ and elements, $a, b \in L$, we say that
 $$
+\begin{aligned}
+& a \geq b  \quad \iff \quad a \wedge b = b \\
+& a > b \quad \iff \quad a \wedge b = b \ \land \ a \neq b
+\end{aligned}
+$$
+<!-- $$
 \begin{flalign}
 & a \geq b \qquad \iff \; a \wedge b = b \\
 & a \ge b \qquad \iff \; a \wedge b = b \; and \; a \neq b
 \end{flalign}
-$$
-also $ a \leq b $ means $ b \geq a$ and $ a < b $ means $ b > a $. We extend the notation of the meet operation to arbitrary finite sets by saying
+$$ -->
+also $a \leq b$ means $b \geq a$ and $a < b$ means $b > a$. We extend the notation of the meet operation to arbitrary finite sets by saying
 $$
 \bigwedge\limits_{1 \leq i \leq n} x_i = x_1 \wedge x_2 \wedge ... \wedge x_n
 $$
 **Definition**: A semilattice $L$ is said to have a bottom element $\bot$, if for all $ x \in L, \bot \wedge x = \bot$. $L$ is said to have a top element $\top$, if $\top \wedge x = x$ for all $x \in L$. We assume from here on that every semilattice has a bottom element, but not necessarily a top element.
 
-**Definition**: Given a semilattice $L$, a sequence of elements $x_1, x_2, ..., x_n $ in $L$ forms a chain if $ x_i > x_{i-1}$ for $ 1 \leq i < n $. $L$ is said to be bounded if for each $x \in L$ there is a constant $b_x$ such that each chain beginning with $x$ has length at most $b_x$.
+**Definition**: Given a semilattice $L$, a sequence of elements $x_1, x_2, ..., x_n$ in $L$ forms a chain if $ x_i > x_{i-1}$ for $1 \leq i < n$. $L$ is said to be bounded if for each $x \in L$ there is a constant $b_x$ such that each chain beginning with $x$ has length at most $b_x$.
 
-If $L$ is bounded, then we can take meets over countably infinite sets if we define $ \bigwedge\limits_{x\in S}x$, where $ S = \{ x_1, x_2, ...\} $, to be $\lim_{n \to\infty} \bigwedge\limits_{1 \leq i \leq n} x_i $ . The fact that $L$ is bounded assures us there is an integer $m$ such that $\bigwedge\limits_{x\in S} x = \bigwedge\limits_{1 \leq i \leq m} x_i$.
+If $L$ is bounded, then we can take meets over countably infinite sets if we define $\bigwedge\limits_{x\in S}x$ , where $S = \{ x_1, x_2, ...\}$ , to be $\lim_{n \to\infty} \bigwedge\limits_{1 \leq i \leq n} x_i$ . The fact that $L$ is bounded assures us there is an integer $m$ such that $\bigwedge\limits_{x\in S} x = \bigwedge\limits_{1 \leq i \leq m} x_i$ .
 
 **Partial Orders and Greatest Lower Bounds**
 
-As we shall see, the meet operator of a semilattice define a partial order on the values of the domain. A relation $\leq$ is a $partial\;order$ on a set $V$ if $\forall x, y, z \in V$:
+As we shall see, the meet operator of a semilattice define a partial order on the values of the domain. A relation $\leq$ is a $partial\;order$ on a set $V$ if $\forall x, y, z \in V$ :
 
 1. $x \leq x$ (the partial order is $reflexive$).
-2. If $x \leq y$ and $y \leq x $, then $x = y$ (the partial order is $antisymmetice$).
-3. If $x \leq y$ and $y \leq z$, then $x \leq z$ (the partial order is $transitive$).
+2. If $x \leq y$ and $y \leq x$ , then $x = y$ (the partial order is $antisymmetice$).
+3. If $x \leq y$ and $y \leq z$ , then $x \leq z$ (the partial order is $transitive$).
 
-The pair $(V, \leq)$ is called a $poset$, or $partially\;ordered\;set$. It is also convenient to have a $ < $ relation for a post, defined as
+The pair $(V, \leq)$ is called a $poset$, or $partially\;ordered\;set$. It is also convenient to have a $<$ relation for a post, defined as
 $$
 x < y \quad \iff (x \leq y)\;\text{and}\;(x \neq y).
 $$
@@ -59,7 +65,7 @@ It turns out that the meet of $x$ and $y$ is their only greatest lower bound. To
 
 - $g \leq x$ because $(x \wedge y) \wedge x = x \wedge y$.
 - $g \leq y$ by a similar argument.
-- Suppose $z$ is any element such that $z \leq x$ and $z \leq y$. We claim $z \leq g$, and therefore, $z$ cannot be a glb of x and y unless it is also $g$. In proof: $(z \wedge g) = (z \wedge (x \wedge y)) = ((z \wedge x) \wedge y)$. Since $z \leq x$, we know $(z \wedge x) = z$, so $(z \wedge g) = ( z \wedge y)$. Since $z \leq y$, we know $z \wedge y = z $, and therefore $ z \wedge g = z $. We have proven $ z \leq g$ and conclude $ g = x \wedge y$ is the only glb of $x$ and $y$. 
+- Suppose $z$ is any element such that $z \leq x$ and $z \leq y$. We claim $z \leq g$, and therefore, $z$ cannot be a glb of x and y unless it is also $g$. In proof: $(z \wedge g) = (z \wedge (x \wedge y)) = ((z \wedge x) \wedge y)$. Since $z \leq x$, we know $(z \wedge x) = z$ , so $(z \wedge g) = ( z \wedge y)$. Since $z \leq y$ , we know $z \wedge y = z$ , and therefore $z \wedge g = z$. We have proven $z \leq g$ and conclude $g = x \wedge y$ is the only glb of $x$ and $y$. 
 
 ## Monotone Data Flow Analysis Frameworks
 
@@ -110,7 +116,7 @@ implies $(\forall x, y \in L) \; [x\leq y \; implies \; f(x) \leq f(y)]$.
 
 
 
-$Observation\;2$. For any bounded semilattice $L$ and any countable set $S \subseteq L$, if for all $x \in S$ we have $ x \geq y$, then $\bigwedge\limits_{x\in S} x\geq y$.
+$Observation\;2$. For any bounded semilattice $L$ and any countable set $S \subseteq L$, if for all $x \in S$ we have $x \geq y$ , then $\bigwedge\limits_{x\in S} x\geq y$.
 
 $proof$. Consider the meet of all elements in $S$:
 $$
@@ -188,7 +194,7 @@ Observe that since $\wedge$ is intersection on $L$, the $\leq$ relation is set i
 
 2. Suppose we are given $z, z' \in L$ and $\langle A := r\rangle \in F$. It is straightforward to show that $\langle A := r \rangle (z \wedge z') = \langle A := r \rangle (z) \wedge \langle A := r \rangle (z')$. Hence the first part of the lemma follows.
 
-   For a counterexample showing that $CONST$ is not distributive, consider the flow chart of Figure 1. There we see that $\langle C := A + B \rangle(z \wedge z') = \emptyset $, while $\langle C := A + B \rangle(z) \wedge \langle C := A + B \rangle(z') = \{ (C, 5) \} $.
+   For a counterexample showing that $CONST$ is not distributive, consider the flow chart of Figure 1. There we see that $\langle C := A + B \rangle(z \wedge z') = \emptyset$ , while $\langle C := A + B \rangle(z) \wedge \langle C := A + B \rangle(z') = \{ (C, 5) \}$ .
 
    <div style="text-align: right">□</div>
 
@@ -317,6 +323,13 @@ This algorithm will obtain the $MOP$ solution in certain situations where Algori
 
 &emsp;$Initialization$
 $$
+(\forall n \in N) \qquad 
+B[n] = \begin{cases} 
+f_{n_0}(\bot) & \text{if } n = n_0 \\ 
+\top          & \text{otherwise} 
+\end{cases}
+$$
+<!-- $$
 (\forall \in N)
 \qquad \qquad \qquad
 B[n] 
@@ -326,12 +339,12 @@ B[n]
 &\top & \text{otherwise}
 \end{flalign}
 \end{cases}
-$$
+$$ -->
 &emsp;$Iteration \; step$. Visit nodes other than $n_0$  in order $n_1, n_2, ...$ (not fixed in advance). We $visit$ node $n$ by setting
 $$
 B[n] := \bigwedge\limits_{p \in PRED(n)} f_n(B[p])
 $$
-The sequence $n_1, n_2, ...$ has to satisfy the condition: if there is a node $n \in N - \{ n_0 \}$ such that $B[n] \neq \bigwedge\limits_{ p \in PRED(n)} f_n(B[p])$ after we have visited node $n_s$ in the sequence, then there exists integer $ t > s$ such that $n_t = t$. Also if $B[n] = \bigwedge\limits_{p \in PRED(n)} f_n(B[p])$ for all $n \neq n_0$, we will eventually halt the iteration.
+The sequence $n_1, n_2, ...$ has to satisfy the condition: if there is a node $n \in N - \{ n_0 \}$ such that $B[n] \neq \bigwedge\limits_{ p \in PRED(n)} f_n(B[p])$ after we have visited node $n_s$ in the sequence, then there exists integer $t > s$ such that $n_t = t$. Also if $B[n] = \bigwedge\limits_{p \in PRED(n)} f_n(B[p])$ for all $n \neq n_0$, we will eventually halt the iteration.
 
 &emsp;$Final \; Step$. We set
 $$
@@ -440,7 +453,7 @@ The set of functions $F_{AB}$ includes the following.
 
 1. the identify function on $L_{AB}$
 
-2. functions $f_i$, for $ 1 \leq i \leq k$ defined by:
+2. functions $f_i$, for $1 \leq i \leq k$ defined by:
 
    1. if $a$ is a string of integers beginning with $1$, then $f_i(a) = ai$,
    2. $f_i(\bot) = (\bot)$ and
@@ -461,7 +474,7 @@ The set of functions $F_{AB}$ includes the following.
    2. $g(\bot) = \bot$,
    3. $g_i(\$) = \$$,
 
-4. the function $h$ defined by $h(x) = \top$ (that is, the string consisting of $\top$ alone) for all $ x \in L_{AB}$.
+4. the function $h$ defined by $h(x) = \top$ (that is, the string consisting of $\top$ alone) for all $x \in L_{AB}$ .
 
 5. All functions constructed from the above by composition.
 
@@ -469,7 +482,7 @@ The set of functions $F_{AB}$ includes the following.
 
 $Proof$. We show only monotonicity; the other properties are easy to check. By Observation 1 and Lemma !, it suffices to show that if $x \leq y$ for $x$ and $y$ in $L_{AB}$ then
 
-1. $f_i(x) \leq f_i(y) $ for $1 \leq i \leq k$,
+1. $f_i(x) \leq f_i(y)$ for $1 \leq i \leq k$ ,
 2. $g(x) \leq g(y)$, and
 3. $h(x) \leq h(y)$.
 
