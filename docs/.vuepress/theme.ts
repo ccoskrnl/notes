@@ -11,7 +11,7 @@ export default hopeTheme({
     url: "https://ccoskrnl.github.io/notes/",
   },
 
-  favicon: "/favicon.ico",
+  favicon: "/fi.ico",
 
   // logo
   logo: "/logo.png",
