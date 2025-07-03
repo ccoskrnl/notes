@@ -192,7 +192,7 @@ Observe that since $\wedge$ is intersection on $L$, the $\leq$ relation is set i
 
    <div style="text-align: right">□</div>
 
-![image-20250221225128628](./Monotone Data Flow Analysis Frameworks.assets/image-20250221225128628.png)
+![image-20250221225128628](./imgs/image-20250221225128628.png)
 
 
 
@@ -297,7 +297,7 @@ A[n] < \bigwedge\limits_{ P \in PATH(n)} f_P(\bot).
 $$
 &emsp; $Proof$. By condition [M4] in the definition of a monotone function space, we can find acyclic graphs $G_x$ and $G_y$, with input nodes $n_x$ and $n_y$, and output nodes $m_x$ and $m_y$, such that after that we apply Algorithm 1 to $G_x$ and $G_y$, we get $A[m_x] = x$ and $A[m_y] = y$. A straightforward induction on the number of meet operations and function applications necessary to construct a lattice element from $\bot$ proves the existence of $G_x$ and $G_y$.
 
-![image-20250221224642216](./Monotone Data Flow Analysis Frameworks.assets/image-20250221224642216.png)
+![image-20250221224642216](./imgs/image-20250221224642216.png)
 
 &emsp; Consider the graph $G$ of the above figure. It is easy to check that if we apply Algorithm 1 we have $A[n] = f(x \wedge y)$. By Theorem 2, in $G$ we have $x \leq \bigwedge\limits_{ P \in PATH(n_x)} f_P(\bot)$ and $y \leq \bigwedge\limits_{ P \in PATH(n_y)} f_P(\bot)$. Thus $\bigwedge\limits_{P \in PATH(n)} f_P(\bot) \geq f(x) \wedge f(y)$ by monotonicity. But we are given $f(x) \wedge f(y) > f(x \wedge y)$, so $A[n] < \bigwedge\limits_{P \in PATH(n)} f_P(\bot)$.
 
@@ -372,7 +372,7 @@ $$
    $$
    after we have applied Algorithm 1 and Algorithm 2 to instance $I$.
    
-   ![image-20250221224609277](./Monotone Data Flow Analysis Frameworks.assets/image-20250221224609277.png)
+   ![image-20250221224609277](./imgs/image-20250221224609277.png)
 
 &emsp; $Proof$. We may, as in Theorem 4, invoke condition [M4] to observe that there are graphs $G'_x$ and $G'_y$ such that their output nodes $m_x$ and $m_y$ have $B[m_x] = x$ and $B[m_y] = y$. Then consider the graph of the above figure. It follows from monotonicity that
 $$

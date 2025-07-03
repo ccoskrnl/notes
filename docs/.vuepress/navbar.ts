@@ -21,7 +21,7 @@ let Compiler = {
   children: [
     {
       text: "Monotone Data Flow Analysis Frameworks",
-      link: "/Compiler/data_flow_analysis/monotone_data_flow_analysis_frameworks.md",
+      link: "/Compiler/data_flow_analysis/monotone_data_flow_analysis_frameworks.html",
     },
     {
       text: "Static Single Assignment (SSA) Form",
