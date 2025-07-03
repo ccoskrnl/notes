@@ -4,17 +4,17 @@ import { Sidebar } from "./sidebar";
 import { sitemap } from "vuepress-theme-hope";
 
 export default hopeTheme({
-  hostname: "https://233official.github.io/dailynotes/",
+  hostname: "https://ccoskrnl.github.io/notes/",
 
   author: {
-    name: "233",
-    url: "https://233official.github.io/dailynotes/",
+    name: "城城",
+    url: "https://ccoskrnl.github.io/notes/",
   },
 
   favicon: "/favicon.ico",
 
   // logo
-  logo: "/logo.svg",
+  logo: "/logo.png",
 
   // 主题色选择器
   themeColor: true,
@@ -31,16 +31,15 @@ export default hopeTheme({
     description: "个人描述",
     intro: "/about/",
     medias: {
-      GitHub: "https://github.com/233Official",
-      Rss: "https://233official.github.io/dailynotes/atom.xml",
-      BiliBili: "https://space.bilibili.com/85033246",
+      GitHub: "https://github.com/ccoskrnl",
+      BiliBili: "https://space.bilibili.com/329083099",
     },
   },
 
   // 仓库链接
-  repo: "233Official/dailynotes",
+  repo: "ccoskrnl/notes",
   // 文档仓库地址，默认同主题选项中的 repo
-  docsRepo: "233Official/dailynotes",
+  docsRepo: "ccoskrnl/notes",
   // 文档在仓库中的目录，默认为根目录
   docsDir: "docs",
   // 文档存放的分值，默认为 "main"
@@ -75,14 +74,14 @@ export default hopeTheme({
     seo: true,
     // slimsearch: true,
     sitemap: {
-      devHostname: "https://233official.github.io/",
-      hostname: "https://233official.github.io/",
+      devHostname: "https://ccoskrnl.github.io/",
+      hostname: "https://ccoskrnl.github.io/",
     },
     feed: {
       rss: true,
       atom: true,
       json: true,
-      hostname: "https://233official.github.io/",
+      hostname: "https://ccoskrnl.github.io/",
     },
   },
 });

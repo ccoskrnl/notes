@@ -9,9 +9,9 @@ import { appendDatePlugin } from "@vuepress/plugin-append-date";
 export default defineUserConfig({
   lang: "zh-CN",
   // 站点的标题
-  title: "DailyNotes",
+  title: "Notes",
   // 站点的描述
-  description: "233的日常学习记录",
+  description: "这是我的个人笔记",
   // 站点配置, 设置为 /[仓库名]/
   //  Github
   // base: "/DailyNotes/",  

@@ -2,7 +2,7 @@
 home: True
 layout: BlogHome
 heroFullScreen: true
-bgImage: M4.png
+bgImage: Hibiki.jpg
 icon: home
 title: 233'notes
 author: 咸鱼型233
