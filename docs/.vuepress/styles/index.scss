@@ -1,0 +1,6 @@
+.vp-skip-link {
+  z-index: 9999; // 确保顶层显示
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+}

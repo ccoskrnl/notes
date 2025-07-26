@@ -195,13 +195,13 @@ $$
 
 - $S = (0, 1) \subseteq \mathbb{R}$: $\sup S = 1$ $(1 \notin S)$  
 - $S = \{ x \in \mathbb{Q} \mid x^2 < 2 \} \subseteq \mathbb{R}：$$\sup S = \sqrt{2}（$无理数）  
-- **不存在例**：在 $\mathbb{Q} $中，$S = \{ x \in \mathbb{Q} \mid x^2 < 2 \} $无最小上界（因 $\sqrt{2} \notin \mathbb{Q}）$
+- **不存在例**：在 $\mathbb{Q}$中，$S = \{ x \in \mathbb{Q} \mid x^2 < 2 \}$无最小上界（因 $\sqrt{2} \notin \mathbb{Q}）$
 
 ---
 
 **4. 最大下界 (Greatest Lower Bound, GLB) / 下确界 (Infimum)**
 
-**定义**：元素 $\inf S \in P $称为 $S $的**最大下界**，当且仅当：
+**定义**：元素 $\inf S \in P$ 称为 $S$ 的**最大下界**，当且仅当：
 $$
 \begin{aligned}
 &(1) \ \inf S \text{ 是 } S \text{ 的下界} \\
@@ -211,7 +211,7 @@ $$
 
 - **性质**：
   - 若存在则唯一
-  - 记作 $\inf S $或 $\bigwedge S$
+  - 记作 $\inf S$或 $\bigwedge S$
   - 不一定属于 $S$
 
 **示例**：  
@@ -224,14 +224,14 @@ $$
  **存在性定理**
 
 1. **实数完备性公理**： 
-   在 $(\mathbb{R}, \leq) $中，任意**有上界的非空子集**必有最小上界（$\sup S $存在）。
+   在 $(\mathbb{R}, \leq)$中，任意**有上界的非空子集**必有最小上界（$\sup S$存在）。
 
 2. **格 (Lattice)**： 
-   若偏序集 $(P, \leq) $中，任意两个元素 $\{a, b\} $都有最小上界 $\sup\{a,b\} $和最大下界 $\inf\{a,b\}，$则称为**格**。  
+   若偏序集 $(P, \leq)$中，任意两个元素 $\{a, b\}$都有最小上界 $\sup\{a,b\}$ 和最大下界 $\inf \{a,b\}$，则称为**格**。  
    
    - **示例**：  
-     - 幂集 $(\mathcal{P}(X), \subseteq)：$$\sup\{A,B\} = A \cup B，$$\inf\{A,B\} = A \cap B $ 
-     - 正整数集 $(\mathbb{Z}^+, \mid)（$整除序）：$\sup\{a,b\} = \text{lcm}(a,b)，$$\inf\{a,b\} = \gcd(a,b)$
+     - 幂集 $(\mathcal{P}(X), \subseteq)$：$\sup\{A,B\} = A \cup B$，$\inf\{A,B\} = A \cap B$ 
+     - 正整数集 $(\mathbb{Z}^+, \mid)$ (整除序)：$\sup\{a,b\} = \text{lcm}(a,b)$，$\inf\{a,b\} = \gcd(a,b)$
 
 ### 拓扑排序(Topological Sorting)
 
