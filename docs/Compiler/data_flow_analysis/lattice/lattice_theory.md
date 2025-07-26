@@ -119,18 +119,18 @@ Hasse 图是用于可视化**有限偏序集**（Partially Ordered Set, Poset）
   - $\{1,2\} \lessdot \{1,2,3\}, \{1,3\} \lessdot \{1,2,3\}, \{2,3\} \lessdot \{1,2,3\}$
 - **Hasse 图**：  
 
-![hasse](./assets/hasse_diagram_001.png)
+![hasse_001](./assets/hasse_diagram_001.png)
 
 例2：整除序（$D_{12} = \{1,2,3,4,6,12\}$，关系为整除）
 
 - **覆盖关系**：
-  - $1 \lessdot 2, 1 \lessdot $3
-  - $2 \lessdot 4, 2 \lessdot $6
-  - $3 \lessdot $6
-  - $4 \lessdot 12, 6 \lessdot 1$2
+  - $1 \lessdot 2, 1 \lessdot 3$
+  - $2 \lessdot 4, 2 \lessdot 6$
+  - $3 \lessdot 6$
+  - $4 \lessdot 12, 6 \lessdot 12$
 - **Hasse 图**：  
 
-![image-20250725110423017](./assets/hasse_diagram_002.png)
+![hasse_002](./assets/hasse_diagram_002.png)
 
 ### 最大元素和最小元素(Maximal and Minimal Elements)
 
@@ -579,6 +579,6 @@ $$
 
 偏序关系：对于任意常数 $c$，有 $c \sube \top$ 且 $\bot \sube c$ 。从偏序关系上来看，$\bot$ 比任何常数都更精确。但在常量传播中，通常我们定义偏序为：$c \sube \top$，并且$\bot\text{(NAC)} \sube \top$，但是常数和NAC之间没有直接的偏序关系。
 
-![](assets/constant_propagation_001.svg)
+![constant_001](assets/constant_propagation_001.svg)
 
 
