@@ -4,6 +4,11 @@ In optimizing compilers, data structure choices directly influence the power and
 
 The translation process into SSA form first figures out at what join points to insert $\phi$-functions, then inserts trivial $\phi$-functions (i.e., $\phi$-functions of the form $\phi (x, x , \ldots , x )$) with the number of argument positions equal to the number of control-flow predecessors of the join point that some definition of the variable reaches, and then renames definitions and uses of variables (conventionally by subscripting them) to establish the static single-assignment property. Once we have finished doing whatever we translated to SSA form for, we need to eliminate the $\phi$-functions, since they are only a conceptual tool, and are not computationally effective—i.e., when we come to a join point with a $\phi$-function while executing a procedure, we have no way to determine which branch we came to it by and hence which value to use.
 
+**Dominator**
+
+We say that node $d$ $dominates$ node $i$, written $d$ $dom$ $i$, if every possible execution path from entry to $i$ includes $d$. Clearly, $dom$ is reflexive (every node dominates itself), transitive(if $a$ $dom$ $b$ and $b$ $dom$ $c$, then $a$ $dom$ $c$), and antisymmetric(if $a$ $dom$ $b$ and $b$ $dom$ $a$, then $b = a$ ). We further define the subrelation called $immediate$ $dominance$ ($idom$) such that for $a \neq b$, $a$ $idom$ $b$ if and only if $a$ $dom$ $b$ and there does not exist a node $c$ such that $c \neq a$ and $c \neq b$ for which $a$ $dom$ $c$ and $c$ $dom$ $b$, and we write $idom(b)$ to denote the immediate dominator of $b$. Clearly the immediate dominator of a node is unique. The immediate dominance relation forms a tree of the nodes of a flowgraph whose root is the entry node, whose edges are the immediate dominances, and whose paths display all the dominance relationships. Further, we say that $d$ $strictly$ $dominates$ $i$, written $d$ $sdom$ $i$, if $d$ dominates $i$ and $d \neq i$.
+
+
 **Where to Place $\phi$-Functions**
 
 At first glance, careful placement might seem to require the enumeration of pairs of assignment statements for each variable. Checking whether there are two assignments to V that reach a common point might seem to be intrinsically nonlinear. In fact, however, it is enough to look at the dominance frontier of each node in the control flow graph. Leaving the technicalities to later sections, we sketch the method here.
@@ -26,7 +31,6 @@ and computing $DF(x)$ as
 $$
 DF(x) = DF_{local}(x) \bigcup\limits_{z \in N(idom(z) = x)} DF_{up} (x, z)
 $$
-To compute the dominance frontier for a given flowgraph, we turn the above equations into the code shown in bellow snippet. 
 
 **Iterated Dominance Frontier($DF^+$)**
 

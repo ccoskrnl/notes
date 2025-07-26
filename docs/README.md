@@ -2,7 +2,7 @@
 home: True
 layout: BlogHome
 heroFullScreen: true
-bgImage: Hibiki.jpg
+bgImage: hamidashi.jpg
 icon: home
 title: 城城的笔记
 author: 城城

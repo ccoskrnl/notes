@@ -27,6 +27,10 @@ let Compiler = {
       text: "Static Single Assignment (SSA) Form",
       link: "/Compiler/data_flow_analysis/ssa.md",
     },
+    {
+      text: "Lattice Theory",
+      link: "/Compiler/data_flow_analysis/lattice_theory.md",
+    },
   ],
 };
 
