@@ -1,25 +1,4 @@
-.vp-skip-link.sr-only {
-  /* 解除尺寸限制，允许内容自然撑开 */
-  width: auto !important;
-  height: auto !important;
-  
-  /* 确保视觉可识别性 */
-  position: static !important;
-  clip: unset !important;
-  clip-path: unset !important;
-  
-  /* 增强可交互性与视觉反馈 */
-  padding: 8px 12px !important;        // 增加内边距
-  background-color: #f0f4ff !important; // 背景色（可自定义）
-  color: #7beb67 !important;            // 文字颜色
-  border: 1px solid rgb(255, 255, 255) !important; // 边框
-  border-radius: 4px !important;        // 圆角
-  font-size: 14px !important;           // 字体大小
-  z-index: 9999 !important;             // 确保置于顶层
-
-  /* 悬停效果增强 */
-  &:hover {
-    background-color: #e1eaff !important;
-    text-decoration: underline !important;
-  }
+// 隐藏无障碍跳过链接
+.vp-skip-link {
+  display: none !important;
 }
