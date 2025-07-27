@@ -20,16 +20,40 @@ let Compiler = {
   text: "编译器",
   children: [
     {
-      text: "Monotone Data Flow Analysis Frameworks",
-      link: "/Compiler/data_flow_analysis/monotone_data_flow_analysis_frameworks.html",
+      text: "基础",
+      children: [
+        {
+          text: "格论",
+          link: "/Compiler/basics/lattice/lattice_theory.md",
+        },
+        {
+          text: "单静态赋值 (SSA) 形式",
+          link: "/Compiler/basics/ssa/ssa.md",
+        }
+      ]
+
     },
     {
-      text: "Static Single Assignment (SSA) Form",
-      link: "/Compiler/data_flow_analysis/ssa.md",
+      text: "数据流分析",
+      children: [
+        {
+          text: "单调数据流分析框架",
+          link: "/Compiler/data_flow_analysis/monotone/monotone_data_flow_analysis_frameworks.md",
+        },
+        {
+          text: "到达定值",
+          link: "/Compiler/data_flow_analysis/reaching_definitions/reaching_definitions.md",
+        }
+      ]
     },
     {
-      text: "Lattice Theory",
-      link: "/Compiler/data_flow_analysis/lattice_theory.md",
+      text: "符号执行",
+      children: [
+        {
+          text: "稀疏条件常量传播(SCCP)",
+          link: "/Compiler/symbolic_execution/sccp/sccp.md",
+        },
+      ]
     },
   ],
 };

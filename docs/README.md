@@ -18,6 +18,24 @@ footer: 短暂几年的衰败并不会影响你一生的成长
 ---
 
 ## Compiler
+---
+
+### 分析基础
+---
+
+#### 静态单赋值形式(Static Single Assignment (SSA))
+
+这篇文章简要介绍了静态单赋值(Static Single Assignment (SSA))的作用，以及它的计算方法。并给出了最小化SSA算法实现。
+
+- [静态单赋值形式(Static Single Assignment (SSA))](./Compiler/basics/ssa/ssa.md)
+
+#### 格论(Lattice Theory)
+
+格论是信息流分析的基础。在编译优化领域，格论是数据流分析的基础，许多分析技术都建立在格论之上。这篇文章首先简单的回顾了偏序，哈斯图，拓扑排序等基础。然后开始介绍格的概念，并讨论格论在数据流分析中的作用。
+
+- [格论(Lattice Theory)](./Compiler/basics/lattice/lattice_theory.md)
+
+
 
 ### 数据流分析
 --- 
@@ -32,22 +50,12 @@ footer: 短暂几年的衰败并不会影响你一生的成长
 
 - [单调数据流分析框架 Markdown版本](./Compiler/data_flow_analysis/monotone/monotone_data_flow_analysis_frameworks.md)
 
-#### 静态单赋值形式(Static Single Assignment (SSA))
+#### 到达定值
 
-这篇文章简要介绍了静态单赋值(Static Single Assignment (SSA))的作用，以及它的计算方法。
-
-- [静态单赋值形式(Static Single Assignment (SSA))](./Compiler/data_flow_analysis/ssa/ssa.md)
-
-#### 格论(Lattice Theory)
-
-格论是信息流分析的基础。在编译优化领域，格论是数据流分析的基础，许多分析技术都建立在格论之上。这篇文章首先简单的回顾了偏序，哈斯图，拓扑排序等基础。然后开始介绍格的概念，并讨论格论在数据流分析中的作用。
-
-- [格论(Lattice Theory)](./Compiler/data_flow_analysis/lattice/lattice_theory.md)
-
+- [到达定值](./Compiler/data_flow_analysis/reaching_definitions/reaching_definitions.md)
 
 
 ### 符号执行(Symbolic Execution)
-
 ---
 
 #### 稀疏条件常量传播(Sparse Conditional Constant Propagation)
