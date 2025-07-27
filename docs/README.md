@@ -15,10 +15,7 @@ footer: 短暂几年的衰败并不会影响你一生的成长
 
 # 城城的笔记
 
----
-
 ## Compiler
----
 
 ### 分析基础
 ---
@@ -61,3 +58,37 @@ footer: 短暂几年的衰败并不会影响你一生的成长
 #### 稀疏条件常量传播(Sparse Conditional Constant Propagation)
 
 - [稀疏条件常量传播(Sparse Conditional Constant Propagation)](./Compiler/symbolic_execution/sccp/sccp.md)
+
+
+## 计算机系统
+
+### 计算机存储结构
+---
+
+#### PCIe内存获取技术
+
+这篇文章简要介绍了现代计算机的内存组织结构，并对PCIe的一些技术细节进行了讲解。
+
+- [PCIe内存获取技术](./Computer_Systems/pcie_memory_acquisition/pcie_memory_acquistion.md)
+
+## 操作系统内核
+
+## 操作系统
+
+### ntoskrnl
+---
+
+#### Windows APC
+
+基于WRK(Windows Research Kernel)源代码讲解，它们很可能(或者一定)与当前版本的Windows系统有所不同。仅作为参考。
+
+- [Windows APC](./Operating_Systems/ntoskrnl/apc/apc.md)
+
+
+#### 对象管理
+
+- [对象管理](./Operating_Systems/ntoskrnl/object/object.md)
+
+#### 句柄
+
+- [句柄](./Operating_Systems/ntoskrnl/handle/handle.md)

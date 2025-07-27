@@ -1,21 +1,6 @@
 // 顶部导航栏
 import { navbar } from "vuepress-theme-hope";
 
-// /** 笔记工具导航栏 */
-// let NoteTools = {
-//   text: "笔记工具",
-//   children: [
-//     {
-//       text: "VuePress",
-//       link: "/NoteTools/VuePress.md",
-//     },
-//     {
-//       text: "Markdown",
-//       link: "/NoteTools/Markdown.md",
-//     },
-//   ],
-// };
-
 let Compiler = {
   text: "编译器",
   children: [
@@ -59,7 +44,48 @@ let Compiler = {
 };
 
 
+let Computer_Systems = {
+  text: "计算机系统",
+  children: [
+    {
+      text: "计算机存储结构",
+      children: [
+        {
+          text: "PCIe 内存获取技术",
+          link: "/ComputerSystems/pcie_memory_acquisition/pcie_memory_acquisition.md",
+        },
+      ]
+    },
+  ]
+}
+
+let Operating_Systems = {
+  text: "操作系统",
+  children: [
+    {
+      text: "ntoskrnl",
+      children: [
+        {
+          text: "APC",
+          link: "/Operating_Systems/ntoskrnl/apc/apc.md",
+        },
+        {
+          text: "对象管理",
+          link: "/Operating_Systems/ntoskrnl/object/object.md",
+        },
+        {
+          text: "句柄",
+          link: "/Operating_Systems/ntoskrnl/handle/handle.md",
+        }
+      ]
+
+    },
+  ],
+};
+
+
 export const Navbar = navbar([
   Compiler, // 编译器相关
-  // NoteTools, // 笔记工具
+  Computer_Systems, // 计算机系统相关
+  Operating_Systems, // 操作系统相关
 ]);
