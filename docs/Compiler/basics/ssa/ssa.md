@@ -660,7 +660,65 @@ def ssa_edges_comp(cfg, loop_info) -> 'SSAEdgeBuilder':
 ```
 
 
+## 示例
 
+考虑下面这段C代码
+```c
+int foo(int n)
+{
+    int sum = 0;
+    for (int i = 0; i < n; i++)
+    {
+        if (i % 2 == 0)
+            sum += i;
+        else
+            sum += 2 * i;
+    }
+
+    return sum;
+}
+```
+
+转换上面的C代码到我们自定义的MIR
+```text
+    %entry
+    %init n
+
+    sum := 0
+    i := 0
+    %goto &L1
+
+L1:
+    cond1 := i < n
+    %if cond1 %goto &L2
+    %goto &L_exit
+
+L2:
+    t1 := i % 2
+    cond2 := t1 = 0
+    %if cond2 %goto &L_even
+    t2 := 2 * i
+    sum := sum + t2
+    %goto &L_update
+
+L_even:
+    sum := sum + i
+
+L_update:
+    i := i + 1
+    %goto &L1
+
+L_exit:
+    %exit
+```
+
+控制流图的形式如下
+
+![before](./assets/before.png)
+
+在运行我们的算法之后，我们得到的控制流图为
+
+![after](./assets/after.png)
 
 
 ## References
