@@ -52,7 +52,7 @@ let Computer_Systems = {
       children: [
         {
           text: "PCIe 内存获取技术",
-          link: "/Computer_Systems/storage/pcie_memory_acquisition/pcie_memory_acquisition.md",
+          link: "/Computer_Systems/storage/pcie_memory_acquisition/pcie_memory_acquistion.md",
         },
       ]
     },

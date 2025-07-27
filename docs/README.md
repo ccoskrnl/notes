@@ -69,7 +69,7 @@ footer: 短暂几年的衰败并不会影响你一生的成长
 
 这篇文章简要介绍了现代计算机的内存组织结构，并对PCIe的一些技术细节进行了讲解。
 
-- [PCIe内存获取技术](./Computer_Systems/pcie_memory_acquisition/pcie_memory_acquistion.md)
+- [PCIe内存获取技术](./Computer_Systems/storage/pcie_memory_acquisition/pcie_memory_acquistion.md)
 
 ## 操作系统内核
 
