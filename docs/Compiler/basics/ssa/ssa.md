@@ -404,7 +404,7 @@ SSA 边是连接变量定义点(def)和其使用点(use)的有向边。在 SSA �
 **1. 直接边 (Direct Edges)**
 
 - **定义**：在同一个基本块内的定义-使用关系
-  
+
 - **示例**：
   
   ```
@@ -412,19 +412,18 @@ SSA 边是连接变量定义点(def)和其使用点(use)的有向边。在 SSA �
     x#1 := 10     // 定义
     y#1 := x#1 + 5 // 使用
   ```
-  
+
 - **SSA 边**：`(x#1定义, y#1使用)`
-  
 
 **2. 控制流边 (Control Flow Edges)**
 
 - **定义**：跨越基本块的定义-使用关系
-  
+
 - **示例**：
   
   ```
   block1:
-
+  
     x#1 := 10
     %if cond %goto &block3
   block2:
@@ -433,14 +432,13 @@ SSA 边是连接变量定义点(def)和其使用点(use)的有向边。在 SSA �
   block3:
     z#1 := x#1 * 2  // 使用
   ```
-  
+
 - **SSA 边**：`(x#1定义, y#1使用)` 和 `(x#1定义, z#1使用)`
-  
 
 **3. Phi 边 (Phi Edges)**
 
 - **定义**：连接 Phi 函数参数到其来源定义的边
-  
+
 - **示例**：
   
   ```
@@ -456,7 +454,7 @@ SSA 边是连接变量定义点(def)和其使用点(use)的有向边。在 SSA �
     x#3 = φ(x#1, x#2) // Phi函数
     y#1 = x#3 + 5     // 使用
   ```
-  
+
 - **SSA 边**：
   
   - `(x#1定义, x#3的phi操作数)`
@@ -466,7 +464,7 @@ SSA 边是连接变量定义点(def)和其使用点(use)的有向边。在 SSA �
 **4. 循环携带边 (Loop-Carried Dependencies)**
 
 - **定义**：跨越循环迭代的依赖关系
-  
+
 - **示例**：
   
   ```
@@ -477,7 +475,7 @@ SSA 边是连接变量定义点(def)和其使用点(use)的有向边。在 SSA �
   body:
     i#3 = i#2 + 1
   ```
-  
+
 - **SSA 边**：`(i_3定义, i_2的phi操作数)` 标记为循环携带
 
 ### 计算
@@ -544,11 +542,100 @@ class SSAEdgeBuilder:
 
 **算法实现**
 
+在进行SSA边计算之前，我们需要首先分析程序的循环结构。
+
+```python
+class Loop:
+    """
+    Loop Structure
+    """
+    def __init__(self, header: BasicBlock):
+        self.header: BasicBlock = header
+        self.body_blocks: set[BasicBlock] = set()
+        self.latches = set()
+        self.parent: Optional['Loop'] = None
+        self.children = [ ]
+
+    def add_block(self, block: BasicBlock):
+        self.body_blocks.add(block)
+
+    def contains_block(self, block):
+        return block in self.body_blocks
+
+    def is_inner_relative_to(self, other: 'Loop'):
+        """
+        Check whether it is more nested than another loop
+        :param other:
+        :return:
+        """
+
+        # if other is an ancestor of this loop, then
+        # this loop is nested deeper
+
+        current = self
+        while current.parent:
+            if current.parent == other:
+                return True
+            current = current.parent
+
+        return False
+
+    def __repr__(self):
+        return f"Loop(header={self.header}, blocks={len(self.body_blocks)})"
+
+```
+
+`LoopAnalyzer`是当前流图的循环结构分析器，它的部分定义如下：
+
+```python
+class LoopAnalyzer:
+    """
+    Loop Analyzer
+    """
+
+    def __init__(self, cfg: 'ControlFlowGraph'):
+        self.cfg: 'ControlFlowGraph' = cfg
+        self.loops = [ ]
+
+    def analyze_loops(self) -> 'LoopAnalyzer':
+        """
+        analysing loop structure in cfg.
+        :return:
+        """
+        self._find_natural_loops()
+        self._compute_loop_nesting()
+        return self
+
+    def _find_natural_loops(self):
+        """
+        find natural loops
+        :return:
+        """
+        pass
+
+    def _compute_loop_nesting(self):
+        """Calculate loop nesting relationship"""
+        pass
+
+    def get_loop_for_block(self, block: BasicBlock) -> Optional[Loop]:
+        """Get innermost loop containing specific block"""
+
+        candidate = None
+        for loop in self.loops:
+            if loop.contains_block(block):
+                # prioritize choosing a deeper loop
+                if not candidate or loop.is_inner_relative_to(candidate):
+                    candidate = loop
+        return candidate
+```
+
+在进行循环分析之后，将分析器作为参数传递给 `ssa_edges_comp`函数。
+
 ```python
 def ssa_edges_comp(cfg, loop_info) -> 'SSAEdgeBuilder':
      """
      计算SSA Edge。（在调用该函数之前必须确保所有变量都被转换为 SSAVariable）
-
+     :param loop_info: LoopAnalyzer实例
      :return: SSAEdgeBuilder
      """
 
@@ -556,7 +643,7 @@ def ssa_edges_comp(cfg, loop_info) -> 'SSAEdgeBuilder':
 
      # def_sites的键为SSA变量名（携带了版本号）
      def_sites: Dict[str, int] = {}  # var_name -> MIRInst.id
-     
+
      phi_sources = defaultdict(list)  # phi_inst_id -> original definition list
 
      def is_loop_carried(phi_block: BasicBlock, def_block: BasicBlock, lo) -> bool:
@@ -659,10 +746,10 @@ def ssa_edges_comp(cfg, loop_info) -> 'SSAEdgeBuilder':
      return SSAEdgeBuilder(cfg, edges, def_sites)
 ```
 
-
 ## 示例
 
 考虑下面这段C代码
+
 ```c
 int foo(int n)
 {
@@ -680,6 +767,7 @@ int foo(int n)
 ```
 
 转换上面的C代码到我们自定义的MIR
+
 ```text
     %entry
     %init n
@@ -719,7 +807,6 @@ L_exit:
 在运行我们的算法之后，我们得到的控制流图为
 
 ![after](./assets/after.png)
-
 
 ## References
 
