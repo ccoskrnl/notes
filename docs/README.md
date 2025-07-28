@@ -32,7 +32,11 @@ footer: 短暂几年的衰败并不会影响你一生的成长
 
 - [格论(Lattice Theory)](./Compiler/basics/lattice/lattice_theory.md)
 
+#### 常量传播中的常量格
 
+常量格是格论在编译优化中的应用之一，同时也是常量传播的基础，常量格的单调性使得常量传播分析的收敛性得到保证。
+
+- [常量传播中的常量格](./Compiler/basics/lattice/constlat.md)
 
 ### 数据流分析
 --- 

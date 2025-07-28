@@ -568,17 +568,3 @@ $$
        $$
        
        违反分配律，故为非分配格
-
-## 常量传播的格
-
-常量格的元素包括：
-
-- 常数 (具体值，如5， 11.32, true, "hello, world"等)
-- TOP（$\top$, 表示未知，不可决定。可能是常量）
-- BOTTOM（$\bot$，也称为NAC（Not a Constant），表示不是一个常量）
-
-偏序关系：对于任意常数 $c$，有 $c \sube \top$ 且 $\bot \sube c$ 。从偏序关系上来看，$\bot$ 比任何常数都更精确。但在常量传播中，通常我们定义偏序为：$c \sube \top$，并且$\bot\text{(NAC)} \sube \top$，但是常数和NAC之间没有直接的偏序关系。
-
-![constant_001](assets/constant_propagation_001.svg)
-
-

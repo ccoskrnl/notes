@@ -12,6 +12,10 @@ let Compiler = {
           link: "/Compiler/basics/lattice/lattice_theory.md",
         },
         {
+          text: "常量传播中的常量格",
+          link: "/Compiler/basics/lattice/constlat.md",
+        },
+        {
           text: "单静态赋值 (SSA) 形式",
           link: "/Compiler/basics/ssa/ssa.md",
         }
