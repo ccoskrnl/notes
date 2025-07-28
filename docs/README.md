@@ -91,8 +91,12 @@ footer: 短暂几年的衰败并不会影响你一生的成长
 
 #### 对象管理
 
+基于WRK对ntoskrnl的对象管理机制的简单介绍
+
 - [对象管理](./Operating_Systems/ntoskrnl/object/object.md)
 
 #### 句柄
+
+基于WRK对win32编程中的句柄机制的分析。windows的对象管理机制使句柄的机制在win32编程中显得极为重要。
 
 - [句柄](./Operating_Systems/ntoskrnl/handle/handle.md)
