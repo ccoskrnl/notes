@@ -26,6 +26,10 @@ let Compiler = {
       text: "数据流分析",
       children: [
         {
+          text: "数据流分析介绍",
+          link: "/Compiler/data_flow_analysis/intro/intro.md",
+        },
+        {
           text: "单调数据流分析框架",
           link: "/Compiler/data_flow_analysis/monotone/monotone_data_flow_analysis_frameworks.md",
         },
