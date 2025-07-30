@@ -26,7 +26,7 @@ let Compiler = {
       text: "数据流分析",
       children: [
         {
-          text: "数据流分析介绍",
+          text: "数据流分析基础",
           link: "/Compiler/data_flow_analysis/intro/intro.md",
         },
         {

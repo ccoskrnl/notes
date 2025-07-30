@@ -41,7 +41,7 @@ footer: 短暂几年的衰败并不会影响你一生的成长
 
 ### 数据流分析
 
---- 
+---
 
 #### 单调数据流分析框架
 
@@ -53,11 +53,11 @@ footer: 短暂几年的衰败并不会影响你一生的成长
 
 - [单调数据流分析框架 Markdown版本](./Compiler/data_flow_analysis/monotone/monotone_data_flow_analysis_frameworks.md)
 
-#### 数据流分析简介
+#### 数据流分析基础
 
 数据流分析指的是一组用来获取有关数据如何沿着程序执行路径流动的相关信息的技术。
 
-- [数据流分析简介](./Compiler/data_flow_analysis/intro/intro.md)
+- [数据流分析基础](./Compiler/data_flow_analysis/intro/intro.md)
 
 #### 到达定值
 
