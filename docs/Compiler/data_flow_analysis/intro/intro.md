@@ -46,7 +46,8 @@ IN[s_{i+1}] = OUT[s_i] \quad i = 1, 2, ..., n - 1
 $$
 对于基本块之间的控制流，一个基本块的首语句的定值的集合就是到达它的各个前驱基本块的最后一个语句之后的定值集合的并集。
 
-## 基本块上的数据流模式
+
+### 基本块上的数据流模式
 
 从技术上来讲，数据流模式涉及程序中每个点上的数据流值。控制流从基本块的开始流动到结尾，中间没有中断或者分支。这样我们就可以用进入和离开基本块的数据流值的方式重新描述这个模式。对于每个基本块 $B$ ，我们把紧靠其前和紧随其后的数据流值分别记为 $IN[B]$ 和 $OUT[B]$。关于 $IN[B]$ 和 $OUT[B]$ 的约束可以根据关于 $B$ 中的各个语句 $s$ 的 $IN[s]$ 和 $OUT[s]$ 的约束得到。
 
@@ -64,14 +65,6 @@ IN[B] = f_B(OUT[B]) \\
 OUT[B] = \bigcup_{S是B的一个后继}IN[S]
 $$
  和线性算术方程不同，数据流方程通常没有唯一解。我们的目标是寻找一个最”精确的“满足这两组约束（即控制流和传递的约束）的解。换言之，我们需要一个解，它能够支持有效的代码改进，但是又不会导致不安全的转换。这些不安全的转换改变了程序计算的内容。
-
-## 数据流分析中的保守主义
-
-实际数据流分析值是通过程序的所有可能执行路径来定义的。所有的数据流模式计算得到的都是对实际数据流值的估算。我们必须保证所有的估算误差都在”安全“的方向上。如果一个策略性决定不允许我们改变程序计算出的内容，它就被认为是”安全的“（或者说”保守的“）。遗憾的是，安全的策略导致我们错失一些能够保持程序含义的代码改进的机会。但实际上对所有优化技术而言，没有哪个安全的策略可以保证不错失任何机会。使用不安全策略就是以改变程序含义的代价来加快代码速度。一般来说，这是不可接受的。
-
-因此在设计一个数据流模式的时候，我们必须知道这些信息将如何被使用，并保证我们做出的任何估算都是在“保守”或者说“安全”的方向上。每个模式和应用都要单独考虑。比如，如果我们把到达定值信息用于常量折叠，那么把一个实际上不可到达的定值当作可到达就是安全的（我们可能在 $x$ 实际是一个常量且可以被折叠的情况下认为 $x$ 不是一个常量），但是把一个实际可到达的定值当作不可到达就是不安全的（我们可能把 $x$ 替换为一个常量，但是实际上程序有时会赋予 $x$ 一个不同与该常量的值）。
-
-## 数据流方程
 
 ### 传递方程
 
@@ -121,6 +114,43 @@ OUT[B] = \bigwedge_{S \in succ(B)} IN[S]
 $$
 其中 $pred(B)$ 和 $succ(B)$ 分别表示 $B$ 的前驱基本块集合和后继基本块集合，$\wedge$ 表示交汇操作。在任何数据流模式中，我们用交汇运算来汇总各条路径会合点上不同路径所作的贡献。
 
+
+### 初始值与安全值
+
+在数据流分析框架中，"初始值"和"安全值"是两个关键概念，它们共同确保了分析的保守性和正确性。初始值即为在分析起点（前向分析的入口块或后向分析的出口块）设置的值。它表示程序执行开始时的已知状态，通常时最精确的状态。安全值被定义为在非起点位置设置的保守值，确保分析不会遗漏任何可能的路径。它表示“最坏情况”的假设，并确保分析结果是保守的（不会漏报），通常是半格中的 $\bot$ （最安全但最不精确的值）。随着分析算法的运行，各个程序点的值从安全逐渐向精确解收敛。
+
+### May分析和Must分析
+
+数据流分析问题通常分为may分析和must分析两大类，这种分类决定了问题的求解策略、初始值和安全值的设置。
+
+
+| 特性 | May分析 | Must分析 |
+|------|--------|---------|
+| **目标** | 识别可能发生的情况 | 识别必然发生的情况 |
+| **近似方向** | 过度近似(over-approximation) | 不足近似(under-approximation) |
+| **安全性** | 包含所有可能情况 | 只包含必然发生情况 |
+| **精度** | 可能包含假阳性 | 可能包含假阴性 |
+| **适用场景** | 存在性问题 | 保证性问题 |
+| **初始值** | 入口/出口点：最精确值(top) | 入口/出口点：最精确值(top) |
+| **安全值** | 其他点：最保守值(bottom) | 其他点：最保守值(bottom) |
+| **合并操作** | 并集(∪)或类似 | 交集(∩)或类似 |
+
+
+
+
+---
+
+
+
+
+> 数据流分析中的保守主义
+>
+> 实际数据流分析值是通过程序的所有可能执行路径来定义的。所有的数据流模式计算得到的都是对实际数据流值的估算。我们必须保证所有的估算误差都在”安全“的方向上。如果一个策略性决定不允许我们改变程序计算出的内容，它就被认为是”安全的“（或者说”保守的“）。遗憾的是，安全的策略导致我们错失一些能够保持程序含义的代码改进的机会。但实际上对所有优化技术而言，没有哪个安全的策略可以保证不错失任何机会。使用不安全策略就是以改变程序含义的代价来加快代码速度。一般来说，这是不可接受的。
+>
+> 因此在设计一个数据流模式的时候，我们必须知道这些信息将如何被使用，并保证我们做出的任何估算都是在“保守”或者说“安全”的方向上。每个模式和应用都要单独考虑。比如，如果我们把到达定值信息用于常量折叠，那么把一个实际上不可到达的定值当作可到达就是安全的（我们可能在 $x$ 实际是一个常量且可以被折叠的情况下认为 $x$ 不是一个常量），但是把一个实际可到达的定值当作不可到达就是不安全的（我们可能把 $x$ 替换为一个常量，但是实际上程序有时会赋予 $x$ 一个不同与该常量的值）。
+
+
+
 ## 数据流分析框架
 
 ### 半格
@@ -163,3 +193,211 @@ $$
 >   注：$\wedge$(Meet) 或 $\vee$(Join) 只是格的两种操作，它们只是运算的抽象符号，并不限定某一个或某一种操作方式。它们的实际操作含义需要根据格的数据对象而赋予。
 
 需要注意的是，半格只要求一种操作（Join 或 Meet）对于任意两个元素存在。半格高度必须是有界的，半格中任意链（一个全序子集）的最大长度减一成为半格的高度。这个高度决定了迭代数据流分析算法在最坏情况下的迭代次数上限。
+
+**最大下界**
+
+假设 $(L, \wedge)$ 是一个半格。域元素 $x$ 和 $y$ 的最大下界(greatest lower bound, glb) 是一个满足下列条件的元素 $g$ ：
+
+1.   $g \preceq x$
+2.   $g \preceq y$ ，并且
+3.   如果 $z$ 是使得 $z \preceq x$ 且 $z \preceq y$ 成立的元素，那么 $z \preceq g$。
+
+我们的结论是，$x$ 和 $y$ 的交汇运算值就是它们的唯一最大下界。令 $g = x \wedge y$，可以观察到下列性质：
+
+- 因为 $(x \wedge y) \wedge x = x \wedge y$，所以 $g \leq x$ 。证明：$g \wedge x = ((x \wedge y) \wedge x) = (x \wedge ( y \wedge x)) = (x \wedge (x \wedge y)) = ((x \wedge x) \wedge y) = (x \wedge y ) = g$。
+- $g \leq y$ 的证明同上。
+- 假设 $z$ 是任意的满足 $z \leq x$ 和 $z \leq y$ 的元素。已知 $z \leq g$，因此除非 $z$ 就是 $g$，否则它不是 $x$ 和 $y$ 的一个最大下界。证明如下：$(z \wedge g) = (z \wedge (x \wedge y)) = ((z \wedge x) \wedge y)$。因为 $z \preceq x$，我们知道 $(z \wedge x = z)$，因此 $(z \wedge g) = (z \wedge y)$。因为 $z \preceq y$，我们知道 $z \wedge y = z$，因此 $z \wedge g = z$。我们已经证明了 $z \preceq g$，并且得出结论 $g = x \wedge y$ 是 $x$ 和 $y$ 的唯一最大下界。
+
+**乘积格**
+
+我们按照下面的方式构造乘积格。假设 $\{ A, \wedge_{A} \}$ 和 $\{ B, \wedge_B \}$ 是两个（半）格。这两个格的乘积格定义如下：
+
+1.   乘积格的域是 $A \times B$。
+
+2.   乘积格的交汇运算 $\wedge$ 定义如下：如果 $(a, b)$ 和 $(a', b')$ 是乘积格域中的元素，那么
+     $$
+     (a, b) \wedge (a', b') = (a \wedge_A a', b \wedge_B b')
+     $$
+     
+     乘积格的偏序可以很简单地用 $A$ 的偏序 $\preceq_A$ 和 $B$ 的偏序 $\preceq_B$ 来表示：
+     $$
+     (a, b) \preceq (a', b') \text{ 当且仅当 } (a \wedge_A a', b \wedge_B b')
+     $$
+
+格的乘积是一个满足结合律的运算，因此上面两条规则可以被扩展到任意多个格。也就是说，如果我们有格 $(A_i, \wedge_i)(i = i, 2, ... , k)$ ，那么这 $k$ 个格按照这个顺序的乘积的域为 $A_1 \times A_2 \times ... \times A_k$，其交汇运算定义为：
+$$
+(a_1, a_2, ..., a_k) \wedge (b_1, b_2, ... , b_k) = (a_1 \wedge_1 b_1, a_2 \wedge b_2, ... , a_k \wedge_k b_k)
+$$
+ 而偏序定义为
+$$
+(a_1, a_2, ..., a_k) \preceq (b_1, b_2, ... , b_k) \text{ 当且仅当对所有的} i, \ a_i \preceq b_i
+$$
+
+
+**格的高度**
+
+偏序集$(V, \preceq)$ 的一个上升链(ascending chain) 是一个满足 $x_1 \preceq x_2 \preceq ... \preceq x_n$ 的序列。一个半格的高度是所有上升链的 $\preceq$ 关系个数的最大值。也就是说，高度比链中的元素个数少一。比如一个有 $n$ 个定值的程序的到达定值半格的高度是 $n$。
+
+如果一个半格具有有穷的高度，就可以比较容易地证明相应的迭代数据流算法的收敛性。显然，一个由有穷值集组成的格具有有穷的高度；一个具有无穷多个值的格也可能具有有穷的高度。在常量传播算法中使用的格就是一个这样的例子。
+
+### 传递函数
+
+一个数据流框架中的传递函数族 $F: V \rightarrow V$ 具有下列性质：
+
+1.   $F$ 有一个单元函数 $I$，使得对于 $V$ 中的所有 $x$，$I(x) = x$。
+2.   $F$ 对函数组合运算封闭。也就是说，对于 $F$ 中的任意函数 $f$ 和 $g$，定义为 $h(x) = g(f(x))$ 的函数 $h$ 也在 $F$ 中。
+
+### 单调框架
+
+对于一个框架，如果框架中的所有传递函数都是单调的，那么我们就说这个框架是单调的。$F$ 中的传递函数 $f$ 是单调函数的条件是对于域 $V$ 中的任意两个元素，如果第一个元素大于第二个元素，那么 $f$ 作用于第一个元素的结果也大于它作用于第二个元素所得到的结果。
+
+一个数据流分析框架 $(D, F, V, \wedge)$ 是单调的，如果
+$$
+\text{公式1：对于所有的 } V \text{ 中的 } x \text{ 和 } y \text{ 以及 } F \text{ 中的 } f，x \preceq y \; \text{蕴含} \; f(x) \preceq f(y)
+$$
+单调性可以被等价地定义为 
+$$
+\text{公式2：对于所有的 } V \text{ 中的 } x \text{ 和 } y \text{ 以及 } F \text{ 中的 } f，f(x \wedge y) \; \text{蕴含} \; f(x) \wedge f(y)
+$$
+**证明：**
+
+首先假设 $(\forall x, y \in L) \; [x\leq y \; \text{蕴含} \; f(x) \leq f(y)]$ 成立，需证明 $(\forall x, y \in L) \; [f(x \wedge y) \leq f(x) \wedge f(y)]$。由于 $( x \wedge y )$ 是 $x$ 和 $y$ 的最大下界，满足：
+$$
+x \wedge y \leq x \quad \text{和} \quad x \wedge y \leq y
+$$
+根据假设 $(\forall x, y \in L) \; [x\leq y \; \text{蕴含} \; f(x) \leq f(y)]$，可得：
+$$
+f(x \wedge y) \leq f(x) \quad \text{和} \quad f(x \wedge y) \leq f(y).
+$$
+由于 $f(x) \wedge f(y)$ 是 $f(x)$ 和 $f(y)$ 的最大下界，因此有
+$$
+f(x \wedge y) \leq f(x) \wedge f(y).
+$$
+即 $(\forall x, y \in L) \; [f(x \wedge y) \leq f(x) \wedge f(y)]$ 成立。
+
+反之，假设 $(\forall x, y \in L) \; [f(x \wedge y) \leq f(x) \wedge f(y)]$ 成立，需证明 $(\forall x, y \in L) \; [x\leq y \; \text{蕴含} \; f(x) \leq f(y)]$。 
+设 $x \leq y$，则根据定义有 $x \wedge y = x$。由假设可得： 
+$$
+f(x) = f(x \wedge y) \leq f(x) \wedge f(y).
+$$
+由于 $f(x) \wedge f(y)$ 是 $f(x)$ 和 $f(y)$ 的最大下界，满足 $f(x) \wedge f(y) \leq f(y)$。因此：  
+$$
+f(x) \leq f(x) \wedge f(y) \leq f(y)
+$$
+即 $f(x) \leq f(y)$，故 $(\forall x, y \in L) \; [x\leq y \; \text{蕴含} \; f(x) \leq f(y)]$ 成立。
+
+### 迭代算法
+
+对于控制流图 $G = (N, E)$，其中 $N$ 是节点（基本块）集合，$E$ 是边集合，我们已经知道数据流方程可表示为：
+
+前向分析
+$$
+\begin{align*}
+\text{IN}[B] &= \bigwedge_{P \in \text{pred}(B)} \text{OUT}[P] \\
+\text{OUT}[B] &= f_B(\text{IN}[B])
+\end{align*}
+$$
+后向分析
+$$
+\begin{align*}
+\text{OUT}[B] &= \bigwedge_{S \in \text{succ}(B)} \text{IN}[S] \\
+\text{IN}[B] &= f_B(\text{OUT}[B])
+\end{align*}
+$$
+**不动点理论**
+
+迭代算法求解的是数据流方程的最小不动点或最大不动点：
+- **最小不动点**：最精确的安全解（may 分析）
+- **最大不动点**：最精确的安全解（must 分析）
+
+数学上表示为：
+$$
+x = F(x)
+$$
+其中 $F$ 是整个系统的传递函数组合。
+
+**通用迭代算法**
+
+**输入**：
+- 控制流图 $G = (N, E)$
+- 入口节点 $n_0$（前向分析）或出口节点 $n_{exit}$（后向分析）
+- 半格 $(L, \otimes)$，其中 $\otimes$ 是合并操作
+- 传递函数族 $\{f_B : L \to L \mid B \in N\}$
+- 初始值 $init \in L$
+- 安全值 $safe \in L$
+
+**输出**：
+- 每个节点的 IN 和 OUT 状态
+
+**步骤**：
+1. **初始化**：
+   $$
+   \begin{aligned}
+   \forall B \in N : & \\
+   \quad \text{IN}[B] & \leftarrow safe \\
+   \quad \text{OUT}[B] & \leftarrow safe \\
+   \end{aligned}
+   $$
+   
+   设置起始点状态：
+   $$
+   \begin{align*}
+   \text{if forward}: & \quad \text{OUT}[n_0] \leftarrow init \\
+   \text{if backward}: & \quad \text{IN}[n_{exit}] \leftarrow init \\
+   \end{align*}
+   $$
+
+2. **创建工作列表**：
+   $$
+   \text{Worklist} \leftarrow N \setminus \{n_0\} \quad (\text{前向分析}) \\
+   \text{or} \\
+   \text{Worklist} \leftarrow N \setminus \{n_{exit}\} \quad (\text{后向分析})
+   $$
+
+3. **迭代直到收敛**：
+   $$
+   \begin{align*}
+   \text{while } & \text{Worklist} \neq \emptyset \text{ do}: \\
+   & \quad \text{从 Worklist 中取出节点 } B \\
+   & \quad \text{计算新输入状态:} \\
+   & \quad \quad \text{if forward:} \\
+   & \quad \quad \quad \text{IN}_{new}[B] \leftarrow \bigwedge_{P \in \text{pred}(B)} \text{OUT}[P] \\
+   & \quad \quad \text{else:} \\
+   & \quad \quad \quad \text{OUT}_{new}[B] \leftarrow \bigwedge_{S \in \text{succ}(B)} \text{IN}[S] \\
+   \\
+   & \quad \text{应用传递函数:} \\
+   & \quad \quad \text{if forward:} \\
+   & \quad \quad \quad \text{OUT}_{new}[B] \leftarrow f_B(\text{IN}_{new}[B]) \\
+   & \quad \quad \text{else:} \\
+   & \quad \quad \quad \text{IN}_{new}[B] \leftarrow f_B(\text{OUT}_{new}[B]) \\
+   \\
+   & \quad \text{检查状态变化:} \\
+   & \quad \quad \text{if } \text{OUT}_{new}[B] \neq \text{OUT}[B] \ (\text{前向}) \\
+   & \quad \quad \quad \text{or} \ \text{IN}_{new}[B] \neq \text{IN}[B] \ (\text{后向}) \text{ then}: \\
+   & \quad \quad \quad \text{更新状态:} \\
+   & \quad \quad \quad \quad \text{IN}[B] \leftarrow \text{IN}_{new}[B] \quad (\text{前向}) \\
+   & \quad \quad \quad \quad \text{OUT}[B] \leftarrow \text{OUT}_{new}[B] \quad (\text{后向}) \\
+   & \quad \quad \quad \text{将受影响节点加入 Worklist:} \\
+   & \quad \quad \quad \quad \text{if forward: } \text{Worklist} \leftarrow \text{Worklist} \cup \text{succ}(B) \\
+   & \quad \quad \quad \quad \text{if backward: } \text{Worklist} \leftarrow \text{Worklist} \cup \text{pred}(B) \\
+   \end{align*}
+   $$
+
+4. **返回结果**：
+   $$
+   \text{return } (\text{IN}, \text{OUT})
+   $$
+
+
+
+### 数据流的解
+
+**最大不动点与标准最小不动点**
+
+**理想解**
+
+不失一般性，我们假设现在感兴趣的数据流框架是一个前向的数据流问题。考虑一个基本块 $B$ 的入口点。求理想解的第一步是要找到从程序入口到达 $B$ 的开头的所有可能的执行路径。只有当程序的某次执行能够准确地沿着某条路径进行，这条路径才被称为“可能的”。理想的求解方法将计算每个可能路径尾端的数据流值，并对这些数据流值应用 $\wedge$(交汇) 运算得到它们的最大下界。那么，程序的任何执行都不可能在程序点上产生一个更小的数据流值（单调性）。另外，这个界限还是紧致：根据流图中到达 $B$ 的所有可能路径计算得到的数据流值的集合的最大下界不可能变得更大。
+
+
+
+我们知道迭代算法得到的解是最大不动点。

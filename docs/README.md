@@ -110,3 +110,16 @@ footer: 短暂几年的衰败并不会影响你一生的成长
 基于WRK对win32编程中的句柄机制的分析。windows的对象管理机制使句柄的机制在win32编程中显得极为重要。
 
 - [句柄](./Operating_Systems/ntoskrnl/handle/handle.md)
+
+#### 驱动
+
+介绍Windows驱动开发
+
+- [驱动开发](./Operating_Systems/ntoskrnl/driver/intro.md)
+
+## 逆向工程
+
+### Hook
+
+#### 进程注入
+

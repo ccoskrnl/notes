@@ -395,8 +395,8 @@ A → B → D
 
 设 $(L, \leq)$ 是一个偏序集。若对任意两个元素 $a, b \in L$：
 
-1. **最小上界（join）** 存在：$\sup\{a, b\}$ 存在，记作 $a \vee b$
-2. **最大下界（meet）** 存在：$\inf\{a, b\}$ 存在，记作 $a \wedge b$
+1. **最小上界（Join，Supremum ，Least Upper Bound）** 存在：$\sup\{a, b\}$ 存在，记作 $a \vee b$
+2. **最大下界（Meet，Infimum ，Greatest Lower Bound）** 存在：$\inf\{a, b\}$ 存在，记作 $a \wedge b$
 
 则称 $(L, \leq)$ 为一个**格**（Lattice）。当格满足以下条件时，称为 **有界格**：
 
@@ -578,3 +578,35 @@ $$
        $$
        
        违反分配律，故为非分配格
+
+
+
+## 乘积格(Product Lattice)
+
+乘积格的核心思想是将两个或多个给定的格组合起来，形成一个新的，更大的格结构。这个新格继承了原始格的性质，并且其元素是原始格元素的元组。
+
+定义
+
+给定两个格 $(L_1, \preceq_1, \wedge_1, \vee_1)$ 和 $(L_2, \preceq_2, \wedge_2, \vee_2)$ ，它们的（直）乘积格 (Direct Product Lattice) 定义为
+
+-   底层集合(Underlying Set)：$L_1 \times L_2 = \{ (x_1, x_2) \ | \ x_1 \in L_1, x_2 \in L_2 \}$ （笛卡儿积）。
+
+-   偏序关系(Partial Order)：在 $L_1 \times L_2$ 上定义偏序 $\preceq$ 如下：
+    $$
+    (x_1, x_2) \preceq (y_1, y_2) \text{ 当且仅当 } x_1 \preceq_1 y_1 且 x_2 \preceq_2 y_2
+    $$
+    这个偏序称为 分量式偏序 (Componentwise Order) 或 乘积偏序 (Product Order)。
+
+-   交运算(Meet)：在 $L_1 \times L_2$ 上定义交运算 $\wedge$ 如下
+    $$
+    (x_1, x_2) \wedge (y_1, y_2) = (x_1 \wedge_1 y_1, x_2 \wedge_2 y_2)
+    $$
+    即，在每个分量上分别进行原始格的交运算。
+
+-   并运算(Join)：在 $L_1 \times L_2$ 上定义交运算 $\wedge$ 如下
+    $$
+    (x_1, x_2) \vee (y_1, y_2) = (x_1 \vee_1 y_1, x_2 \vee_2 y_2)
+    $$
+    即，在每个分量上分别进行原始格的并运算。
+
+**定理：** 这样定义的结构 **(L₁ × L₂, ≤, ∧, ∨)** 本身也是一个格。

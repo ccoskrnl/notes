@@ -84,6 +84,10 @@ let Operating_Systems = {
         {
           text: "句柄",
           link: "/Operating_Systems/ntoskrnl/handle/handle.md",
+        },
+        {
+          text: "驱动开发",
+          link: "/Operating_Systems/ntoskrnl/driver/intro.md",
         }
       ]
 
