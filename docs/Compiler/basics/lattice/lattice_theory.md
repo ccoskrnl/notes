@@ -119,7 +119,10 @@ Hasse 图是用于可视化**有限偏序集**（Partially Ordered Set, Poset）
   - $\{1,2\} \lessdot \{1,2,3\}, \{1,3\} \lessdot \{1,2,3\}, \{2,3\} \lessdot \{1,2,3\}$
 - **Hasse 图**：  
 
-![hasse_001](./assets/hasse_diagram_001.png)
+<p align="center">
+  <img src="./assets/hasse_diagram_001.png" />
+</p>
+
 
 例2：整除序（$D_{12} = \{1,2,3,4,6,12\}$，关系为整除）
 
@@ -130,7 +133,9 @@ Hasse 图是用于可视化**有限偏序集**（Partially Ordered Set, Poset）
   - $4 \lessdot 12, 6 \lessdot 12$
 - **Hasse 图**：  
 
-![hasse_002](./assets/hasse_diagram_002.png)
+<p align="center">
+  <img src="./assets/hasse_diagram_002.png" />
+</p>
 
 ### 最大元素和最小元素(Maximal and Minimal Elements)
 
@@ -170,7 +175,9 @@ $$
 
 **示例**：
 
-![lower_bound_and_upper_bound](./assets/bound_001.png)
+<p align="center">
+  <img src="./assets/bound_001.png" />
+</p>
 
 子集$\{a,b,c\}$的上界是 $e,f,j$ 和 $h$。它的下界只有 $a$。子集 $\{j,h\}$ 没有上界，它的下界是 $a, b, c, d, e$ 和 $f$ 。$a, c, d, f$ 的上界是 $f, h$ 和 $j$，它的下界是 $a$。
 
