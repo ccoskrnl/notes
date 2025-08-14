@@ -253,38 +253,38 @@ $$
 
 一个数据流分析框架 $(D, F, V, \wedge)$ 是单调的，如果
 $$
-\text{公式1：对于所有的 } V \text{ 中的 } x \text{ 和 } y \text{ 以及 } F \text{ 中的 } f，x \preceq y \; \text{蕴含} \; f(x) \preceq f(y)
+\text{公式1：对于所有的 } V \text{ 中的 } x \text{ 和 } y \text{ 以及 } F \text{ 中的 } f，x \preceq y \; \implies \; f(x) \preceq f(y)
 $$
 单调性可以被等价地定义为 
 $$
-\text{公式2：对于所有的 } V \text{ 中的 } x \text{ 和 } y \text{ 以及 } F \text{ 中的 } f，f(x \wedge y) \; \text{蕴含} \; f(x) \wedge f(y)
+\text{公式2：对于所有的 } V \text{ 中的 } x \text{ 和 } y \text{ 以及 } F \text{ 中的 } f，f(x \wedge y) \; \preceq \; f(x) \wedge f(y)
 $$
 **证明：**
 
-首先假设 $(\forall x, y \in L) \; [x\leq y \; \text{蕴含} \; f(x) \leq f(y)]$ 成立，需证明 $(\forall x, y \in L) \; [f(x \wedge y) \leq f(x) \wedge f(y)]$。由于 $( x \wedge y )$ 是 $x$ 和 $y$ 的最大下界，满足：
+首先假设 $(\forall x, y \in L) \; [x \preceq y \; \implies \; f(x) \preceq f(y)]$ 成立，需证明 $(\forall x, y \in L) \; [f(x \wedge y) \leq f(x) \wedge f(y)]$。由于 $( x \wedge y )$ 是 $x$ 和 $y$ 的最大下界，满足：
 $$
-x \wedge y \leq x \quad \text{和} \quad x \wedge y \leq y
+x \wedge y \preceq x \quad \text{和} \quad x \wedge y \preceq y
 $$
-根据假设 $(\forall x, y \in L) \; [x\leq y \; \text{蕴含} \; f(x) \leq f(y)]$，可得：
+根据假设 $(\forall x, y \in L) \; [x \preceq y \; \implies \; f(x) \preceq f(y)]$，可得：
 $$
-f(x \wedge y) \leq f(x) \quad \text{和} \quad f(x \wedge y) \leq f(y).
+f(x \wedge y) \preceq f(x) \quad \text{和} \quad f(x \wedge y) \preceq f(y).
 $$
 由于 $f(x) \wedge f(y)$ 是 $f(x)$ 和 $f(y)$ 的最大下界，因此有
 $$
-f(x \wedge y) \leq f(x) \wedge f(y).
+f(x \wedge y) \preceq f(x) \wedge f(y).
 $$
-即 $(\forall x, y \in L) \; [f(x \wedge y) \leq f(x) \wedge f(y)]$ 成立。
+即 $(\forall x, y \in L) \; [f(x \wedge y) \preceq f(x) \wedge f(y)]$ 成立。
 
-反之，假设 $(\forall x, y \in L) \; [f(x \wedge y) \leq f(x) \wedge f(y)]$ 成立，需证明 $(\forall x, y \in L) \; [x\leq y \; \text{蕴含} \; f(x) \leq f(y)]$。 
-设 $x \leq y$，则根据定义有 $x \wedge y = x$。由假设可得： 
+反之，假设 $(\forall x, y \in L) \; [f(x \wedge y) \preceq f(x) \wedge f(y)]$ 成立，需证明 $(\forall x, y \in L) \; [x \preceq y \; \implies \; f(x) \preceq f(y)]$。 
+设 $x \preceq y$，则根据定义有 $x \wedge y = x$。由假设可得： 
 $$
-f(x) = f(x \wedge y) \leq f(x) \wedge f(y).
+f(x) = f(x \wedge y) \preceq f(x) \wedge f(y).
 $$
-由于 $f(x) \wedge f(y)$ 是 $f(x)$ 和 $f(y)$ 的最大下界，满足 $f(x) \wedge f(y) \leq f(y)$。因此：  
+由于 $f(x) \wedge f(y)$ 是 $f(x)$ 和 $f(y)$ 的最大下界，满足 $f(x) \wedge f(y) \preceq f(y)$。因此：  
 $$
-f(x) \leq f(x) \wedge f(y) \leq f(y)
+f(x) \preceq f(x) \wedge f(y) \preceq f(y)
 $$
-即 $f(x) \leq f(y)$，故 $(\forall x, y \in L) \; [x\leq y \; \text{蕴含} \; f(x) \leq f(y)]$ 成立。
+即 $f(x) \preceq f(y)$，故 $(\forall x, y \in L) \; [x \preceq y \; \implies \; f(x) \preceq f(y)]$ 成立。
 
 **可分配的框架**
 
@@ -461,7 +461,7 @@ IN[B_4] = f_{B_3}( f_{B_1}(v_{ENTRY}) \; \wedge \; f_{B_2}(v_{ENTRY}))
 $$
 只有当数据流框架是可分配时得到的解才是相同的。如果一个数据流框架单调但是不可分配，根据单调框架的公式2，我们仍然有$IN[B_4] \preceq MOV[B_4]$。
 $$
-\text{公式2：对于所有的 } V \text{ 中的 } x \text{ 和 } y \text{ 以及 } F \text{ 中的 } f，f(x \wedge y) \; \text{蕴含} \; f(x) \wedge f(y)
+\text{公式2：对于所有的 } V \text{ 中的 } x \text{ 和 } y \text{ 以及 } F \text{ 中的 } f，f(x \wedge y) \; \preceq \; f(x) \wedge f(y)
 $$
 如果对于所有的基本块 $B$ 都有 $IN[B] \preceq IDEAL[B]$，那么这个解就是安全的（保守的）。
 
