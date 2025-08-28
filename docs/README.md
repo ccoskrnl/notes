@@ -2,7 +2,7 @@
 home: True
 layout: BlogHome
 heroFullScreen: true
-bgImage: Hibiki.jpg
+bgImage: skadi.jpg
 icon: home
 title: 城城的笔记
 author: 城城
@@ -65,6 +65,8 @@ footer: 短暂几年的衰败并不会影响你一生的成长
 
 - [到达定值](./Compiler/data_flow_analysis/reaching_definitions/reaching_definitions.md)
 
+
+
 ### 符号执行(Symbolic Execution)
 
 ---
@@ -85,9 +87,9 @@ footer: 短暂几年的衰败并不会影响你一生的成长
 
 - [PCIe内存获取技术](./Computer_Systems/storage/pcie_memory_acquisition/pcie_memory_acquistion.md)
 
-## 操作系统内核
 
-## 操作系统
+
+## 操作系统内核
 
 ### ntoskrnl
 
@@ -117,9 +119,4 @@ footer: 短暂几年的衰败并不会影响你一生的成长
 
 - [驱动开发](./Operating_Systems/ntoskrnl/driver/intro.md)
 
-## 逆向工程
-
-### Hook
-
-#### 进程注入
 
