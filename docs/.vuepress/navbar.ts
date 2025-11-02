@@ -95,9 +95,24 @@ let Operating_Systems = {
   ],
 };
 
+let Computer_Security = {
+  text: "计算机安全",
+  children: [
+    {
+      text: "软件安全",
+      children: [
+        {
+          text: "Reflective DLL Injection",
+          link: "/Computer_Security/software/reflective_dll/main.md",
+        },
+      ]
+    },
+  ]
+}
 
 export const Navbar = navbar([
   Compiler, // 编译器相关
   Computer_Systems, // 计算机系统相关
   Operating_Systems, // 操作系统相关
+  Computer_Security, // 计算机安全相关
 ]);

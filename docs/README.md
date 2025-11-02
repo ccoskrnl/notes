@@ -120,3 +120,15 @@ footer: 短暂几年的衰败并不会影响你一生的成长
 - [驱动开发](./Operating_Systems/ntoskrnl/driver/intro.md)
 
 
+## 计算机安全
+
+### 软件安全
+
+---
+
+#### 反射DLL注入
+
+这项技术并非一个简单的“注入工具”，而是一个高级的、旨在实现深度隐蔽和持久化驻留的恶意代码框架。它的设计目标直指现代安全检测（如EDR、AV）的盲区。
+
+- [反射DLL注入](./Computer_Security/software/reflective_dll/main.md)
+
