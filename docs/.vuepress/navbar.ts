@@ -110,9 +110,25 @@ let Computer_Security = {
   ]
 }
 
+let Computer_Networks = {
+  text: "计算机网络",
+  children: [
+    {
+      text: "SDN",
+      children: [
+        {
+          text: "SDN",
+          link: "/Computer_Networks/sdn/main.md",
+        },
+      ]
+    },
+  ]
+}
+
 export const Navbar = navbar([
   Compiler, // 编译器相关
   Computer_Systems, // 计算机系统相关
   Operating_Systems, // 操作系统相关
   Computer_Security, // 计算机安全相关
+  Computer_Networks, // 计算机网络相关
 ]);

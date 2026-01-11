@@ -23,7 +23,7 @@
     pe32.dwSize = sizeof(PROCESSENTRY32);
 
     // retrieve information about the first process and exit if unsuccessful.
-    !Process32First(proc_snap, &pe32)
+    Process32First(proc_snap, &pe32)
 
     // display information about all processes in the snapshot.
     do

@@ -2,7 +2,7 @@
 home: True
 layout: BlogHome
 heroFullScreen: true
-bgImage: skadi.jpg
+bgImage: background.jpg
 icon: home
 title: 城城的笔记
 author: 城城
@@ -132,3 +132,13 @@ footer: 短暂几年的衰败并不会影响你一生的成长
 
 - [反射DLL注入](./Computer_Security/software/reflective_dll/main.md)
 
+
+## 计算机网络
+
+### SDN
+
+### SDN
+
+软件定义网络（ SDN） 在数据平面和控制平面之间做了明确分割，在一台分离的“控制器”服务中实现了控制平面功能，该控制器服务与它所控制的路由器的转发组件完全分开并远离。
+
+- [SDN](./Computer_Networks/SDN/main.md)
