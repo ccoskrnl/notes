@@ -10,7 +10,7 @@ heroImage: logo.png
 heroText: 城城的笔记
 tagline: 城城的笔记
 copyright: false
-footer: 短暂几年的衰败并不会影响你一生的成长 
+footer: 已识乾坤大，犹怜草木青 
 ---
 
 # 城城的笔记
@@ -87,6 +87,15 @@ footer: 短暂几年的衰败并不会影响你一生的成长
 
 - [PCIe内存获取技术](./Computer_Systems/storage/pcie_memory_acquisition/pcie_memory_acquistion.md)
 
+### Multiple-Processor Management
+
+---
+
+#### Locked atomic operations in IA-32
+
+- [Locked atomic operations in IA-32](./Computer_Systems/smp/atomic/atomic.md)
+
+
 
 
 ## 操作系统内核
@@ -137,8 +146,17 @@ footer: 短暂几年的衰败并不会影响你一生的成长
 
 ### SDN
 
-### SDN
+---
+
+#### SDN
 
 软件定义网络（ SDN） 在数据平面和控制平面之间做了明确分割，在一台分离的“控制器”服务中实现了控制平面功能，该控制器服务与它所控制的路由器的转发组件完全分开并远离。
 
 - [SDN](./Computer_Networks/SDN/main.md)
+
+
+## Miscellaneous
+
+### 待读清单
+
+- [待读清单](./Misc/reading_list/reading_list.md)

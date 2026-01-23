@@ -125,10 +125,21 @@ let Computer_Networks = {
   ]
 }
 
+let Miscellaneous = {
+  text: "杂项",
+  children: [
+    {
+      text: "待读清单",
+      link: "/Miscellaneous/reading_list/reading_list.md",
+    },
+  ]
+}
+
 export const Navbar = navbar([
   Compiler, // 编译器相关
   Computer_Systems, // 计算机系统相关
   Operating_Systems, // 操作系统相关
   Computer_Security, // 计算机安全相关
   Computer_Networks, // 计算机网络相关
+  Miscellaneous, // 杂项
 ]);
