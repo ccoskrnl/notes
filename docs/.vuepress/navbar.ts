@@ -64,6 +64,15 @@ let Computer_Systems = {
         },
       ]
     },
+    {
+      text: "UEFI",
+      children: [
+        {
+          text: "构建EDK2开发环境",
+          link: "/Computer_Systems/uefi/edk2/main.md",
+        },
+      ]
+    },
   ]
 }
 

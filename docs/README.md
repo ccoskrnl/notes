@@ -96,6 +96,14 @@ footer: 已识乾坤大，犹怜草木青
 - [Locked atomic operations in IA-32](./Computer_Systems/smp/atomic/atomic.md)
 
 
+### UEFI
+
+---
+
+#### 构建EDK2开发环境
+
+- [Build EDK2 development environment](./Computer_Systems/uefi/edk2/main.md)
+
 
 
 ## 操作系统内核
@@ -159,4 +167,4 @@ footer: 已识乾坤大，犹怜草木青
 
 ### 待读清单
 
-- [待读清单](./Misc/reading_list/reading_list.md)
+- [待读清单](./Miscellaneous/reading_list/reading_list.md)
