@@ -1,4 +1,4 @@
-# Cache
+# Atomic
 
 Look for a copy of the desired word $w$ in the cache. If there is a miss, fetch the block that contains $w$ from next lower level of the memory hierarchy, store the block in some cache line(possibly evicting a valid line), and then return $w$.
 
