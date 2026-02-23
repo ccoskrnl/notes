@@ -14,4 +14,24 @@
 
 -   GhostRace: Exploiting and Mitigating Speculative Race Conditions - https://www.usenix.org/conference/usenixsecurity24/presentation/ragab
 
-    
+- Part 3 - From User Mode to Ring 0: Kernel Driver Fundamentals - https://adminions.ca/books/articles/page/part-3-from-user-mode-to-ring-0-kernel-driver-fundamentals
+
+- The Ultimate CPU emulator - https://www.unicorn-engine.org/docs/tutorial.html
+
+- 傅里叶变换交互式入门 - https://www.jezzamon.com/fourier/zh-cn.html
+
+- Reverse engineering Go binaries using Radare 2 and Python - https://malware.news/t/reverse-engineering-go-binaries-using-radare-2-and-python/32362
+
+- https://www.wnacg.com/photos-slist-aid-195801.html
+
+- Mastering Windows Access Control: Understanding SeDebugPrivilege - https://binarydefense.com/resources/blog/mastering-windows-access-control-understanding-sedebugprivilege/#:~:text=For%20those%20not%20familiar%20%E2%80%93%20SeDebugPrivilege,handed%20o
+
+- Hypervisors for Memory Introspection and Reverse Engineering - https://secret.club/2025/06/02/hypervisors-for-memory-introspection-and-reverse-engineering.html#illusion-uefi-based-hypervisor-with-ept-based-hooking
+
+- 5 Days to Virtualization: A Series on Hypervisor Development - https://revers.engineering/7-days-to-virtualization-a-series-on-hypervisor-development/
+
+- Developing Modern Ransomware Part 1: User-Land - https://lorenzomeacci.com/developing-modern-ransomware-part-1-user-land
+
+- https://rayanfam.com/
+
+- https://github.com/bobbuilder123/fps-pointer-chain-target    
