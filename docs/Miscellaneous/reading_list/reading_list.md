@@ -22,8 +22,6 @@
 
 - Reverse engineering Go binaries using Radare 2 and Python - https://malware.news/t/reverse-engineering-go-binaries-using-radare-2-and-python/32362
 
-- https://www.wnacg.com/photos-slist-aid-195801.html
-
 - Mastering Windows Access Control: Understanding SeDebugPrivilege - https://binarydefense.com/resources/blog/mastering-windows-access-control-understanding-sedebugprivilege/#:~:text=For%20those%20not%20familiar%20%E2%80%93%20SeDebugPrivilege,handed%20o
 
 - Hypervisors for Memory Introspection and Reverse Engineering - https://secret.club/2025/06/02/hypervisors-for-memory-introspection-and-reverse-engineering.html#illusion-uefi-based-hypervisor-with-ept-based-hooking
