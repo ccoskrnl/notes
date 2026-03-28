@@ -78,11 +78,11 @@ $$
 
 ## 到达定值的格
 
-到达定值的格元素为定义集合的幂集。假设程序中有三个定义 $d_1, d_2, d_3$ ，我们定义集合 $D$ 为所有定义的集合 $D = \{  d_1, d_2, d_3 \}$，格的元素 $L = 2^D$。即格的所有可能的元素为 $\{ \empty \}, \{ d_1 \}, \{ d_2 \}, \{ d_3 \}, \{ d_1, d_2 \}, \{ d_1, d_3 \}, \{ d_2, d_3 \}, \{ d_1, d_2, d_3 \}$ 。假设需要使用半格 $L = (V, \wedge, \preceq)$ 表示到达定值的格，我们设置半格的顶元素 $\top = \{ \empty \}$，底元素 $\bot = \{ d_1, d_2, d_3 \}$。我们定义 $\wedge$ 操作为 $\cup$ ，根据定义 $x \preceq y  \quad \text{当且仅当} \quad x \wedge y = x$，偏序应该是 $\supe$ 。$\top$ 为半格中的最大元素，而$\bot$ 为半格中的最小元素。因为$a \preceq \top, \forall a \in V \implies a \supe \{ empty \}, \forall a \in V$， 并且 $\bot \preceq \top \implies D \supe \{ \empty \} $。
+到达定值的格元素为定义集合的幂集。假设程序中有三个定义 $d_1, d_2, d_3$ ，我们定义集合 $D$ 为所有定义的集合 $D = \{  d_1, d_2, d_3 \}$，格的元素 $L = 2^D$。即格的所有可能的元素为 $\{ \empty \}, \{ d_1 \}, \{ d_2 \}, \{ d_3 \}, \{ d_1, d_2 \}, \{ d_1, d_3 \}, \{ d_2, d_3 \}, \{ d_1, d_2, d_3 \}$ 。假设需要使用半格 $L = (V, \wedge, \preceq)$ 表示到达定值的格，我们设置半格的顶元素 $\top = \{ \empty \}$，底元素 $\bot = \{ d_1, d_2, d_3 \}$。我们定义 $\wedge$ 操作为 $\cup$ ，根据定义 $x \preceq y  \quad \text{当且仅当} \quad x \wedge y = x$，偏序应该是 $\supe$ 。$\top$ 为半格中的最大元素，而$\bot$ 为半格中的最小元素。因为$a \preceq \top, \forall a \in V \implies a \supe \{ empty \}, \forall a \in V$， 并且 $\bot \preceq \top \implies D \supe \{ \empty \}$。
 
 
 
->    $\wedge$ 操作为 $\cup$ ，$\preceq$ 为 $\supseteq$ ，$\top$ 为半格中的最大元素，而$\bot$ 为半格中的最小元素。这可能有点违反直觉，但实际上它仍然是正确的。在有些文献中，到达定值的格为一个并半格 $L = (V, \vee, \preceq)$，它的并操作 $\vee$ 为 $\cup$，偏序 $\preceq$ 为 $\sube$，最大元素 $\top$ 为 $D$，最小元素$\bot$ 为 $\{ \empty \}$ 。在到达定值分析中，虽然两种的半格表示都是正确的，但是在初始化和迭代方向上有所不同。对与我们的半格 $L = (V, \wedge=\cup, \preceq=\supe)$，在进行
+>    $\wedge$ 操作为 $\cup$ ，$\preceq$ 为 $\supseteq$ ，$\top$ 为半格中的最大元素，而$\bot$ 为半格中的最小元素。这可能有点违反直觉，但实际上它仍然是正确的。在有些文献中，到达定值的格为一个并半格 $L = (V, \vee, \preceq)$，它的并操作 $\vee$ 为 $\cup$，偏序 $\preceq$ 为 $\sube$，最大元素 $\top$ 为 $D$，最小元素$\bot$ 为 $\{ \empty \}$ 。在到达定值分析中，虽然两种的半格表示都是正确的，但是在初始化和迭代方向上有所不同。
 >
 >    不过在这里我们并不使用并半格的概念，而是使用 $L = (V, \wedge, \preceq)$ 表示所有半格。
 
@@ -105,3 +105,114 @@ $$
 我们知道到达定值的格结构为 幂格集，其中 $\top$ 是 $\{ \empty \}$ ，表示 “无定义到达”，最乐观假设。$\bot$ 是全集 $D$，表示“所有定义都可能到达”，这是最保守的假设，也是我们优化时最不希望的结果。
 
 到达定值的安全值可以设置为 $\top$ 或者 $\bot$。根据单调性和不动点定理：到达定值的传递函数是**单调**的，且格是有限高度的，迭代算法必然收敛到一个不动点。在到达定值中，无论从 $\top$ 还是 $\bot$ 开始迭代，最终都会收敛到同一个不动点。这是因为，从 $\top$ 开始（空集）：通过传递函数逐步添加定义（$gen_B$），并集合并路径，最终覆盖所有可达定义。收敛速度通常更快（初始值接近最终解），依据标准最小不动点理论。而从 $\bot$ 开始（全集）：通过传递函数移除不可达定义（$kill_B$），并集保留可达定义，最终收敛到相同结果。收敛速度可能更慢（需多轮迭代移除多余定义），依据最大不动点。
+
+## 代码示例
+
+```python
+class ReachingDefsPowerSetSemilattice(Semilattice[set[DefPoint]]):
+
+    def __init__(self, var: Variable, universal_set: set[DefPoint]):
+        self.var = var
+        self.universal_set = universal_set
+
+    def top(self) -> T:
+        return set()
+
+    def bottom(self) -> T:
+        return self.universal_set.copy()
+
+    def partial_order(self, a: T, b: T) -> bool:
+        """
+        a <= b (a 包含 b)
+        """
+        return b.issubset(a)
+
+    def meet(self, a: set[DefPoint], b: set[DefPoint]) -> set[DefPoint]:
+        """
+        并集
+        """
+        return a | b
+
+
+class ReachingDefsProductSemilattice(Semilattice['Semilattice']):
+
+    def __init__(self, defs_block: Dict[BasicBlock, List[Tuple[Variable, DefPoint]]]):
+        """
+        defs_block: 一个字典，键为基本快(BasicBlock类), 值为元组(变量，定义点)的列表。
+        """
+        # 每个变量对应幂集半格
+        self.var_to_lattice: Dict[Variable, ReachingDefsPowerSetSemilattice] = { }
+        # 为所有的变量都创建一个幂集半格
+        self.lattices: List[ReachingDefsPowerSetSemilattice] = []
+        # 变量在幂集半格列表中的索引
+        self.tuple_index: Dict[Variable, int] = { }
+        self._initialize_lattices(defs_block)
+
+    def _initialize_lattices(self, defs_block: Dict[BasicBlock, List[Tuple[Variable, DefPoint]]]):
+
+        for defs_list in defs_block.values():
+            """
+            遍历每个元组列表
+            """
+
+            for defs in defs_list:
+                # 取出变量
+                var: Variable = defs[0]
+                # 找到对应的半格
+                lattice = self.var_to_lattice.get(var)
+
+                if not lattice:
+                  """
+                  如果半格不存在就创建它，并添加到半格列表
+                  """
+                    lattice = ReachingDefsPowerSetSemilattice(var, set())
+                    self.lattices.append(lattice)
+                    self.tuple_index[var] = len(self.lattices) - 1
+                    self.var_to_lattice[var] = lattice
+
+                # 添加定义点到半格的全集
+                lattice.universal_set.add(defs[1])
+
+
+    def meet(self, a: T, b: T) -> T:
+        return tuple(
+            lat.meet(a_i, b_i)
+            for lat, a_i, b_i in zip(self.lattices, a, b)
+        )
+
+    def top(self) -> T:
+        return tuple(lat.top() for lat in self.lattices)
+
+    def bottom(self) -> T:
+        return tuple(lat.bottom() for lat in self.lattices)
+
+    def partial_order(self, a: T, b: T) -> bool:
+        return all(
+            lat.partial_order(a_i, b_i)
+            for lat, a_i, b_i in zip(self.lattices, a, b)
+        )
+
+
+
+
+def reaching_definitions(cfg):
+    """
+    执行到达定值分析
+    """
+
+    defs_block: Dict[BasicBlock, List[Tuple[Variable, DefPoint]]] = cfg.collect_definitions()
+    lattice = ReachingDefsProductSemilattice(defs_block)
+    transfer = ReachingDefsTransfer(lattice, defs_block)
+
+    analysis = DataFlowAnalysisFramework(
+        cfg=cfg,
+        lattice=lattice,
+        transfer=transfer,
+        direction='forward',
+        init_value=lattice.top(),
+        safe_value=lattice.top(),  # 也可以为bottom
+        on_state_change=reaching_defs_on_state_change
+    )
+
+    analysis.analyze(strategy='worklist')
+```
