@@ -422,13 +422,13 @@ A → B → D
 格也可定义为配备两个二元运算 $\vee$（并）和 $\wedge$（交）的集合 $L$，满足：
 
 1. **交换律**： 
-   $a \vee b = b \vee a$ 
+   $a \vee b = b \vee a \quad$ 
    $a \wedge b = b \wedge a$
 2. **结合律**： 
-   $(a \vee b) \vee c = a \vee (b \vee c)$ 
+   $(a \vee b) \vee c = a \vee (b \vee c) \quad$ 
    $(a \wedge b) \wedge c = a \wedge (b \wedge c$)
 3. **吸收律**： 
-   $a \vee (a \wedge b) = a$ 
+   $a \vee (a \wedge b) = a \quad$ 
    $a \wedge (a \vee b) = a$
 
 偏序关系可通过运算恢复： 

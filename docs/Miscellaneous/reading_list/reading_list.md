@@ -33,3 +33,8 @@
 - https://rayanfam.com/
 
 - https://github.com/bobbuilder123/fps-pointer-chain-target    
+
+- http://profs.sci.univr.it/~giaco/download/Watermarking-Obfuscation/slicing-obfuscation.pdf
+
+- https://www.comp.nus.edu.sg/~joxan/papers/slicing.pdf
+- Part 1: Digging deep into LoadLibrary - https://n4r1b.com/posts/2019/03/part-1-digging-deep-into-loadlibrary/

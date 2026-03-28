@@ -161,4 +161,6 @@ Main thread
 ```
 
 
+## References
 
+- Part 1: Digging deep into LoadLibrary - https://n4r1b.com/posts/2019/03/part-1-digging-deep-into-loadlibrary/
