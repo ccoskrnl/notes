@@ -48,6 +48,25 @@ let Compiler = {
         },
       ]
     },
+
+    {
+      text: "项目实践",
+      children: [
+        {
+          text: "QBE 编译器后端框架",
+          link: "/Compiler/projects/qbe.md",
+        },
+      ]
+    },
+    {
+      text: "推荐阅读",
+      children: [
+        {
+          text: "推荐阅读",
+          link: "/Compiler/recommended_reading/reading.md",
+        },
+      ]
+    },
   ],
 };
 
@@ -108,11 +127,20 @@ let Computer_Security = {
   text: "计算机安全",
   children: [
     {
-      text: "软件安全",
+      text: "恶意软件开发",
       children: [
         {
           text: "Reflective DLL Injection",
           link: "/Computer_Security/software/reflective_dll/main.md",
+        },
+      ]
+    },
+    {
+      text: "分析思路",
+      children: [
+        {
+          text: "病毒分析思路",
+          link: "/Computer_Security/method/malware_analysis/malware_analysis.md",
         },
       ]
     },
