@@ -54,7 +54,7 @@ let Compiler = {
       children: [
         {
           text: "QBE 编译器后端框架",
-          link: "/Compiler/projects/qbe.md",
+          link: "/Compiler/projects/qbe/qbe.md",
         },
       ]
     },
