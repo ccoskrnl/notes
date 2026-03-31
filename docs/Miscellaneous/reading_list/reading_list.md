@@ -1,40 +1,55 @@
 # Further Reading
 
--   恶意软件的生存之道：监视器与辅助器组件解析 - How Malware Survives Understanding Watcher and Helper Components - https://reversethemalware.blogspot.com/2026/01/how-malware-survives-understanding.html
--   使用频率分析检测带有抖动的 C2 信标 - Detecting C2-Jittered Beacons with Frequency Analysis - https://www.diegowritesa.blog/2025/04/detecting-c2-jittered-beacons-with.html
--   RegRipper 注册表取证 - https://www.kali.org/tools/regripper/
--   Sleuth Kit 文件系统取证调查 - https://www.sleuthkit.org/sleuthkit/desc.php
--   Simulating common internet services in a lab environment - INetSim - https://www.inetsim.org/index.html
--   Caldera 自动化威胁分析平台 - A Scalable, Automated Adversary Emulation Platform - https://caldera.mitre.org/
--   Yara恶意软件检测 - https://yara.readthedocs.io/en/latest/
--   A general, open source, retargetable decompiler of machine code programs - Boomerang - https://boomerang.sourceforge.net/
--   VBinDiff 十六进制分析器 - https://www.cjmweb.net/vbindiff/
+**恶意软件**
 
--   The Geometry of Innocent Flesh on the Bone: Return-into-libc without Function Calls (on the x86) - https://hovav.net/ucsd/dist/geometry.pdf
+- [恶意软件的生存之道：监视器与辅助器组件解析](https://reversethemalware.blogspot.com/2026/01/how-malware-survives-understanding.html)
+- [Developing Modern Ransomware Part 1: User-Land](https://lorenzomeacci.com/developing-modern-ransomware-part-1-user-land)
+- [展开数据无眠 - InsomniacUnwinding 登场](https://lorenzomeacci.com/unwind-data-cant-sleep-introducing-insomniacunwinding)
+- [Playing in the (Tradecraft) Garden of Beacon: Finding Eden](https://www.cobaltstrike.com/blog/playing-in-the-tradecraft-garden-of-beacon)
+- [Improving consistency with EDR DLL Injection via APCs](https://fluxsec.red/apc-queue-injection-rust)
+- 
 
--   GhostRace: Exploiting and Mitigating Speculative Race Conditions - https://www.usenix.org/conference/usenixsecurity24/presentation/ragab
+**取证分析**
 
-- Part 3 - From User Mode to Ring 0: Kernel Driver Fundamentals - https://adminions.ca/books/articles/page/part-3-from-user-mode-to-ring-0-kernel-driver-fundamentals
+- [使用频率分析检测带有抖动的 C2 信标](https://www.diegowritesa.blog/2025/04/detecting-c2-jittered-beacons-with.html)
+- [RegRipper 注册表取证](https://www.kali.org/tools/regripper/)
+- [Sleuth Kit 文件系统取证调查](https://www.sleuthkit.org/sleuthkit/desc.php)
+- [INetSim: Simulating common internet services in a lab environment](https://www.inetsim.org/index.html)
+- [Caldera 自动化威胁分析平台](https://caldera.mitre.org/)
+- [Yara恶意软件检测](https://yara.readthedocs.io/en/latest/)
+- [Windows 进程内部结构：PEB 与 LDR 双向链表解析（内存取证基础 第二部分）](https://imphash.medium.com/windows-process-internals-a-few-concepts-to-know-before-jumping-on-memory-forensics-part-2-4f45022fb1f8)
 
-- The Ultimate CPU emulator - https://www.unicorn-engine.org/docs/tutorial.html
+**逆向**
 
-- 傅里叶变换交互式入门 - https://www.jezzamon.com/fourier/zh-cn.html
+- [Boomerang - A general, open source, retargetable decompiler of machine code programs](https://boomerang.sourceforge.net/)
+- [VBinDiff 十六进制分析器](https://www.cjmweb.net/vbindiff/)
+- [The Ultimate CPU emulator](https://www.unicorn-engine.org/docs/tutorial.html)
+- [Reverse engineering Go binaries using Radare 2 and Python](https://malware.news/t/reverse-engineering-go-binaries-using-radare-2-and-python/32362)
+- [fps-pointer-chain-target](https://github.com/bobbuilder123/fps-pointer-chain-target)
+- [IDA trace 指令分析](https://mp.weixin.qq.com/s?__biz=MzU2NTkxMTU1NA==&mid=2247489360&idx=1&sn=9e82a446a45eaa5f7bc3830f5ab385a0&chksm=fcb5de3dcbc2572b0e6eb2b743dc984809dd056d3e30550394d5490318dfb25701590137f965&scene=297&subscene=10000&sessionid=1774923958&clicktime=1774924049&enterid=1774924049&ascene=0&fasttmpl_type=0&fasttmpl_fullversion=8192921-zh_CN-zip&fasttmpl_flag=0&realreporttime=1774924049047&poc_token=HP0xy2mj01PYrYCYNdWeXbLhIi4nLtOu2EQraQL7)
 
-- Reverse engineering Go binaries using Radare 2 and Python - https://malware.news/t/reverse-engineering-go-binaries-using-radare-2-and-python/32362
 
-- Mastering Windows Access Control: Understanding SeDebugPrivilege - https://binarydefense.com/resources/blog/mastering-windows-access-control-understanding-sedebugprivilege/#:~:text=For%20those%20not%20familiar%20%E2%80%93%20SeDebugPrivilege,handed%20o
+**漏洞利用**
 
-- Hypervisors for Memory Introspection and Reverse Engineering - https://secret.club/2025/06/02/hypervisors-for-memory-introspection-and-reverse-engineering.html#illusion-uefi-based-hypervisor-with-ept-based-hooking
+- [The Geometry of Innocent Flesh on the Bone: Return-into-libc without Function Calls (on the x86)](https://hovav.net/ucsd/dist/geometry.pdf)
+- [GhostRace: Exploiting and Mitigating Speculative Race Conditions](https://www.usenix.org/conference/usenixsecurity24/presentation/ragab)
+- [Mastering Windows Access Control: Understanding SeDebugPrivilege](https://binarydefense.com/resources/blog/mastering-windows-access-control-understanding-sedebugprivilege/#:~:text=For%20those%20not%20familiar%20%E2%80%93%20SeDebugPrivilege,handed%20o)
+- [On the clock: Escaping VMware Workstation at Pwn2Own Berlin 2025](https://www.synacktiv.com/en/publications/on-the-clock-escaping-vmware-workstation-at-pwn2own-berlin-2025)
 
-- 5 Days to Virtualization: A Series on Hypervisor Development - https://revers.engineering/7-days-to-virtualization-a-series-on-hypervisor-development/
 
-- Developing Modern Ransomware Part 1: User-Land - https://lorenzomeacci.com/developing-modern-ransomware-part-1-user-land
+**操作系统底层**
 
-- https://rayanfam.com/
+- [Part 3 - From User Mode to Ring 0: Kernel Driver Fundamentals](https://adminions.ca/books/articles/page/part-3-from-user-mode-to-ring-0-kernel-driver-fundamentals)
+- [Part 1: Digging deep into LoadLibrary](https://n4r1b.com/posts/2019/03/part-1-digging-deep-into-loadlibrary/)
+- [Rayanfam blog](https://rayanfam.com/)
+- [Hypervisors for Memory Introspection and Reverse Engineering](https://secret.club/2025/06/02/hypervisors-for-memory-introspection-and-reverse-engineering.html#illusion-uefi-based-hypervisor-with-ept-based-hooking)
+- [5 Days to Virtualization: A Series on Hypervisor Development](https://revers.engineering/7-days-to-virtualization-a-series-on-hypervisor-development/)
 
-- https://github.com/bobbuilder123/fps-pointer-chain-target    
+**计算机科学**
 
-- http://profs.sci.univr.it/~giaco/download/Watermarking-Obfuscation/slicing-obfuscation.pdf
+- [傅里叶变换交互式入门](https://www.jezzamon.com/fourier/zh-cn.html)
 
-- https://www.comp.nus.edu.sg/~joxan/papers/slicing.pdf
-- Part 1: Digging deep into LoadLibrary - https://n4r1b.com/posts/2019/03/part-1-digging-deep-into-loadlibrary/
+**软件保护**
+
+- [Slicing Obfuscations: Design, Correctness, and Evaluation](http://profs.sci.univr.it/~giaco/download/Watermarking-Obfuscation/slicing-obfuscation.pdf)
+- [Path-Sensitive Backward Slicing](https://www.comp.nus.edu.sg/~joxan/papers/slicing.pdf)
