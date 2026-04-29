@@ -48,16 +48,6 @@ let Compiler = {
         },
       ]
     },
-
-    {
-      text: "逆向分析",
-      children: [
-        {
-          text: "逆向分析常用技术介绍",
-          link: "/Compiler/reverse/intro/intro.md",
-        },
-      ]
-    },
   ],
 };
 
@@ -133,7 +123,11 @@ let Computer_Security = {
           text: "病毒分析思路",
           link: "/Computer_Security/method/malware_analysis/malware_analysis.md",
         },
-      ]
+        {
+          text: "逆向分析方法",
+          link: "/Computer_Security/method/reverse_analysis/intro.md",
+        },
+      ],
     },
     {
       text: "密码学",
