@@ -50,20 +50,11 @@ let Compiler = {
     },
 
     {
-      text: "项目实践",
+      text: "逆向分析",
       children: [
         {
-          text: "QBE 编译器后端框架",
-          link: "/Compiler/projects/qbe/qbe.md",
-        },
-      ]
-    },
-    {
-      text: "推荐阅读",
-      children: [
-        {
-          text: "推荐阅读",
-          link: "/Compiler/recommended_reading/reading.md",
+          text: "逆向分析常用技术介绍",
+          link: "/Compiler/reverse/intro/intro.md",
         },
       ]
     },
@@ -141,6 +132,15 @@ let Computer_Security = {
         {
           text: "病毒分析思路",
           link: "/Computer_Security/method/malware_analysis/malware_analysis.md",
+        },
+      ]
+    },
+    {
+      text: "密码学",
+      children: [
+        {
+          text: "RSA算法讲解",
+          link: "/Computer_Security/cryptography/rsa/rsa.md",
         },
       ]
     },
