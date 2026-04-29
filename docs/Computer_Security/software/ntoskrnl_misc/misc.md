@@ -1,1 +1,0 @@
-# NTOSKRNL Technology Miscellaneous
