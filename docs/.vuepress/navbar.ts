@@ -127,6 +127,10 @@ let Computer_Security = {
           text: "逆向分析方法",
           link: "/Computer_Security/method/reverse_analysis/intro.md",
         },
+        {
+          text: "angr",
+          link: "/Computer_Security/method/angr/angr.md",
+        },
       ],
     },
     {

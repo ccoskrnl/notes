@@ -354,64 +354,6 @@ $$
 
 二进制符号执行引擎的核心算法，本质上是一个带约束求解的、状态分叉的模拟器。它通过将程序输入、寄存器和内存抽象为符号，通过模拟执行并收集路径约束，来探索程序在不同输入下的行为。它将静态的 def-use 关系升级为了动态的、路径敏感的符号计算，以精确解析那些静态分析难以处理的指针、内存等复杂依赖。
 
-### 符号执行中的不透明谓词 (Opaque Predicates) 消除
-
-```c
-int modexp(int y, int x[], int w, int n)
-{
-	int R, L, k, s;
-	int next = 0;
-
-	for (;;)
-	{
-		switch (next) {
-			case 0:
-				k = 0;
-				s = 1;
-				next = 1;
-				break;
-
-			case 1:
-				if (k < w)
-					next = 2;
-				else
-					next = 6;
-				break;
-
-			case 2:
-				if (x[k] == 1)
-					next = 3;
-				else
-					next = 4;
-				break;
-
-			case 3:
-				R = (s * y) % n;
-				next = 5;
-				break;
-
-			case 4:
-				R = s;
-				next = 5;
-				break;
-
-			case 5:
-				s = R * R % n;
-				L = R;
-				k++;
-				next = 1;
-				break;
-
-			case 6:
-				return L;
-
-		}
-	}
-}
-```
-
-**使用符号执行暴力恢复控制流图。对于复杂函数强混淆，使用符号执行结合后向切片尝试恢复。**
-
 
 
 ## 切片技术
