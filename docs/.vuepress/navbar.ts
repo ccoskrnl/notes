@@ -112,7 +112,7 @@ let Computer_Security = {
       children: [
         {
           text: "Reflective DLL Injection",
-          link: "/Computer_Security/software/reflective_dll/main.md",
+          link: "/Computer_Security/development/reflective_dll/main.md",
         },
       ]
     },
@@ -139,6 +139,15 @@ let Computer_Security = {
         {
           text: "RSA算法讲解",
           link: "/Computer_Security/cryptography/rsa/rsa.md",
+        },
+      ]
+    },
+    {
+      text: "分析报告",
+      children: [
+        {
+          text: "勒索病毒[48877a3a4c72c1]",
+          link: "/Computer_Security/reports/ransomware_48877a3a4c72c1daf3a80e3c034b56a04cec7ce3856887fed73e645e53c76b96/report.md",
         },
       ]
     },
