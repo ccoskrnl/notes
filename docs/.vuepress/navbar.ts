@@ -166,7 +166,7 @@ let Computer_Networks = {
       children: [
         {
           text: "SDN",
-          link: "/Computer_Networks/sdn/main.md",
+          link: "/Computer_Networks/SDN/main.md",
         },
       ]
     },
