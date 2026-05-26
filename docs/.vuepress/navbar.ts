@@ -146,9 +146,13 @@ let Computer_Security = {
       text: "分析报告",
       children: [
         {
-          text: "勒索病毒[48877a3a4c72c1]",
-          link: "/Computer_Security/reports/ransomware_48877a3a4c72c1daf3a80e3c034b56a04cec7ce3856887fed73e645e53c76b96/report.md",
+          text: "勒索病毒[48877a3a4c72]",
+          link: "/Computer_Security/reports/ransomware_48877a3a4c72/report.md",
         },
+        {
+          text: "窃密木马[597c5e69c854]",
+          link: "/Computer_Security/reports/rat_597c5e69c854/report.md",
+        }
       ]
     },
   ]

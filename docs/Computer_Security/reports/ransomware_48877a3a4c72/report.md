@@ -1,3 +1,23 @@
+# 勒索病毒威胁情报分析报告：48877a3a4c72c1daf3a80e3c034b56a04cec7ce3856887fed73e645e53c76b96
+
+
+[TOC]
+
+
+## ⚠️ 免责声明 (Disclaimer)
+
+**【郑重声明】** 本文档及其中包含的所有逆向分析过程、代码片段、伪代码和技术细节，**仅供网络安全防御研究、学术交流及反恶意软件技术探讨使用**。
+
+为了避免被恶意利用及保护相关受害者，文中涉及的所有敏感信息（包括但不限于：C2 服务器 IP、域名、通信端口、特定业务标识符及相关真实路径）均已进行严格的**脱敏与打码处理**。
+
+请读者严格遵守相关网络安全法律法规。**未经授权，任何人不得利用本文中探讨的技术手段进行任何形式的非法攻击、入侵或破坏活动。** 因读者滥用本文中提及的技术或情报所引发的任何直接或间接法律责任及后果，均由行为人自行承担，原作者对此不负任何法律连带责任。
+
+**[Disclaimer]** The analysis, code snippets, and technical details provided in this article are strictly for **educational purposes, cybersecurity defense research, and malware analysis discussions**.
+
+All sensitive Information of Compromise (IoCs), including but not limited to C2 IP addresses, domains, ports, and specific business identifiers, have been **redacted and obfuscated** to prevent malicious use and protect potential victims.
+
+Readers must comply with all applicable cybersecurity laws and regulations. **Any unauthorized or illegal use of the techniques discussed in this article for malicious attacks or system compromises is strictly prohibited.** The author assumes no liability for any direct or indirect consequences, damages, or legal responsibilities arising from the misuse of the information contained herein.
+
 
 ## 报告摘要
 
@@ -11,7 +31,6 @@
 - **SHA-256**: 48877a3a4c72c1daf3a80e3c034b56a04cec7ce3856887fed73e645e53c76b96
 - **文件大小**: 522.50 KB (535040 bytes)
 - **文件类型**: Portable Executable 64
-- **编译特征**: 底层包含 Delphi
 
 ## 破坏链路
 
@@ -143,7 +162,7 @@ C:\Windows\System32\cmd.exe /c bcdedit /set {default} bootstatuspolicy ignoreall
 
 RSA公钥内容如下
 
-![企业微信截图_17781158186645](./assets/企业微信截图_17781158186645.png)
+![image_17781158186645](./assets/image_17781158186645.png)
 
 病毒使用同一个密钥但是对每个文件使用不同的IV进行AES加密，如果超过一定的时间就重新生成一把AES密钥进行加密
 
