@@ -31,10 +31,11 @@ Readers must comply with all applicable cybersecurity laws and regulations. **An
 1. **权限提升**：母体启动后提权至 `SeDebugPrivilege`，并向 C2 发起强校验（哈希与签名双重验证）的网络请求，按需拉取加密载荷 `shell33.dll`。
 2. **靶标搜寻与伪装环境：** 针对 64 位系统核心输入枢纽（`TextInputHost.exe` 或 `TabTip.exe`）进行筛选，并通过手动构造“环境块（Environment Block）”的方式隐蔽传递共享内存名，为后续 IPC 通信建立隐蔽信道。
 3. **架构跃迁（天堂之门）：** 利用经典的 `Heaven's Gate` 技术，由 32 位母体强行拉起 64 位原生 `cmd.exe` 并挂起，实施**进程镂空（Process Hollowing）**，完美规避传统 32 位杀软的动态监控。
-4. **无文件反射加载：** 镂空后的 64 位注入器（Injector64）将基于 Rust 编写的核心武器库（Reflective DLL）通过 Stephen Fewer 反射式注入技术，直接在 `TextInputHost.exe` 内存中展开并执行，全程无文件落地。
-5. **白名单滥用**：Rust 核心模块解密后，利用 `WinHTTP -> curl -> certutil` 的白名单降级容灾机制，定向针对 32 位的 WeGame 客户端，空投经过 NsPack 加壳的 32 位易语言终极窃密载荷。
-6. **API 劫持与跨进程窃密：** 终极载荷利用 Inline Hook（拦截 `NtWaitForSingleObject`）将 PE 插件注入 WeGame。通过拦截窗口消息（`WH_CALLWNDPROC`，暗号 1124）实现隐蔽的 RPC 通信，操控 WeGame 自身在内存中实施特征码暴搜与凭据读取。
-7. **数据外发与毁尸灭迹：** 成功窃取 Token、QQ 号及主机 IP/地域信息后，打包回传至 C2，并立即执行自毁程序，抹除所有本地实体痕迹。
+4. **无文件反射加载：** 镂空后的 64 位注入器（Injector64）将 `shell33.dll`（Reflective DLL）通过 Stephen Fewer 反射式注入技术，直接在 `TextInputHost.exe` 内存中展开并执行，全程无文件落地。
+5. **按需加载武器空投：** 反射DLL本身不包含恶意代码，当它在 `TextInputHost.exe` 中运行时，会等待猎物上线。接着针对猎物向服务器请求一个对应的任务。服务器返回新的武器连接。反射DLL会解密这个新的武器，在内存中加载执行。对于Wegame，服务器会返回一个Rust编写的DLL。
+6. **白名单滥用**：Rust 核心模块解密后，利用 `WinHTTP -> curl -> certutil` 的白名单降级容灾机制，定向针对 32 位的 WeGame 客户端，空投经过 NsPack 加壳的 32 位易语言终极窃密载荷。
+7. **API 劫持与跨进程窃密：** 终极载荷利用 Inline Hook（拦截 `NtWaitForSingleObject`）将 PE 插件注入 WeGame。通过拦截窗口消息（`WH_CALLWNDPROC`，暗号 1124）实现隐蔽的 RPC 通信，操控 WeGame 自身在内存中实施特征码暴搜与凭据读取。
+8. **数据外发与毁尸灭迹：** 成功窃取 Token、QQ 号及主机 IP/地域运营商信息后，打包回传至 C2，并立即执行自毁程序，抹除所有本地实体痕迹。
 
 
 
@@ -541,7 +542,21 @@ HD_ReadMemory();
 
 ![image-20260526120626521](./report.assets/image-20260526120626521.png)
 
-最后木马删除自身防止被取证。
+| 字段                | 作用                                     |
+| ------------------- | ---------------------------------------- |
+| **user=**           | 目标QQ账号                               |
+| **`pass=&stpass=`** | 单点登录的核心凭证                       |
+| **token=**          | 设备/环境验证码                          |
+| **ip=&region=**     | 使用同城同运营商代理避免账号异地登陆锁定 |
+| **code=**           | 可能为渠道分成代码                       |
+
+
+
+### 毁尸灭迹
+
+**最后木马删除自身防止被取证。**
+
+
 
 ## 5. IoCs
 
@@ -558,4 +573,4 @@ HD_ReadMemory();
 
 2. 网络层指标 (Network IoCs)
 
-**为了安全考虑，这里暂不提供****
+​	**暂不提供**
