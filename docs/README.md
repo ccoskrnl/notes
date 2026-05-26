@@ -2,7 +2,7 @@
 home: True
 layout: BlogHome
 heroFullScreen: true
-bgImage: background.jpg
+bgImage: background.png
 icon: home
 title: 城城的笔记
 author: 城城
