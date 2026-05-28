@@ -108,11 +108,15 @@ let Computer_Security = {
   text: "计算机安全",
   children: [
     {
-      text: "恶意软件开发",
+      text: "工具开发",
       children: [
         {
           text: "Reflective DLL Injection",
           link: "/Computer_Security/development/reflective_dll/main.md",
+        },
+        {
+          text: "IDA 脚本开发环境搭建",
+          link: "/Computer_Security/development/ida_scripts_development_env/dev_env.md",
         },
       ]
     },

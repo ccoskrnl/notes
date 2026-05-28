@@ -15,7 +15,7 @@
 - [Shellcode Loader 高级执行与规避技艺](https://0xdbgman.github.io/posts/shellcode-loaders-the-art-of-execution/)
 - [利用任意物理读写驱动来加载自己的驱动](https://mp.weixin.qq.com/s?__biz=MjM5NTc2MDYxMw==&mid=2458614348&idx=1&sn=3ad065ac0bd0b6e152a887670ef1e5dd&chksm=b18c4ac686fbc3d0a473406b46596e76fb71f85e9d529c6da5b1efed2dee39755539e84efbc8&scene=297&subscene=10000&sessionid=1779848198&clicktime=1779848398&enterid=1779848398&ascene=0&fasttmpl_type=0&fasttmpl_fullversion=8274644-zh_CN-zip&fasttmpl_flag=0&realreporttime=1779848398017#rd)
 - [Updated Analysis of PatchGuard on Microsoft Windows 10 RS4](https://blog.tetrane.com/downloads/Tetrane_PatchGuard_Analysis_RS4_v1.01.pdf)
-- [The Geometry of Innocent Flesh on the Bone: Return-into-libc without Function Calls (on the x86)](https://hovav.net/ucsd/dist/geometry.pdf)
+- [The Geometry of Innocent Flesh on the Bone: Return-into-libc without Function Calls(on the x86)](https://hovav.net/ucsd/dist/geometry.pdf)
 - [GhostRace: Exploiting and Mitigating Speculative Race Conditions](https://www.usenix.org/conference/usenixsecurity24/presentation/ragab)
 - [Mastering Windows Access Control: Understanding SeDebugPrivilege](https://binarydefense.com/resources/blog/mastering-windows-access-control-understanding-sedebugprivilege/#:~:text=For%20those%20not%20familiar%20%E2%80%93%20SeDebugPrivilege,handed%20o)
 - [On the clock: Escaping VMware Workstation at Pwn2Own Berlin 2025](https://www.synacktiv.com/en/publications/on-the-clock-escaping-vmware-workstation-at-pwn2own-berlin-2025)
@@ -40,6 +40,7 @@
 - [fps-pointer-chain-target](https://github.com/bobbuilder123/fps-pointer-chain-target)
 - [IDA trace 指令分析](https://mp.weixin.qq.com/s?__biz=MzU2NTkxMTU1NA==&mid=2247489360&idx=1&sn=9e82a446a45eaa5f7bc3830f5ab385a0&chksm=fcb5de3dcbc2572b0e6eb2b743dc984809dd056d3e30550394d5490318dfb25701590137f965&scene=297&subscene=10000&sessionid=1774923958&clicktime=1774924049&enterid=1774924049&ascene=0&fasttmpl_type=0&fasttmpl_fullversion=8192921-zh_CN-zip&fasttmpl_flag=0&realreporttime=1774924049047&poc_token=HP0xy2mj01PYrYCYNdWeXbLhIi4nLtOu2EQraQL7)
 - [x64dbg插件无驱动过vmp3.9.4反调试](https://mp.weixin.qq.com/s?__biz=MjM5Mjc3MDM2Mw==&mid=2651144264&idx=1&sn=189e58a7a9ec333be36e0093a5b77c92&chksm=bd50d01c8a27590ae1ead1ddc69350a4daabd7c72f09f29fa6d06ce2ce460550b9b714c0a193&scene=297&subscene=10000&sessionid=1779848198&clicktime=1779848345&enterid=1779848345&ascene=0&fasttmpl_type=0&fasttmpl_fullversion=8274644-zh_CN-zip&fasttmpl_flag=0&realreporttime=1779848345551#rd)
+- [Static Devirtualization of Themida](https://back.engineering/blog/09/05/2026/)
 
 
 **操作系统底层**
