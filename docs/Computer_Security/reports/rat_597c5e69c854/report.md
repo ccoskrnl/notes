@@ -88,7 +88,7 @@ Readers must comply with all applicable cybersecurity laws and regulations. **An
 
 
 
-![image-20260526115509654](./report.assets/image-20260526115509654.png)
+![image-20260528162615601](./report.assets/image-20260528162615601.png)
 
 
 
@@ -361,7 +361,7 @@ DllEntryPoint会跳转到DllMain函数
 
 ### 针对Wegame的武器空投
 
-![image-20260526115545122](./report.assets/image-20260526115545122.png)
+![image-20260528162727068](./report.assets/image-20260528162727068.png)
 
 在调试器中可以看到，Wegame就是木马的名单上的猎物之一。
 
@@ -454,7 +454,7 @@ DllEntryPoint会跳转到DllMain函数
 
 木马会在内存中释放一个高强度混淆的HD_Process.dll，这个DLL负责执行wegame读内存的操作。
 
-![image-20260526113945692](./report.assets/image-20260526113945692.png)
+![image-20260528162812703](./report.assets/image-20260528162812703.png)
 
 首先它会向wegame中写入一段`0x82A` 大小的shellcode和一个大小为`0x19E00 `的DLL文件。这个shellcode负责进行手动加载DLL文件。在注入方式的选择中，木马选择了 “内联挂钩（Inline Hook）” 触发的被动式注入技术。
 
