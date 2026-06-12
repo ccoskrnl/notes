@@ -41,7 +41,11 @@
 - [IDA trace 指令分析](https://mp.weixin.qq.com/s?__biz=MzU2NTkxMTU1NA==&mid=2247489360&idx=1&sn=9e82a446a45eaa5f7bc3830f5ab385a0&chksm=fcb5de3dcbc2572b0e6eb2b743dc984809dd056d3e30550394d5490318dfb25701590137f965&scene=297&subscene=10000&sessionid=1774923958&clicktime=1774924049&enterid=1774924049&ascene=0&fasttmpl_type=0&fasttmpl_fullversion=8192921-zh_CN-zip&fasttmpl_flag=0&realreporttime=1774924049047&poc_token=HP0xy2mj01PYrYCYNdWeXbLhIi4nLtOu2EQraQL7)
 - [x64dbg插件无驱动过vmp3.9.4反调试](https://mp.weixin.qq.com/s?__biz=MjM5Mjc3MDM2Mw==&mid=2651144264&idx=1&sn=189e58a7a9ec333be36e0093a5b77c92&chksm=bd50d01c8a27590ae1ead1ddc69350a4daabd7c72f09f29fa6d06ce2ce460550b9b714c0a193&scene=297&subscene=10000&sessionid=1779848198&clicktime=1779848345&enterid=1779848345&ascene=0&fasttmpl_type=0&fasttmpl_fullversion=8274644-zh_CN-zip&fasttmpl_flag=0&realreporttime=1779848345551#rd)
 - [Static Devirtualization of Themida](https://back.engineering/blog/09/05/2026/)
-
+- [An experimental dynamic approach to devirtualize pure functions protected by VMProtect 3.x](https://github.com/JonathanSalwan/VMProtect-devirtualization/tree/main)
+- [Microblogging: Synthesizing (obfuscated) expressions](https://github.com/JonathanSalwan/Triton/issues/1074)
+- [VMProtect 2 - Detailed Analysis of the Virtual Machine Architecture](https://back.engineering/blog/17/05/2021/)
+- [VMProtect 2 - Part Two, Complete Static Analysis](https://back.engineering/blog/21/06/2021/)
+- [Back Engineering Blos Posts](https://back.engineering/blog/)
 
 **操作系统底层**
 
@@ -72,5 +76,11 @@
 
 - [ ] BYOVD
 - [ ] Hypervisor & HyperDbg
-- [ ] angr
+
 - [ ] DynamoRIO
+
+- [ ] angr
+- [ ] 动态污点分析
+- [ ] PIN Trace & Intel PT
+- [ ] 后向切片
+- [ ] unicorn
