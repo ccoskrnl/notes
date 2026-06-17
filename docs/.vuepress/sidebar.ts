@@ -1,36 +1,6 @@
 // 侧边栏
 import { sidebar } from "vuepress-theme-hope";
 
-// /* 编译器 */
-// let Compiler_basics = [
-//   {
-//     text: "格论",
-//     link: "/Compiler/basics/lattice/lattice_theory.md",
-//   },
-//   {
-//     text: "单静态赋值 (SSA) 形式",
-//     link: "/Compiler/basics/ssa/ssa.md",
-//   },
-// ]
-
-// let Compiler_data_flow_analysis = [
-//   {
-//     text: "单调数据流分析框架",
-//     link: "/Compiler/data_flow_analysis/monotone/monotone_data_flow_analysis_frameworks.md",
-//   },
-//   { 
-//     text: "到达定值",
-//     link: "/Compiler/data_flow_analysis/reaching_definitions/reaching_definitions.md",
-//   },
-// ]
-
-// let Compiler_symbolic_execution = [
-//   {
-//     text: "稀疏条件常量传播(SCCP)",
-//     link: "/Compiler/symbolic_execution/sccp/sccp.md",
-//   },
-// ]
-
 let Compiler = [
 {
   text: "编译器",
@@ -40,11 +10,15 @@ let Compiler = [
       children: [
         {
           text: "格论",
-          link: "/Compiler/basics/lattice/lattice_theory.md",
+          link: "/compiler/basics/lattice/lattice_theory.md",
+        },
+        {
+          text: "常量传播中的常量格",
+          link: "/compiler/basics/lattice/constlat.md",
         },
         {
           text: "单静态赋值 (SSA) 形式",
-          link: "/Compiler/basics/ssa/ssa.md",
+          link: "/compiler/basics/ssa/ssa.md",
         }
       ]
 
@@ -53,12 +27,16 @@ let Compiler = [
       text: "数据流分析",
       children: [
         {
+          text: "数据流分析基础",
+          link: "/compiler/data-flow-analysis/intro/intro.md",
+        },
+        {
           text: "单调数据流分析框架",
-          link: "/Compiler/data_flow_analysis/monotone/monotone_data_flow_analysis_frameworks.md",
+          link: "/compiler/data-flow-analysis/monotone/monotone_data_flow_analysis_frameworks.md",
         },
         {
           text: "到达定值",
-          link: "/Compiler/data_flow_analysis/reaching_definitions/reaching_definitions.md",
+          link: "/compiler/data-flow-analysis/reaching-definitions/reaching_definitions.md",
         }
       ]
     },
@@ -67,15 +45,13 @@ let Compiler = [
       children: [
         {
           text: "稀疏条件常量传播(SCCP)",
-          link: "/Compiler/symbolic_execution/sccp/sccp.md",
+          link: "/compiler/symbolic-execution/sccp/sccp.md",
         },
       ]
     },
   ],
 },
 ]
-
-
 
 export const Sidebar = sidebar({
   "编译器设计": Compiler,

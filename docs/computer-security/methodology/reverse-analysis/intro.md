@@ -340,7 +340,7 @@ $$
 
 编译器优化（如常量传播、死代码消除）中的符号执行通常是静态的、流不敏感的或路径不敏感的，旨在安全近似程序行为，不追求完整路径覆盖，但必须保证优化不改变程序语义。
 
-[SCCP(Sparse Conditional Constant Propagation)](../../symbolic_execution/sccp/sccp.md) 是经典代表，它在 SSA 形式 上结合了常量传播和死代码消除。SCCP 本质上是一种简化的、路径不敏感的静态符号执行。这种设计在编译器优化中足够用，因为优化必须快速且安全。
+[SCCP(Sparse Conditional Constant Propagation)](../../../compiler/symbolic-execution/sccp/sccp.md) 是经典代表，它在 SSA 形式 上结合了常量传播和死代码消除。SCCP 本质上是一种简化的、路径不敏感的静态符号执行。这种设计在编译器优化中足够用，因为优化必须快速且安全。
 
 逆向工程、漏洞挖掘等场景中，符号执行的目标是深入理解程序行为、自动生成输入以触发特定路径或证明路径可达性。
 

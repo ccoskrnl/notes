@@ -9,15 +9,15 @@ let Compiler = {
       children: [
         {
           text: "格论",
-          link: "/Compiler/basics/lattice/lattice_theory.md",
+          link: "/compiler/basics/lattice/lattice_theory.md",
         },
         {
           text: "常量传播中的常量格",
-          link: "/Compiler/basics/lattice/constlat.md",
+          link: "/compiler/basics/lattice/constlat.md",
         },
         {
           text: "单静态赋值 (SSA) 形式",
-          link: "/Compiler/basics/ssa/ssa.md",
+          link: "/compiler/basics/ssa/ssa.md",
         }
       ]
 
@@ -27,15 +27,15 @@ let Compiler = {
       children: [
         {
           text: "数据流分析基础",
-          link: "/Compiler/data_flow_analysis/intro/intro.md",
+          link: "/compiler/data-flow-analysis/intro/intro.md",
         },
         {
           text: "单调数据流分析框架",
-          link: "/Compiler/data_flow_analysis/monotone/monotone_data_flow_analysis_frameworks.md",
+          link: "/compiler/data-flow-analysis/monotone/monotone_data_flow_analysis_frameworks.md",
         },
         {
           text: "到达定值",
-          link: "/Compiler/data_flow_analysis/reaching_definitions/reaching_definitions.md",
+          link: "/compiler/data-flow-analysis/reaching-definitions/reaching_definitions.md",
         }
       ]
     },
@@ -44,32 +44,26 @@ let Compiler = {
       children: [
         {
           text: "稀疏条件常量传播(SCCP)",
-          link: "/Compiler/symbolic_execution/sccp/sccp.md",
+          link: "/compiler/symbolic-execution/sccp/sccp.md",
         },
       ]
     },
   ],
 };
 
-
-let Computer_Systems = {
-  text: "计算机系统",
+let Architecture = {
+  text: "体系结构",
   children: [
     {
-      text: "计算机存储结构",
-      children: [
-        {
-          text: "PCIe 内存获取技术",
-          link: "/Computer_Systems/storage/pcie_memory_acquisition/pcie_memory_acquistion.md",
-        },
-      ]
+      text: "PCIe 内存获取技术",
+      link: "/architecture/pcie-memory-acquisition/pcie_memory_acquistion.md",
     },
     {
       text: "UEFI",
       children: [
         {
           text: "构建EDK2开发环境",
-          link: "/Computer_Systems/uefi/edk2/main.md",
+          link: "/architecture/uefi/edk2/main.md",
         },
       ]
     },
@@ -84,19 +78,19 @@ let Operating_Systems = {
       children: [
         {
           text: "APC",
-          link: "/Operating_Systems/ntoskrnl/apc/apc.md",
+          link: "/operating-system/ntoskrnl/apc/apc.md",
         },
         {
           text: "对象管理",
-          link: "/Operating_Systems/ntoskrnl/object/object.md",
+          link: "/operating-system/ntoskrnl/object/object.md",
         },
         {
           text: "句柄",
-          link: "/Operating_Systems/ntoskrnl/handle/handle.md",
+          link: "/operating-system/ntoskrnl/handle/handle.md",
         },
         {
           text: "驱动开发",
-          link: "/Operating_Systems/ntoskrnl/driver/intro.md",
+          link: "/operating-system/ntoskrnl/driver/intro.md",
         }
       ]
 
@@ -108,32 +102,45 @@ let Computer_Security = {
   text: "计算机安全",
   children: [
     {
-      text: "工具开发",
+      text: "安全机制",
       children: [
         {
           text: "Reflective DLL Injection",
-          link: "/Computer_Security/development/reflective_dll/rfdll.md",
-        },
-        {
-          text: "IDA 脚本开发环境搭建",
-          link: "/Computer_Security/development/ida_scripts_development_env/dev_env.md",
+          link: "/computer-security/mechanism/reflective-dll/rfdll.md",
         },
       ]
     },
     {
-      text: "分析思路",
+      text: "工具链",
+      children: [
+        {
+          text: "IDA 脚本开发环境搭建",
+          link: "/computer-security/tooling/ida-scripts/dev_env.md",
+        },
+        {
+          text: "Intel Pin 工具",
+          link: "/computer-security/tooling/intel-pin/pin.md",
+        },
+        {
+          text: "Windows 内核调试",
+          link: "/computer-security/tooling/windows-kernel-debugging/main.md",
+        },
+      ]
+    },
+    {
+      text: "分析方法",
       children: [
         {
           text: "病毒分析思路",
-          link: "/Computer_Security/method/malware_analysis/malware_analysis.md",
+          link: "/computer-security/methodology/malware-analysis/malware_analysis.md",
         },
         {
           text: "逆向分析方法",
-          link: "/Computer_Security/method/reverse_analysis/intro.md",
+          link: "/computer-security/methodology/reverse-analysis/intro.md",
         },
         {
           text: "angr",
-          link: "/Computer_Security/method/angr/angr.md",
+          link: "/computer-security/methodology/angr/angr.md",
         },
       ],
     },
@@ -142,7 +149,7 @@ let Computer_Security = {
       children: [
         {
           text: "RSA算法讲解",
-          link: "/Computer_Security/cryptography/rsa/rsa.md",
+          link: "/computer-security/cryptography/rsa/rsa.md",
         },
       ]
     },
@@ -151,11 +158,19 @@ let Computer_Security = {
       children: [
         {
           text: "勒索病毒[48877a3a4c72]",
-          link: "/Computer_Security/reports/ransomware_48877a3a4c72/report.md",
+          link: "/computer-security/reports/ransomware-48877a3a4c72/report.md",
         },
         {
           text: "窃密木马[597c5e69c854]",
-          link: "/Computer_Security/reports/rat_597c5e69c854/report.md",
+          link: "/computer-security/reports/rat-597c5e69c854/report.md",
+        },
+        {
+          text: "高级加载器[af7fcb94e1]",
+          link: "/computer-security/reports/loader-af7fcb94e1/report.md",
+        },
+        {
+          text: "寄生蠕虫[4354970ccc]",
+          link: "/computer-security/reports/worm-4354970ccc/report.md",
         }
       ]
     },
@@ -170,28 +185,28 @@ let Computer_Networks = {
       children: [
         {
           text: "SDN",
-          link: "/Computer_Networks/SDN/main.md",
+          link: "/computer-network/SDN/main.md",
         },
       ]
     },
   ]
 }
 
-let Miscellaneous = {
-  text: "杂项",
+let Resources = {
+  text: "资源",
   children: [
     {
       text: "待读清单",
-      link: "/Miscellaneous/reading_list/reading_list.md",
+      link: "/resources/reading_list/reading_list.md",
     },
   ]
 }
 
 export const Navbar = navbar([
-  Compiler, // 编译器相关
-  Computer_Systems, // 计算机系统相关
-  Operating_Systems, // 操作系统相关
-  Computer_Security, // 计算机安全相关
-  Computer_Networks, // 计算机网络相关
-  Miscellaneous, // 杂项
+  Compiler,
+  Architecture,
+  Operating_Systems,
+  Computer_Security,
+  Computer_Networks,
+  Resources,
 ]);
