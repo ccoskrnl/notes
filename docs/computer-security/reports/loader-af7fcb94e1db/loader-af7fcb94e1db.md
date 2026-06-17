@@ -5,6 +5,7 @@ tags:
   - 进程注入
   - 恶意软件分析报告
 date: 2026-06-02
+star: true
 ---
 
 # 针对 svchost 的寄生链：某高级恶意软件加载器的深度技术剖析
@@ -391,3 +392,9 @@ __int64 __fastcall fn_InjectPayloadEx_180002C9C(
 - SHA-1: `74a8b3787411e4361be2f78579357f988825a97f`
 - 日志文件: `C:\Users\{用户名}\AppData\Local\Temp\{GUID}.tmp`
 - 互斥体: `{GUID}`
+
+---
+
+- [[computer-security/reports/Malware Reports]]
+- [[computer-security/reports/rat-597c5e69c854/rat-597c5e69c854|远控木马分析报告]]
+- [[computer-security/mechanism/reflective-dll/reflective-dll-injection|Reflective DLL 注入技术]]

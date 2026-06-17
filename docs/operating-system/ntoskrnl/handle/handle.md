@@ -1,3 +1,12 @@
+---
+tags:
+  - Windows内核
+  - 句柄
+  - 对象管理
+  - ntoskrnl
+date: 2025-07-28
+star: false
+---
 # Windows句柄
 
 Windows执行体实现了一套对象机制来管理各种资源和实体。每种对象都有一个与之对应的对象类型，对象类型定义了该类对象的一些特性和方法。对象类型通过提供的自定义的Parse方法可以扩展此名字空间。对象管理器中的对象是执行体对象，它们位于系统空间中；在进程空间不能通过地址来引用他们，Windows使用句柄(handle)来管理进程中的对象引用。
@@ -353,3 +362,9 @@ nt!_OBJECT_TYPE
    +0x0c8 CallbackList     : _LIST_ENTRY [ 0xffff9180`46d07c40 - 0xffff9180`46d07c40 ]
 ```
 所以，该句柄关联的是一个 `Process` 对象。
+
+---
+
+- [[operating-system/ntoskrnl/object/object|Windows内核中的对象管理]]
+- [[operating-system/ntoskrnl/driver/driver-development-intro|Windows 驱动开发基础]]
+- [[operating-system/ntoskrnl/apc/apc|异步过程调用]]

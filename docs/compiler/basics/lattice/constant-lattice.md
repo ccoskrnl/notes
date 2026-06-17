@@ -1,3 +1,12 @@
+---
+tags:
+  - 常量传播
+  - 格论
+  - 编译器优化
+  - SCCP
+date: 2025-07-28
+star: false
+---
 # 常量传播的格
 
 ## 定义
@@ -504,3 +513,8 @@ if (rand() % 2) {   // 条件NAC
 ```
 
 **关键点**：控制流合并将⊤/常量转为NAC
+
+---
+
+- [[compiler/basics/lattice/lattice_theory|格论]]
+- [[compiler/symbolic-execution/sccp/sccp|Sparse Conditional Constant Propagation]]

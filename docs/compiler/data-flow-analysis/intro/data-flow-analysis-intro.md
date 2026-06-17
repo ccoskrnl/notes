@@ -1,3 +1,12 @@
+---
+tags:
+  - 数据流分析
+  - 编译器优化
+  - 传递函数
+  - 半格
+date: 2025-07-28
+star: true
+---
 # 数据流分析基础
 
 数据流分析指的是一组用来获取有关数据如何沿着程序执行路径流动的相关信息的技术。
@@ -22,7 +31,7 @@
 
 ## 数据流分析模式
 
-在所有的数据流分析应用中，我们都会把每个程序点和一个 *数据流值 (data-flow value)* 关联起来。这个值是在该点可能观察到的所有程序状态的集合的抽象表示。所有可能的数据流值的集合称为这个数据流应用的域。比如，[到达定值](../reaching-definitions/reaching_definitions.md) 的数据流值的域是程序的定值集合的所有子集的集合。某个数据流值是一个定值的集合，而我们希望把程序中的每个点和可能到达该点的定值的精确集合关联起来。对于抽象方式的选择依赖与分析的目标。我们只跟踪相关的信息。
+在所有的数据流分析应用中，我们都会把每个程序点和一个 *数据流值 (data-flow value)* 关联起来。这个值是在该点可能观察到的所有程序状态的集合的抽象表示。所有可能的数据流值的集合称为这个数据流应用的域。比如，[到达定值](../reaching-definitions/reaching-definitions.md) 的数据流值的域是程序的定值集合的所有子集的集合。某个数据流值是一个定值的集合，而我们希望把程序中的每个点和可能到达该点的定值的精确集合关联起来。对于抽象方式的选择依赖与分析的目标。我们只跟踪相关的信息。
 
 我们把每个语句 $s$ 之前和之后的数据流分别记为 $IN[s]$ 和 $OUT[s]$。*数据流问题(data-flow problem)* 就是要对一组约束求解。这组约束对所有的语句 $s$ 限定了 $IN[s]$ 和 $OUT[s]$ 之间的关系。约束分为两种，基于语句语义（传递函数）的约束和基于控制流的约束。
 
@@ -503,3 +512,11 @@ $$
 3. Muchnick and Steven S. Advanced compiler design and implementation.
 4. Aho, Alfred V. Compilers: principles, techniques, & tools.
 
+
+
+---
+
+- [[compiler/basics/lattice/lattice_theory|格论]]
+- [[compiler/data-flow-analysis/monotone/monotone_data_flow_analysis_frameworks|单调数据流分析框架]]
+- [[compiler/data-flow-analysis/reaching-definitions/reaching-definitions|到达定值]]
+- [[compiler/symbolic-execution/sccp/sccp|Sparse Conditional Constant Propagation]]

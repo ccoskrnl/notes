@@ -13,7 +13,7 @@ let Compiler = {
         },
         {
           text: "常量传播中的常量格",
-          link: "/compiler/basics/lattice/constlat.md",
+          link: "/compiler/basics/lattice/constant-lattice.md",
         },
         {
           text: "单静态赋值 (SSA) 形式",
@@ -27,7 +27,7 @@ let Compiler = {
       children: [
         {
           text: "数据流分析基础",
-          link: "/compiler/data-flow-analysis/intro/intro.md",
+          link: "/compiler/data-flow-analysis/intro/data-flow-analysis-intro.md",
         },
         {
           text: "单调数据流分析框架",
@@ -35,7 +35,7 @@ let Compiler = {
         },
         {
           text: "到达定值",
-          link: "/compiler/data-flow-analysis/reaching-definitions/reaching_definitions.md",
+          link: "/compiler/data-flow-analysis/reaching-definitions/reaching-definitions.md",
         }
       ]
     },
@@ -56,14 +56,14 @@ let Architecture = {
   children: [
     {
       text: "PCIe 内存获取技术",
-      link: "/architecture/pcie-memory-acquisition/pcie_memory_acquistion.md",
+      link: "/architecture/pcie-memory-acquisition/pcie-memory-acquisition.md",
     },
     {
       text: "UEFI",
       children: [
         {
           text: "构建EDK2开发环境",
-          link: "/architecture/uefi/edk2/main.md",
+          link: "/architecture/uefi/edk2/edk2-setup.md",
         },
       ]
     },
@@ -90,7 +90,7 @@ let Operating_Systems = {
         },
         {
           text: "驱动开发",
-          link: "/operating-system/ntoskrnl/driver/intro.md",
+          link: "/operating-system/ntoskrnl/driver/driver-development-intro.md",
         }
       ]
 
@@ -106,7 +106,7 @@ let Computer_Security = {
       children: [
         {
           text: "Reflective DLL Injection",
-          link: "/computer-security/mechanism/reflective-dll/rfdll.md",
+          link: "/computer-security/mechanism/reflective-dll/reflective-dll-injection.md",
         },
       ]
     },
@@ -115,15 +115,15 @@ let Computer_Security = {
       children: [
         {
           text: "IDA 脚本开发环境搭建",
-          link: "/computer-security/tooling/ida-scripts/dev_env.md",
+          link: "/computer-security/tooling/ida-scripts/ida-dev-env-setup.md",
         },
         {
           text: "Intel Pin 工具",
-          link: "/computer-security/tooling/intel-pin/pin.md",
+          link: "/computer-security/tooling/intel-pin/intel-pin-intro.md",
         },
         {
           text: "Windows 内核调试",
-          link: "/computer-security/tooling/windows-kernel-debugging/main.md",
+          link: "/computer-security/tooling/windows-kernel-debugging/kernel-debug-setup.md",
         },
       ]
     },
@@ -132,11 +132,11 @@ let Computer_Security = {
       children: [
         {
           text: "病毒分析思路",
-          link: "/computer-security/methodology/malware-analysis/malware_analysis.md",
+          link: "/computer-security/methodology/malware-analysis/malware-analysis.md",
         },
         {
           text: "逆向分析方法",
-          link: "/computer-security/methodology/reverse-analysis/intro.md",
+          link: "/computer-security/methodology/reverse-analysis/reverse-analysis-intro.md",
         },
         {
           text: "angr",
@@ -157,20 +157,24 @@ let Computer_Security = {
       text: "分析报告",
       children: [
         {
+          text: "📋 Malware Reports",
+          link: "/computer-security/reports/Malware%20Reports.md",
+        },
+        {
           text: "勒索病毒[48877a3a4c72]",
-          link: "/computer-security/reports/ransomware-48877a3a4c72/report.md",
+          link: "/computer-security/reports/ransomware-48877a3a4c72/ransomware-48877a3a4c72.md",
         },
         {
           text: "窃密木马[597c5e69c854]",
-          link: "/computer-security/reports/rat-597c5e69c854/report.md",
+          link: "/computer-security/reports/rat-597c5e69c854/rat-597c5e69c854.md",
         },
         {
-          text: "高级加载器[af7fcb94e1]",
-          link: "/computer-security/reports/loader-af7fcb94e1/report.md",
+          text: "高级加载器[af7fcb94e1db]",
+          link: "/computer-security/reports/loader-af7fcb94e1db/loader-af7fcb94e1db.md",
         },
         {
-          text: "寄生蠕虫[4354970ccc]",
-          link: "/computer-security/reports/worm-4354970ccc/report.md",
+          text: "寄生蠕虫[4354970ccc7c]",
+          link: "/computer-security/reports/worm-4354970ccc7c/worm-4354970ccc7c.md",
         }
       ]
     },
@@ -185,7 +189,7 @@ let Computer_Networks = {
       children: [
         {
           text: "SDN",
-          link: "/computer-network/SDN/main.md",
+          link: "/computer-network/SDN/sdn-overview.md",
         },
       ]
     },
@@ -197,7 +201,7 @@ let Resources = {
   children: [
     {
       text: "待读清单",
-      link: "/resources/reading_list/reading_list.md",
+      link: "/resources/reading_list/reading-list.md",
     },
   ]
 }

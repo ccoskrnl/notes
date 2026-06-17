@@ -1,3 +1,12 @@
+---
+tags:
+  - SSA
+  - 编译器优化
+  - 支配边界
+  - φ函数
+date: 2025-07-27
+star: false
+---
 # 静态单赋值形式 (Static Single Assignment Form)
 
 在优化编译器中，数据结构的选择直接影响到实际程序优化的能力和效率。一个糟糕的数据结构选择会阻碍优化，或者将编译速度拖慢到使得高级优化功能变得不可取的程度。静态单赋值形式（SSA）能有效地将程序中操作的值与存储它们的位置分离开来，从而使多种优化能够实现更有效的版本。
@@ -812,3 +821,8 @@ L_exit:
 
 1. RON CYTRON, JEANNE FERRANTE, BARRY K. ROSEN, and MARK N. WEGMAN  IBM Research Division  and  F. KENNETH ZADECK  Brown University. Efficiently computing static single assignment form and the control dependence graph. ACM Trans. Program. Lang. Syst. p451-490. 10/1991. https://dl.acm.org/doi/10.1145/115372.115320
 2. Muchnick and Steven S. Advanced compiler design and implementation.
+
+---
+
+- [[compiler/symbolic-execution/sccp/sccp|Sparse Conditional Constant Propagation]]
+- [[compiler/data-flow-analysis/intro/data-flow-analysis-intro|数据流分析基础]]

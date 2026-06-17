@@ -1,3 +1,13 @@
+---
+tags:
+  - 反射式注入
+  - 进程注入
+  - Windows安全
+  - 免杀技术
+  - EDR绕过
+date: 2026-05-31
+star: true
+---
 # 反射DLL
 
 
@@ -530,3 +540,8 @@ typedef NTSTATUS (NTAPI *pNtQuerySystemInformation)(
 如果是进行 **APC 注入**，不仅要求线程处于 Wait 状态，还需要线程处于 `Alertable`（可警告）状态。通常，攻击者会进一步检查 `WaitReason`。例如，`WaitReason` 为 `DelayExecution` (通常是调用 `Sleep` 引起的) 或者是 `UserRequest` (等待用户输入) 的线程，被唤醒或接受 APC 的概率更高。
 
 一旦找到 `ThreadState == 5` 的线程，通过 `Threads[i].ClientId.UniqueThread` 就能拿到该线程的 TID（Thread ID）。接下来，攻击者就可以拿着这个 TID 去调用 `OpenThread` 进行挂起和上下文修改了。
+
+
+---
+
+- [[computer-security/methodology/malware-analysis/malware-analysis|病毒分析]]

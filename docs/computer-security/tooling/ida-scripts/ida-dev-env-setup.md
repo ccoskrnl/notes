@@ -1,3 +1,11 @@
+---
+tags:
+  - IDA Pro
+  - 逆向工程
+  - 开发环境
+date: 2026-05-28
+star: false
+---
 # IDA 脚本开发环境搭建
 
 ### 基本开发环境搭建
@@ -103,3 +111,9 @@ if __name__ == "__main__":
 
 
 
+
+
+---
+
+- [[computer-security/tooling/intel-pin/intel-pin-intro|Intel Pin]]
+- [[computer-security/tooling/windows-kernel-debugging/kernel-debug-setup|Windows 内核调试]]

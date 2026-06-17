@@ -1,3 +1,12 @@
+---
+tags:
+  - Windows内核
+  - 对象管理
+  - 执行体
+  - ntoskrnl
+date: 2025-07-28
+star: false
+---
 # Windows内核中的对象管理
 
 Windows 内核资源管理采纳了面向对象的思想。Windows 的内核包含执行体(微)内核和 HAL三层对象管理器是执行体中的组件，主要管理执行体对象。但是，执行体对象也可能封装了一个或多个内核对象。
@@ -419,3 +428,9 @@ ObpPushStackInfo( ObjectHeader, TRUE );
 对象管理器中的对象是执行体对象，它们位于系统地址空间中，因而所有的进程都可以访问这些对象。但是，在进程地址空间中运行的用户模式代码不能用指针的方式来引用这些对象，它们在调用系统服务时只能通过句柄来引用执行体对象。句柄是进程范畴的概念，它一定要在特定的进程环境中才有意义。在内核中，将一个句柄转换成对应的对象，可以通过 ObReferenceObjectByHandle 函数(在 basentosloblobref.c)来完成该函数负责从当前进程环境或内核环境的句柄表中获得指定的对象引用。
 
 对象是通过引用计数来管理其生命周期的，一旦引用计数为零，则对象的生命周期结束，它所占用的内存也可以被回收。对象的引用计数来源于两个方面。第一个来源是内核中的指针引用。一旦内核中新增了一个对象的引用，则对象的引用计数需要增一; 如果一个对象的引用不再有用，则引用计数减一。这两种作用是在 ObReferenceObjectByPointer 和 ObDereferenceObiect 函数中完成的。第二个来源是，一个进程打开一个对象并获得个句柄，它以后通过此句柄来引用此对象。对象头信息中准确地记录了有多少个句柄指向此对象，当一个句柄不再被使用时，其句柄计数减一。这两种作用是在函数 ObpIncrementHandleCount 和 ObpDecrementHandleCount 中完成的。
+
+---
+
+- [[operating-system/ntoskrnl/handle/handle|Windows句柄]]
+- [[operating-system/ntoskrnl/driver/driver-development-intro|Windows 驱动开发基础]]
+- [[operating-system/ntoskrnl/apc/apc|异步过程调用]]

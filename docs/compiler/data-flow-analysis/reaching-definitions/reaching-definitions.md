@@ -1,3 +1,12 @@
+---
+tags:
+  - 数据流分析
+  - 到达定值
+  - 编译器优化
+  - gen-kill
+date: 2025-07-27
+star: false
+---
 # 到达定值
 
 我们可能希望找出在某个程序点上一个变量可能有哪些值，以及这些值可能在哪里定值。考虑下面这段代码：
@@ -216,3 +225,8 @@ def reaching_definitions(cfg):
 
     analysis.analyze(strategy='worklist')
 ```
+
+---
+
+- [[compiler/basics/lattice/lattice_theory|格论]]
+- [[compiler/data-flow-analysis/intro/data-flow-analysis-intro|数据流分析基础]]

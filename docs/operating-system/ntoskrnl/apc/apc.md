@@ -1,3 +1,12 @@
+---
+tags:
+  - Windows内核
+  - APC
+  - 异步过程调用
+  - ntoskrnl
+date: 2025-07-28
+star: false
+---
 # Asynchronous Procedure Call
 
 **基于WRK(Windows Research Kernel)源代码讲解，它们很可能(或者一定)与当前版本的Windows系统有所不同。仅作为参考**
@@ -357,3 +366,10 @@ KiDeliverApc (
 4. 在APC_LEVEL软件中断发生时，HAL模块中的软件中断处理函数( `HalpDispatchSoftwareInterrupt` )调用KiDeliverApc来交付内核模式APC。当内核代码调用KeLowerIrql函数降低IRQL到PASSIVE_LEVEL时，KiDeliverApc 函数也会被调用。
 
 情况四会造成一种很有趣的现象，由于在处理普通内核模式APC时会将IRQL降低为PASSIVE_LEVEL时，这时候KiDeliverApc又会被调用，所以在内核处理普通内核APC的NormalRoutine时的顺序是后进先出。
+
+
+---
+
+- [[operating-system/ntoskrnl/handle/handle|Windows句柄]]
+- [[operating-system/ntoskrnl/object/object|Windows内核中的对象管理]]
+- [[operating-system/ntoskrnl/driver/driver-development-intro|Windows 驱动开发基础]]

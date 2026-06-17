@@ -1,3 +1,13 @@
+---
+tags:
+  - 逆向工程
+  - 符号执行
+  - 污点分析
+  - 抽象解释
+  - 程序切片
+date: 2026-04-29
+star: true
+---
 # 逆向分析常用技术介绍
 
 ## 理论工具
@@ -490,3 +500,10 @@ function BackwardSlice_Weiser(CFG, criterion (n, V)):
 
 
 该算法的本质是基于 CFG 的**迭代式信息流分析**，它混合了数据流（逆流）和控制流（控制依赖）的传播。它的优点是不需要显式构建 PDG，但理解和实现都更复杂，精度与 PDG 方法等价。
+
+
+---
+
+- [[computer-security/methodology/angr/angr|angr]]
+- [[compiler/symbolic-execution/sccp/sccp|Sparse Conditional Constant Propagation]]
+- [[data-flow-analysis-intro|Introduction to Data Flow Analysis]]

@@ -1,3 +1,12 @@
+---
+tags:
+  - angr
+  - 符号执行
+  - 二进制分析
+  - 逆向工程
+date: 2026-04-30
+star: false
+---
 # angr 介绍
 
 ## Stash
@@ -362,3 +371,8 @@ for reg in volatile_regs:
 
 
 
+
+
+---
+
+- [[computer-security/methodology/reverse-analysis/reverse-analysis-intro|逆向分析常用技术]]

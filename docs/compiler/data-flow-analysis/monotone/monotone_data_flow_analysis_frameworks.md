@@ -1,3 +1,12 @@
+---
+tags:
+  - 数据流分析
+  - 单调框架
+  - 编译器优化
+  - 格论
+date: 2025-07-03
+star: false
+---
 # Monotone Data Flow Analysis Frameworks
 
 Performing compile time optimization requires solving a class of problems, called Global data flow analysis problems (abbreviated as gdfap's), involving determination of information which is distributed throughout the program.
@@ -508,3 +517,10 @@ $Proof$. If $A$ exists, then we can apply $A$ to any monotone framework $D_{AB}$
 3. Wikipedia - [Post correspondence problem](https://en.wikipedia.org/wiki/Post_correspondence_problem)
 4. Muchnick and Steven S. Advanced compiler design and implementation.
 5. Aho, Alfred V. Compilers: principles, techniques, & tools.
+
+
+---
+
+- [[compiler/basics/lattice/lattice_theory|格论]]
+- [[compiler/data-flow-analysis/intro/data-flow-analysis-intro|数据流分析基础]]
+- [[compiler/data-flow-analysis/reaching-definitions/reaching-definitions|到达定值]]

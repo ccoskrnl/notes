@@ -1,3 +1,11 @@
+---
+tags:
+  - UEFI
+  - EDK2
+  - 固件开发
+date: 2026-02-07
+star: false
+---
 # Build EDK2 development environment
 
 Clone edk2 repository:
@@ -40,3 +48,4 @@ After all done, use `build` command to execute build testing, all modules in `Md
 ```bash
 build
 ```
+

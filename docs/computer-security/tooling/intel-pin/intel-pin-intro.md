@@ -1,3 +1,11 @@
+---
+tags:
+  - Intel Pin
+  - 动态二进制插桩
+  - 逆向工程
+date: 2026-06-12
+star: false
+---
 # Intel-Pin Windows开发环境搭建
 
 下载链接：https://www.intel.com/content/www/us/en/developer/articles/tool/pin-a-binary-instrumentation-tool-downloads.html
@@ -20,3 +28,8 @@ IA32 and intel64 (x86 32 bit and 64 bit)
 安装完成后，Pin 的 GNU Make 脚本会在你调用 make 时，自动在 VS 的目录下找到并使用 clang-cl.exe 来编译你的 DLL，从而避免莫名其妙的底层链接错误。
 
 进入`{Pin主目录}\source\tools\MyPinTool`目录下，使用 Visual Studio 2026 打开 `MyPinTool-clang.vcxproj`，之后正常修改代码编译即可。
+
+---
+
+- [[computer-security/tooling/ida-scripts/ida-dev-env-setup|IDA 脚本开发]]
+- [[computer-security/tooling/windows-kernel-debugging/kernel-debug-setup|Windows 内核调试]]

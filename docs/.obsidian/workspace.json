@@ -1,0 +1,209 @@
+{
+  "main": {
+    "id": "577d5f61a4b768c9",
+    "type": "split",
+    "children": [
+      {
+        "id": "aee18dc7e412b3ae",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "6f75f1b804ad4422",
+            "type": "leaf",
+            "state": {
+              "type": "graph",
+              "state": {},
+              "icon": "lucide-git-fork",
+              "title": "关系图谱"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "905b65f6d34a89e2",
+    "type": "split",
+    "children": [
+      {
+        "id": "f4cb6c001093c303",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "16b69dfb414d6710",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "文件列表"
+            }
+          },
+          {
+            "id": "8b2449eef8adec9e",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "搜索"
+            }
+          },
+          {
+            "id": "48b62d3992f278d2",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "书签"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "382623ad935d598e",
+    "type": "split",
+    "children": [
+      {
+        "id": "dc8881b2713c7c64",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "f084a635f1ec463f",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "反向链接"
+            }
+          },
+          {
+            "id": "c86ca30aaae98384",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "出链"
+            }
+          },
+          {
+            "id": "6b914132dabfe979",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "标签"
+            }
+          },
+          {
+            "id": "278eeb0eef96e31f",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "添加笔记属性"
+            }
+          },
+          {
+            "id": "b965351b87e9e645",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "大纲"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:打开快速切换": false,
+      "graph:查看关系图谱": false,
+      "canvas:新建白板": false,
+      "daily-notes:打开/创建今天的日记": false,
+      "templates:插入模板": false,
+      "command-palette:打开命令面板": false,
+      "bases:新建数据库": false
+    }
+  },
+  "active": "6f75f1b804ad4422",
+  "lastOpenFiles": [
+    "resources/Resources.md",
+    "operating-system/ntoskrnl/NTOSKRNL.md",
+    "computer-security/methodology/reverse-analysis/reverse-analysis-intro.md",
+    "compiler/data-flow-analysis/intro/data-flow-analysis-intro.md",
+    "computer-security/methodology/malware-analysis/malware-analysis.md",
+    "computer-security/methodology/angr/angr.md",
+    "computer-security/mechanism/reflective-dll/reflective-dll-injection.md",
+    "computer-security/cryptography/rsa/rsa.md",
+    "computer-network/SDN/sdn-overview.md",
+    "computer-network/Network.md",
+    "compiler/symbolic-execution/sccp/sccp.md",
+    "compiler/data-flow-analysis/reaching-definitions/reaching-definitions.md",
+    "compiler/data-flow-analysis/monotone/monotone_data_flow_analysis_frameworks.md",
+    "compiler/basics/ssa/ssa.md",
+    "compiler/basics/lattice/lattice_theory.md",
+    "compiler/basics/lattice/constant-lattice.md",
+    "architecture/pcie-memory-acquisition/pcie-memory-acquisition.md",
+    "architecture/uefi/edk2/edk2-setup.md",
+    "architecture/Architecture.md",
+    "computer-security/Computer Security.md",
+    "compiler/Compiler.md",
+    "compiler/data-flow-analysis/monotone/monotone_data_flow_analysis_frameworks.pdf",
+    "computer-security/reports/MOC_REPORTS.md",
+    "computer-security/reports/Malware Reports.md",
+    "computer-security/reports/rat-597c5e69c854/rat-analysis.md",
+    "computer-security/reports/rat-597c5e69c854/rat-597c5e69c854.md",
+    "computer-security/reports/rat-597c5e69c854/ransomware-48877a3a4c72.md"
+  ]
+}

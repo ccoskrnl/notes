@@ -1,3 +1,12 @@
+---
+tags:
+  - Windows内核
+  - 内核调试
+  - WinDbg
+  - 虚拟机
+date: 2026-06-14
+star: false
+---
 # Windows 虚拟机开启内核网络调试
 
 **VMWare虚拟机设置设置**
@@ -47,3 +56,8 @@ bcdedit /set testsigning on
 打开WinDBG，选择内核网络调试，输入端口号和Key。出现以下信息就代表内核网络调试的环境搭建好了。
 
 ![alt text](./assets/image-1.png)
+
+---
+
+- [[computer-security/tooling/ida-scripts/ida-dev-env-setup|IDA 脚本开发]]
+- [[computer-security/tooling/intel-pin/intel-pin-intro|Intel Pin]]

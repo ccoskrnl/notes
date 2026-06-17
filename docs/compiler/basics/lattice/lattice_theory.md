@@ -1,3 +1,12 @@
+---
+tags:
+  - 格论
+  - 偏序集
+  - 编译器优化
+  - 数据流分析
+date: 2025-07-26
+star: false
+---
 # Lattice
 
 ## 基础
@@ -617,3 +626,10 @@ $$
     即，在每个分量上分别进行原始格的并运算。
 
 **定理：** 这样定义的结构 **(L₁ × L₂, ≤, ∧, ∨)** 本身也是一个格。
+
+
+---
+
+- [[compiler/basics/lattice/constant-lattice|常量传播的格]]
+- [[compiler/data-flow-analysis/monotone/monotone_data_flow_analysis_frameworks|单调数据流分析框架]]
+- [[compiler/data-flow-analysis/reaching-definitions/reaching-definitions|到达定值]]

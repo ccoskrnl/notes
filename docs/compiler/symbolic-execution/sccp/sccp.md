@@ -1,3 +1,13 @@
+---
+tags:
+  - 常量传播
+  - 符号执行
+  - SSA
+  - SCCP
+  - 编译器优化
+date: 2025-07-26
+star: false
+---
 # Sparse Conditional Constant Propagation
 
 ## 介绍
@@ -16,7 +26,7 @@ SCCP 是普通常量传播的增强版，结合了**常量传播**与**条件分
   <img src="./assets/constlat.png" />
 </p>
 
-上图是一个[常量格(常量格的特性可以参考这篇文章)](../../basics/lattice/constlat.md)，其中每一个 $C_i$ 是一个可能的常数值，包含 true 和 false 是为了提供关于条件表达式结果的格值。对于程序中的每一个变量，我们在流图中定义这个变量的唯一结点的出口处给它一个相连的格值。给一个变量赋予值 $\top$ 意味着它还有一个还未确定的常数值，而 $\bot$ 则意味着不是常数，或不能确定是常数。我们用 $\top$ 初始化所有的变量。
+上图是一个[常量格(常量格的特性可以参考这篇文章)](../../basics/lattice/constant-lattice.md)，其中每一个 $C_i$ 是一个可能的常数值，包含 true 和 false 是为了提供关于条件表达式结果的格值。对于程序中的每一个变量，我们在流图中定义这个变量的唯一结点的出口处给它一个相连的格值。给一个变量赋予值 $\top$ 意味着它还有一个还未确定的常数值，而 $\bot$ 则意味着不是常数，或不能确定是常数。我们用 $\top$ 初始化所有的变量。
 
 
 
@@ -295,3 +305,10 @@ L2:
 <p align="center">
   <img src="./assets/sccp_after.png" />
 </p>
+
+
+---
+
+- [[compiler/basics/ssa/ssa|单静态赋值形式]]
+- [[compiler/basics/lattice/constant-lattice|常量传播的格]]
+- [[compiler/data-flow-analysis/intro/data-flow-analysis-intro|数据流分析基础]]

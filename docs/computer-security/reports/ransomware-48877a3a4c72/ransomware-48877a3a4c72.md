@@ -3,6 +3,7 @@ tags:
   - 勒索病毒
   - 恶意软件分析报告
 date: 2026-04-21
+star: true
 ---
 # 勒索病毒威胁情报分析报告：48877a3a4c72c1daf3a80e3c034b56a04cec7ce3856887fed73e645e53c76b96
 
@@ -215,3 +216,7 @@ RSA公钥内容如下
   - 加密文件：`trial-recovery.{随机字符串}.-encrypted`
 
 - SHA-256：`48877a3a4c72c1daf3a80e3c034b56a04cec7ce3856887fed73e645e53c76b96`
+
+---
+
+- [[computer-security/reports/Malware Reports]]

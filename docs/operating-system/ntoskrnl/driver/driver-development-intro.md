@@ -1,3 +1,12 @@
+---
+tags:
+  - Windows内核
+  - 驱动开发
+  - WDK
+  - ntoskrnl
+date: 2025-08-11
+star: false
+---
 
 # Windows 驱动开发基础
 
@@ -84,3 +93,10 @@ CTL_CODE(DeviceType, Function, Method, Access)
 *(补充：缓冲方式决定了内核如何传递用户态数据，METHOD_IN_DIRECT等模式需配合MDL使用)*
 
 > 完整 IOCTL 规范参考：[Microsoft Docs - Defining I/O Control Codes](https://docs.microsoft.com/en-us/windows-hardware/drivers/kernel/defining-i-o-control-codes)
+
+
+---
+
+- [[operating-system/ntoskrnl/object/object|Windows内核中的对象管理]]
+- [[operating-system/ntoskrnl/handle/handle|Windows句柄]]
+- [[operating-system/ntoskrnl/apc/apc|异步过程调用]]
