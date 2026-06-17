@@ -370,6 +370,4 @@ KiDeliverApc (
 
 ---
 
-- [[operating-system/ntoskrnl/handle/handle|Windows句柄]]
-- [[operating-system/ntoskrnl/object/object|Windows内核中的对象管理]]
-- [[operating-system/ntoskrnl/driver/driver-development-intro|Windows 驱动开发基础]]
+

@@ -4,17 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "aee18dc7e412b3ae",
+        "id": "bde7d48b62e688ce",
         "type": "tabs",
         "children": [
           {
-            "id": "6f75f1b804ad4422",
+            "id": "66addc430da86a61",
             "type": "leaf",
             "state": {
-              "type": "graph",
-              "state": {},
-              "icon": "lucide-git-fork",
-              "title": "关系图谱"
+              "type": "markdown",
+              "state": {
+                "file": "computer-security/Computer Security.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Computer Security"
             }
           }
         ]
@@ -176,34 +180,37 @@
       "bases:新建数据库": false
     }
   },
-  "active": "6f75f1b804ad4422",
+  "active": "66addc430da86a61",
   "lastOpenFiles": [
-    "resources/Resources.md",
-    "operating-system/ntoskrnl/NTOSKRNL.md",
-    "computer-security/methodology/reverse-analysis/reverse-analysis-intro.md",
-    "compiler/data-flow-analysis/intro/data-flow-analysis-intro.md",
-    "computer-security/methodology/malware-analysis/malware-analysis.md",
+    "computer-security/Computer Security.md",
+    "computer-security/tooling/Tooling.md",
+    "computer-security/tooling/windows-kernel-debugging/computer-security/tooling/Tooling.md",
+    "computer-security/tooling/windows-kernel-debugging/computer-security/tooling",
+    "computer-security/tooling/windows-kernel-debugging/computer-security",
+    "computer-security/tooling/windows-kernel-debugging/kernel-debug-setup.md",
+    "operating-system/ntoskrnl/object/object.md",
+    "operating-system/ntoskrnl/handle/handle.md",
+    "operating-system/ntoskrnl/apc/apc.md",
     "computer-security/methodology/angr/angr.md",
+    "computer-security/methodology/malware-analysis/malware-analysis.md",
+    "computer-security/reports/worm-4354970ccc7c/worm-4354970ccc7c.md",
+    "computer-security/reports/Malware Reports.md",
+    "computer-security/reports/rat-597c5e69c854/rat-597c5e69c854.md",
+    "computer-security/reports/rat-597c5e69c854/report.assets/flowchart.png",
+    "computer-security/reports/ransomware-48877a3a4c72/ransomware-48877a3a4c72.md",
+    "computer-security/reports/loader-af7fcb94e1db/loader-af7fcb94e1db.md",
+    "computer-security/methodology/reverse-analysis/reverse-analysis-intro.md",
     "computer-security/mechanism/reflective-dll/reflective-dll-injection.md",
-    "computer-security/cryptography/rsa/rsa.md",
     "computer-network/SDN/sdn-overview.md",
-    "computer-network/Network.md",
     "compiler/symbolic-execution/sccp/sccp.md",
     "compiler/data-flow-analysis/reaching-definitions/reaching-definitions.md",
     "compiler/data-flow-analysis/monotone/monotone_data_flow_analysis_frameworks.md",
+    "compiler/data-flow-analysis/intro/data-flow-analysis-intro.md",
     "compiler/basics/ssa/ssa.md",
     "compiler/basics/lattice/lattice_theory.md",
     "compiler/basics/lattice/constant-lattice.md",
-    "architecture/pcie-memory-acquisition/pcie-memory-acquisition.md",
     "architecture/uefi/edk2/edk2-setup.md",
-    "architecture/Architecture.md",
-    "computer-security/Computer Security.md",
-    "compiler/Compiler.md",
-    "compiler/data-flow-analysis/monotone/monotone_data_flow_analysis_frameworks.pdf",
-    "computer-security/reports/MOC_REPORTS.md",
-    "computer-security/reports/Malware Reports.md",
-    "computer-security/reports/rat-597c5e69c854/rat-analysis.md",
-    "computer-security/reports/rat-597c5e69c854/rat-597c5e69c854.md",
-    "computer-security/reports/rat-597c5e69c854/ransomware-48877a3a4c72.md"
+    "architecture/pcie-memory-acquisition/pcie-memory-acquisition.md",
+    "compiler/data-flow-analysis/monotone/monotone_data_flow_analysis_frameworks.pdf"
   ]
 }

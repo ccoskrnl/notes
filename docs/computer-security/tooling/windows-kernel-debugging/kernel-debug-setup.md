@@ -59,5 +59,4 @@ bcdedit /set testsigning on
 
 ---
 
-- [[computer-security/tooling/ida-scripts/ida-dev-env-setup|IDA 脚本开发]]
-- [[computer-security/tooling/intel-pin/intel-pin-intro|Intel Pin]]
+- [[computer-security/tooling/Tooling|Tooling]]

@@ -5,7 +5,7 @@ tags:
   - 对象管理
   - ntoskrnl
 date: 2025-07-28
-star: false
+star: true
 ---
 # Windows句柄
 
@@ -367,4 +367,3 @@ nt!_OBJECT_TYPE
 
 - [[operating-system/ntoskrnl/object/object|Windows内核中的对象管理]]
 - [[operating-system/ntoskrnl/driver/driver-development-intro|Windows 驱动开发基础]]
-- [[operating-system/ntoskrnl/apc/apc|异步过程调用]]

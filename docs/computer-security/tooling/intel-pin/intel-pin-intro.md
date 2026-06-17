@@ -31,5 +31,4 @@ IA32 and intel64 (x86 32 bit and 64 bit)
 
 ---
 
-- [[computer-security/tooling/ida-scripts/ida-dev-env-setup|IDA 脚本开发]]
-- [[computer-security/tooling/windows-kernel-debugging/kernel-debug-setup|Windows 内核调试]]
+- [[computer-security/tooling/Tooling|Tooling]]

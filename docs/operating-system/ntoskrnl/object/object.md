@@ -433,4 +433,3 @@ ObpPushStackInfo( ObjectHeader, TRUE );
 
 - [[operating-system/ntoskrnl/handle/handle|Windows句柄]]
 - [[operating-system/ntoskrnl/driver/driver-development-intro|Windows 驱动开发基础]]
-- [[operating-system/ntoskrnl/apc/apc|异步过程调用]]

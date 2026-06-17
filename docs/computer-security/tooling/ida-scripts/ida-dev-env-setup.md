@@ -115,5 +115,4 @@ if __name__ == "__main__":
 
 ---
 
-- [[computer-security/tooling/intel-pin/intel-pin-intro|Intel Pin]]
-- [[computer-security/tooling/windows-kernel-debugging/kernel-debug-setup|Windows 内核调试]]
+- [[computer-security/tooling/Tooling|Tooling]]

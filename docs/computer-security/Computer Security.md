@@ -6,10 +6,7 @@
 
 ## 工具链
 
-[IDA 脚本开发环境搭建](./tooling/ida-scripts/ida-dev-env-setup.md)
-[Intel Pin 动态插桩工具](./tooling/intel-pin/intel-pin-intro.md)
-[Windows 内核调试环境搭建](./tooling/windows-kernel-debugging/kernel-debug-setup.md)
-
+[逆向分析工具](./tooling/Tooling.md)
 ## 分析方法
 
 [病毒分析思路](./methodology/malware-analysis/malware-analysis.md)

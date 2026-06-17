@@ -6,7 +6,7 @@ tags:
   - SCCP
   - 编译器优化
 date: 2025-07-26
-star: false
+star: true
 ---
 # Sparse Conditional Constant Propagation
 
