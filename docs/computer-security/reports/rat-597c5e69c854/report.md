@@ -1,4 +1,18 @@
-# 窃密木马威胁情报分析报告：597c5e69c8542e8a771d94ce8592ad9f49cadcd3b5ead6d0ca23adfbc4a62488
+---
+tags:
+  - GhostDrop
+  - Dropper/Loader
+  - 远控木马
+  - 反射式注入
+  - 进程注入 
+  - 武器空投
+  - WeGame窃密
+  - 天堂之门
+  - 恶意软件分析报告
+date: 2026-05-18
+---
+
+# 幽灵空投: 针对WeGame的窃密木马分析报告(a7209053be)
 
 
 
