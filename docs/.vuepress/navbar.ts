@@ -153,31 +153,6 @@ let Computer_Security = {
         },
       ]
     },
-    {
-      text: "分析报告",
-      children: [
-        {
-          text: "📋 Malware Reports",
-          link: "/computer-security/reports/Malware%20Reports.md",
-        },
-        {
-          text: "勒索病毒[48877a3a4c72]",
-          link: "/computer-security/reports/ransomware-48877a3a4c72/ransomware-48877a3a4c72.md",
-        },
-        {
-          text: "窃密木马[597c5e69c854]",
-          link: "/computer-security/reports/rat-597c5e69c854/rat-597c5e69c854.md",
-        },
-        {
-          text: "高级加载器[af7fcb94e1db]",
-          link: "/computer-security/reports/loader-af7fcb94e1db/loader-af7fcb94e1db.md",
-        },
-        {
-          text: "寄生蠕虫[4354970ccc7c]",
-          link: "/computer-security/reports/worm-4354970ccc7c/worm-4354970ccc7c.md",
-        }
-      ]
-    },
   ]
 }
 

@@ -410,4 +410,3 @@ typedef NTSTATUS (NTAPI *pNtQuerySystemInformation)(
 一旦找到 `ThreadState == 5` 的线程，通过 `Threads[i].ClientId.UniqueThread` 就能拿到该线程的 TID（Thread ID）。接下来，攻击者就可以拿着这个 TID 去调用 `OpenThread` 进行挂起和上下文修改了。
 
 ---
-- [[computer-security/methodology/malware-analysis/malware-analysis|病毒分析]]

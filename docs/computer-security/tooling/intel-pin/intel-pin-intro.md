@@ -31,4 +31,3 @@ IA32 and intel64 (x86 32 bit and 64 bit)
 
 ---
 
-- [[computer-security/tooling/Tooling|Tooling]]

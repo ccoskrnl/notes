@@ -5,10 +5,10 @@ layout: BlogHome
 heroFullScreen: true
 bgImage: background.png
 icon: home
-title: 城城的笔记
-author: 城城
+title: 笔记
+author: 睦
 heroImage: logo.png
-heroText: 城城的笔记
+heroText: 睦的笔记
 copyright: false
-footer: 已识乾坤大，犹怜草木青 
+footer: 已识乾坤大，犹怜草木青
 ---

@@ -115,4 +115,3 @@ if __name__ == "__main__":
 
 ---
 
-- [[computer-security/tooling/Tooling|Tooling]]

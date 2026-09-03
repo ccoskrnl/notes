@@ -59,4 +59,3 @@ bcdedit /set testsigning on
 
 ---
 
-- [[computer-security/tooling/Tooling|Tooling]]
