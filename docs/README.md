@@ -3,7 +3,7 @@ date: 2025-07-03
 home: True
 layout: BlogHome
 heroFullScreen: true
-bgImage: background.png
+bgImage: background.jpg
 icon: home
 title: 笔记
 author: 睦

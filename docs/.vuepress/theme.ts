@@ -28,7 +28,7 @@ export default hopeTheme({
   displayFooter: true,
 
   blog: {
-    description: "我不是Shinano",
+    description: "普通的安全研究员",
     intro: "/about/",
     medias: {
       GitHub: "https://github.com/ccoskrnl",
